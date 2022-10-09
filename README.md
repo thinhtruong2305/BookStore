@@ -10,7 +10,7 @@ C#: Identity, Fluent API, Migration, Dependency Injection(DI), Delegate, Lambda,
 
 Front - end: HTML, CSS (Bootstrap), Javascript (Jquery, Ajax (Nếu có - unless)).
 
-SQL: Query - MS SQLServer, MY SQL, ...
+SQL: Query - MS SQLServer
 
 ASP.NET, ASP.NET Razor Page, ASP.NET MVC
 
