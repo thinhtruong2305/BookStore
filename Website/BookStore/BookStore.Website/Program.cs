@@ -1,8 +1,26 @@
+﻿using BookStore.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using System.Configuration;
+using System;
+using BookStore.DAL;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+// Đăng ký AppDbContext
+builder.Services.AddDbContext<AppDatabase>(options => {
+    // Đọc chuỗi kết nối
+    string connectstring = @"Data Source=DESKTOP-J98APIA;Initial Catalog=BookStore;User ID=sa;Password=Thinhyeuhocbai123";
+    // Sử dụng MS SQL Server
+    options.UseSqlServer(connectstring);
+});
+
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<AppDatabase>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
