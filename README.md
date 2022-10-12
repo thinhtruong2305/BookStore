@@ -14,7 +14,7 @@ SQL: Query - MS SQLServer
 
 ASP.NET, ASP.NET Razor Page, ASP.NET MVC
 
-#Các package cần cài đặt - Install Package
+# Các package cần cài đặt - Install Package
 Microsoft.AspNetCore.Identity
 Microsoft.AspNetCore.Identity.EntityFrameworkCore
 Microsoft.EntityFrameworkCore
