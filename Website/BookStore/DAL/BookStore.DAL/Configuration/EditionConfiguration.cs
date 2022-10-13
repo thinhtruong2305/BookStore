@@ -31,7 +31,7 @@ namespace BookStore.DAL.Configuration
                 .HasColumnType("nvarchar(30)");
 
             builder.Property<decimal>(e => e.Price)
-                .HasColumnType("money");
+                .HasColumnType("decimal(18,0)");
         }
     }
 }

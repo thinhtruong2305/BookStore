@@ -1,4 +1,4 @@
-﻿using BookStore.Common.Shared.Model;
+﻿ using BookStore.Common.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -35,7 +35,7 @@ namespace BookStore.DAL.Entities
         public Info Info { get; set; }
         public Edition Edition { get; set; }
         public OrderDetail OrderDetail { get; set; }
-        public BookImage BookImage { get; set; }
+        public List<BookImage> BookImages { get; set; }
         public List<Rating> Ratings { get; set; }
     }
 }

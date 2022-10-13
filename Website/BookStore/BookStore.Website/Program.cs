@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDatabase>(options => {
     // Đọc chuỗi kết nối
     string connectstring = @"Data Source=DESKTOP-J98APIA;Initial Catalog=BookStore;User ID=sa;Password=Thinhyeuhocbai123";
     // Sử dụng MS SQL Server
-    options.UseSqlServer(connectstring);
+    options.UseSqlServer(connectstring, b => b.MigrationsAssembly("BookStore.DAL"));
 });
 
 builder.Services.AddIdentity<User, IdentityRole>()

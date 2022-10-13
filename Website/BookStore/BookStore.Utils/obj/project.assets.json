@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
       "projectName": "BookStore.Utils",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Utils\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

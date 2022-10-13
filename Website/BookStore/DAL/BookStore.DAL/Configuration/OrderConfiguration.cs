@@ -16,10 +16,6 @@ namespace BookStore.DAL.Configuration
             builder.HasKey(o => o.OrderId);
             builder.Property(o => o.OrderId).UseIdentityColumn();
 
-            builder.HasMany(o => o.OrderDetails)
-                .WithOne(od => od.Order)
-                .HasForeignKey(od => od.OrderId);
-
             builder.Property<string>(o => o.ShipName)
                 .HasColumnType("nvarchar(60)")
                 .HasDefaultValue("Unknow");

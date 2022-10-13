@@ -17,10 +17,8 @@ namespace BookStore.DAL.Configuration
             builder.Property(info => info.InfoId).UseIdentityColumn();
 
             builder.HasOne(info => info.Series)
-                .WithMany(s => s.infos)
-                .HasForeignKey(info => info.SeriesId);
-
-            
+                .WithOne(s => s.info)
+                .HasForeignKey<Info>(info => info.SeriesId);
 
             builder.Property<string>(info => info.Language)
                 .HasColumnType("nvarchar(20)");

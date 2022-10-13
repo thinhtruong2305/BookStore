@@ -36,6 +36,6 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Liên kết")]
         public string Slug { get; set; }
 
-        public List<Info> infos { get; set; }
+        public Info info { get; set; }
     }
 }
