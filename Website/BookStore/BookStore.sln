@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Website", "BookStore.Website\BookStore.Website.csproj", "{79680D5E-DDDE-4518-B1C5-2B855FDF8C8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Website", "BookStore.Website\BookStore.Website.csproj", "{79680D5E-DDDE-4518-B1C5-2B855FDF8C8F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{1682CE90-A214-4F20-B21C-F5B4AA797438}"
 EndProject
@@ -11,13 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{2807898A-564
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{692039FC-5BD5-4636-85CD-A0E2978FC3B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL", "DAL\BookStore.DAL\BookStore.DAL.csproj", "{77A0FE41-6283-415C-A494-02BEE1B84804}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.DAL", "DAL\BookStore.DAL\BookStore.DAL.csproj", "{77A0FE41-6283-415C-A494-02BEE1B84804}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL.Shared", "DAL\BookStore.DAL.Shared\BookStore.DAL.Shared.csproj", "{2CB0DFDD-E066-4598-B237-CD14FA18FE0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.DAL.Shared", "DAL\BookStore.DAL.Shared\BookStore.DAL.Shared.csproj", "{2CB0DFDD-E066-4598-B237-CD14FA18FE0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Utils", "BookStore.Utils\BookStore.Utils.csproj", "{090289B0-D1A9-4CAE-927E-4DDC70AE8395}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Utils", "BookStore.Utils\BookStore.Utils.csproj", "{090289B0-D1A9-4CAE-927E-4DDC70AE8395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Common.Shared", "BookStore.Common.Shared\BookStore.Common.Shared.csproj", "{42D7A339-431A-4394-A08F-EDB9FF5CE3D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Common.Shared", "BookStore.Common.Shared\BookStore.Common.Shared.csproj", "{42D7A339-431A-4394-A08F-EDB9FF5CE3D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Logic", "BookStore.Logic\BookStore.Logic.csproj", "{5767F380-6C39-4018-BA8A-95F0700875C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Logic.Shared", "BookStore.Logic.Shared\BookStore.Logic.Shared.csproj", "{55058103-BE60-4BE3-B936-B946BA6C1A8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{42D7A339-431A-4394-A08F-EDB9FF5CE3D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42D7A339-431A-4394-A08F-EDB9FF5CE3D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42D7A339-431A-4394-A08F-EDB9FF5CE3D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5767F380-6C39-4018-BA8A-95F0700875C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5767F380-6C39-4018-BA8A-95F0700875C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5767F380-6C39-4018-BA8A-95F0700875C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5767F380-6C39-4018-BA8A-95F0700875C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55058103-BE60-4BE3-B936-B946BA6C1A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55058103-BE60-4BE3-B936-B946BA6C1A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55058103-BE60-4BE3-B936-B946BA6C1A8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55058103-BE60-4BE3-B936-B946BA6C1A8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,8 @@ Global
 		{2CB0DFDD-E066-4598-B237-CD14FA18FE0C} = {1682CE90-A214-4F20-B21C-F5B4AA797438}
 		{090289B0-D1A9-4CAE-927E-4DDC70AE8395} = {692039FC-5BD5-4636-85CD-A0E2978FC3B4}
 		{42D7A339-431A-4394-A08F-EDB9FF5CE3D9} = {692039FC-5BD5-4636-85CD-A0E2978FC3B4}
+		{5767F380-6C39-4018-BA8A-95F0700875C1} = {2807898A-5644-4FE1-852E-26F9D61F3132}
+		{55058103-BE60-4BE3-B936-B946BA6C1A8A} = {2807898A-5644-4FE1-852E-26F9D61F3132}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AF57B10-EF71-48C8-9A8E-2EE3C2C5931D}

@@ -49,7 +49,7 @@ namespace BookStore.DAL.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Keyword")
                         .IsRequired()
@@ -57,7 +57,7 @@ namespace BookStore.DAL.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Slug")
                         .IsRequired()
@@ -107,14 +107,12 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .IsRequired()
                         .HasColumnType("ntext");
 
                     b.Property<int>("InfoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Keyword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Slug")
@@ -199,7 +197,6 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Format")
-                        .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ISBN")
@@ -209,17 +206,16 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("char(10)")
                         .HasDefaultValue("Unknow");
 
-                    b.Property<int>("Pages")
+                    b.Property<int?>("Pages")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,0)");
 
                     b.Property<string>("PrintRunSize")
-                        .IsRequired()
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<DateTime>("PublicationDate")
+                    b.Property<DateTime?>("PublicationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PublisherId")
@@ -466,14 +462,9 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .IsRequired()
                         .HasColumnType("ntext");
 
-                    b.Property<int>("EditionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Keyword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("PulishingHouse")
@@ -554,26 +545,13 @@ namespace BookStore.DAL.Migrations
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Decription")
-                        .IsRequired()
-                        .HasColumnType("ntext");
-
-                    b.Property<string>("Keyword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)");
-
                     b.Property<int?>("PlannedVolume")
                         .HasColumnType("int");
 
                     b.Property<string>("SeriesName")
-                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(30)")
                         .HasDefaultValue("Unknow");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("varchar(MAX)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -604,17 +582,16 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .IsRequired()
                         .HasColumnType("ntext");
 
-                    b.Property<int>("InfoId")
+                    b.Property<int?>("InfoId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Keyword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("MenuId")
+                    b.Property<int?>("MenuId")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
@@ -673,11 +650,11 @@ namespace BookStore.DAL.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -980,9 +957,7 @@ namespace BookStore.DAL.Migrations
 
                     b.HasOne("BookStore.DAL.Entities.Menu", "Menu")
                         .WithMany("Tags")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MenuId");
 
                     b.Navigation("Info");
 

@@ -19,15 +19,6 @@ namespace BookStore.DAL.Configuration
             builder.Property<string>(s => s.SeriesName)
                 .HasColumnType("nvarchar(30)")
                 .HasDefaultValue("Unknow");
-
-            builder.Property<string>(s => s.Keyword)
-                .HasColumnType("nvarchar(60)");
-
-            builder.Property<string>(s => s.Decription)
-                .HasColumnType("ntext");
-
-            builder.Property<string>(s => s.Slug)
-                .HasColumnType("varchar(MAX)");
         }
     }
 }

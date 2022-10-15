@@ -548,3 +548,13 @@ C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.pdb
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.genruntimeconfig.cache
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\ref\BookStore.Website.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\MediatR.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\MediatR.Contracts.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.Shared.pdb

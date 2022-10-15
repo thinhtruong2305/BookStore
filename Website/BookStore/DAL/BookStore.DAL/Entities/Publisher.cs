@@ -13,7 +13,6 @@ namespace BookStore.DAL.Entities
     public class Publisher : BaseEntity
     {
         public int PublisherId { get; set; }
-        public int EditionId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập nhà xuất bản")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
@@ -25,15 +24,13 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Quốc gia")]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập từ khóa của nhà xuất bản")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Từ khóa")]
-        public string Keyword { get; set; }
+        public string? Keyword { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập mô tả của nhà xuất bản")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Mô tả")]
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
 
         [Display(Name = "Liên kết")]
         public string Slug { get; set; }
