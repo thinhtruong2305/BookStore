@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DAL\BookStore.DAL\BookStore.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Command\" />
+  </ItemGroup>
+
 </Project>
