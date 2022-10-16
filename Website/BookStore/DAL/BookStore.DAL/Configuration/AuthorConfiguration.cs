@@ -18,10 +18,10 @@ namespace BookStore.DAL.Configuration
             builder.Property(a => a.AuthorId).UseIdentityColumn();
 
             builder.Property<string>(a => a.FirstName)
-               .HasColumnType("nvarchar(50)");
+               .HasColumnType("nvarchar(25)");
 
             builder.Property<string>(a => a.LastName)
-                .HasColumnType("nvarchar(10)");
+                .HasColumnType("nvarchar(25)");
 
             builder.Property<string>(a => a.CountryOfResidence)
                 .HasColumnType("nvarchar(20)");

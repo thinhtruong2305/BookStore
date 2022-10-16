@@ -28,7 +28,6 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Đầu sách")]
         public int VolumeNumber { get; set; }
         public Book Book { get; set; }
-
         public Series Series { get; set; }
         public List<Tag> Tags { get; set; }
     }

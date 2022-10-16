@@ -18,7 +18,11 @@ namespace BookStore.DAL.Configuration
 
             builder.HasOne(od => od.Book)
                 .WithOne(b => b.OrderDetail)
-                .HasForeignKey<OrderDetail>(od => od.BookId);
+                .HasForeignKey<OrderDetail>(b => b.BookId);
+
+            builder.HasOne(o => o.Order)
+                .WithMany(od => od.OrderDetails)
+                .HasForeignKey(od => od.OrderId);
         }
     }
 }

@@ -14,28 +14,13 @@ namespace BookStore.DAL.Entities
     {
         public int SeriesId { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập tên tag")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Tên tag")]
-        public string SeriesName { get; set; }
+        [Display(Name = "Tên series")]
+        public string? SeriesName { get; set; }
 
         [RegularExpression(@"/^[0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [0-9]")]
         [Display(Name = "Đầu sách sắp ra")]
         public int? PlannedVolume { get; set; }
-
-        [Required(ErrorMessage = "Bạn phải nhập từ khóa của sách")]
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Từ khóa")]
-        public string Keyword { get; set; }
-
-        [Required(ErrorMessage = "Bạn phải nhập mô tả của sách")]
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Mô tả")]
-        public string Decription { get; set; }
-
-        [Display(Name = "Liên kết")]
-        public string Slug { get; set; }
-
-        public List<Info> infos { get; set; }
+        public Info info { get; set; }
     }
 }

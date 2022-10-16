@@ -1,4 +1,4 @@
-﻿using BookStore.Common.Shared.Model;
+﻿ using BookStore.Common.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,15 +19,13 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập từ khóa của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Từ khóa")]
-        public string Keyword { get; set; }
+        public string? Keyword { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập mô tả của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name  = "Mô tả")]
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
 
         [Display(Name = "Liên kết")]
         public string Slug { get; set; }
@@ -35,7 +33,7 @@ namespace BookStore.DAL.Entities
         public Info Info { get; set; }
         public Edition Edition { get; set; }
         public OrderDetail OrderDetail { get; set; }
-        public BookImage BookImage { get; set; }
+        public List<BookImage> BookImages { get; set; }
         public List<Rating> Ratings { get; set; }
     }
 }

@@ -13,24 +13,21 @@ namespace BookStore.DAL.Entities
     public class Tag : BaseEntity
     {
         public int TagId { get; set; }
-        public int MenuId { get; set; }
-
-        public int InfoId { get; set; }
+        public int? MenuId { get; set; }
+        public int? InfoId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên tag")]
         [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z]")]
         [Display(Name = "Tên tag")]
         public string TagName { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Từ khóa")]
-        public string Keyword { get; set; }
+        public string? Keyword { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Mô tả")]
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
 
         [Display(Name = "Liên kết")]
         public string Slug { get; set; }

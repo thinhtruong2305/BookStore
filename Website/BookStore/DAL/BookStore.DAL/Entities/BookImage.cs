@@ -14,6 +14,8 @@ namespace BookStore.DAL.Entities
     {
         public int BookImageId { get; set; }
         public int BookId { get; set; }
+
+        [Required(ErrorMessage = "Bạn không được để trống")]
         public string FileUpload { get; set; }
         public Book Book { get; set; }
     }

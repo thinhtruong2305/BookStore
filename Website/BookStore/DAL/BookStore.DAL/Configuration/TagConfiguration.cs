@@ -18,7 +18,8 @@ namespace BookStore.DAL.Configuration
 
             builder.HasOne(t => t.Menu)
                 .WithMany(m => m.Tags)
-                .HasForeignKey(t => t.MenuId);
+                .HasForeignKey(t => t.MenuId)
+                .IsRequired(false);
 
             builder.HasOne(t => t.Info)
                 .WithMany(info => info.Tags)

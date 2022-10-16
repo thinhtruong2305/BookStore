@@ -17,8 +17,8 @@ namespace BookStore.DAL.Configuration
             builder.Property(bi => bi.BookImageId).UseIdentityColumn();
 
             builder.HasOne(bi => bi.Book)
-                .WithOne(b => b.BookImage)
-                .HasForeignKey<BookImage>(bi => bi.BookId);
+                .WithMany(b => b.BookImages)
+                .HasForeignKey(bi => bi.BookId);
         }
     }
 }

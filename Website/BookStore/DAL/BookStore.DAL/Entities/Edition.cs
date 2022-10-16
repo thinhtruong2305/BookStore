@@ -22,30 +22,26 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Mã sách")]
         public string ISBN { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập ngày xuất bản")]
         [RegularExpression(@"^(?:(?:31(\/)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", ErrorMessage = "Bạn phải nhập dd/MM/yyyy hoặc dd/MMM/yyyy")]
         [Display(Name = "Ngày xuất bản")]
-        public DateTime PublicationDate { get; set; }
+        public DateTime? PublicationDate { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập hình thức")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Hình thức")]
-        public string Format { get; set; }
+        [Display(Name = "Định dạng")]
+        public string? Format { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập kích cỡ")]
         [RegularExpression(@"/^([0-9]{0,4})(\,[0-9]{0,4})(\s[a-z])(\s([0-9]{0,4})(\,[0-9]{0,4}))(\s[a-z]{1,3})$/gm", ErrorMessage = "Bạn phải nhập các ký tự theo mẫu **,** x **,** đơn vị đo")]
         [Display(Name = "Kích cỡ")]
-        public string PrintRunSize { get; set; }
+        public string? PrintRunSize { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập giá tiền")]
         [RegularExpression(@"/^((?=.*[1-9]|0)(?:\d{1,3}))((?=.*\d)(?:\.\d{3})?)*((?=.*\d)(?:\,\d\d){1}?){0,1}$/gm", ErrorMessage = "Bạn phải nhập các định dạng tiền 1.000,10")]
         [Display(Name = "Giá tiền")]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập giá tiền")]
         [RegularExpression(@"/^([1-9])([0-9]{1,10})$/gm", ErrorMessage = "Bạn không được nhập số 0 ở đầu")]
         [Display(Name = "Giá tiền")]
-        public int Pages { get; set; }
+        public int? Pages { get; set; }
         public Book Book { get; set; }
         public List<EditionPublisher> EditionPublishers { get; set; }
     }

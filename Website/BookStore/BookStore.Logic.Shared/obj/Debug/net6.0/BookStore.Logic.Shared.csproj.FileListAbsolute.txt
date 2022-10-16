@@ -1,0 +1,17 @@
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.Logic.Shared.deps.json
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.Logic.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.Logic.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.Common.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\bin\Debug\net6.0\BookStore.Common.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\refint\BookStore.Logic.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\BookStore.Logic.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Logic.Shared\obj\Debug\net6.0\ref\BookStore.Logic.Shared.dll
