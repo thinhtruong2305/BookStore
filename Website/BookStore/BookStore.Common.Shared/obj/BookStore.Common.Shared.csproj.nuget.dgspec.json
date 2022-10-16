@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {}
+    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
         "projectName": "BookStore.Common.Shared",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
+        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Mg8w4QgjBGvOGzhxavriTsnnQ7mPOzTP3kSEuPf1cev3CA9QBFtt5/owCpDNzHacHctzPf5jB8dtbUaaAoN9Xg==",
+  "dgSpecHash": "b+lSNiHTKai/ZPiYhvbfNOWcAvloN9XqJK2LNSUNXnlH3su+GGuEt2YOjBsmmUkKS0XbwHs9xOS5I40XH09XJw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

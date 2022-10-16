@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QsMJicMVLFVma49Tqeg7Xib22l5E0mXbOsny76F37FE3WaR81g7I/ww2dqjmwYT2pTNJ1c8/zU7P4sbqrc/WEw==",
+  "dgSpecHash": "4mx0XyaYIt7cvyY4Blnvvdt8ZctS+s4p9ycHkgRpm4yyvRjgOy0A0vHuifDD4X2d/MCA01+ijlD+zBvrjzhj1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

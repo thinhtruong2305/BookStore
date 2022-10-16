@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XkKO2It7AqOGlYsdpKpbLipDDhMamLez+QRXcTswXzD4Ir36qb1wRut0MM0BEVYFmHB+o9wxLbUN56x+fhnuRg==",
+  "dgSpecHash": "d38hMBkarHl9tshjQEimx+QEf6Udrof6DFKA9/csbnkBjcslRNKENZRhVW9ot7louaIwxNShE8Ph8j9PGI5Z4g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

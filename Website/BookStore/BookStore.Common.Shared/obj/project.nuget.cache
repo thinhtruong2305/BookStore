@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kg8yLPjEKlJPED4Qlq4Zr4DmErBs7eySjAu3DHVFVB/UcMdQGH8ayat0zYSDpZg5jHRDHL2KCQ3Rd/jqeEKbDA==",
+  "dgSpecHash": "F4ifRQREYGsJEIqOs9GeLutlAT/cRwPywsM2GzTQgK7SpiD2n7sBYIKgkcbCKFYcovy3pNPIdJCZfrJUPyuVHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\Graduation Project\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
