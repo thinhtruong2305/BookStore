@@ -23,14 +23,20 @@ namespace BookStore.DAL.Configuration
             builder.Property<string>(a => a.LastName)
                 .HasColumnType("nvarchar(25)");
 
+            builder.Property<DateTime>(a => a.DateOfBirth)
+                .HasDefaultValue(DateTime.MinValue);
+
             builder.Property<string>(a => a.CountryOfResidence)
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("nvarchar(20)")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(a => a.Keyword)
-                .HasColumnType("nvarchar(60)");
+                .HasColumnType("nvarchar(60)")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(a => a.Decription)
-                .HasColumnType("ntext");
+                .HasColumnType("ntext")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(a => a.Slug)
                 .HasColumnType("varchar(MAX)");

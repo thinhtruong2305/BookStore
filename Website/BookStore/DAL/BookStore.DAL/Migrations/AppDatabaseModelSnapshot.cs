@@ -31,8 +31,9 @@ namespace BookStore.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AuthorId"), 1L, 1);
 
                     b.Property<string>("CountryOfResidence")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<DateTime?>("CreateAt")
                         .HasColumnType("datetime2");
@@ -41,19 +42,23 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<string>("Decription")
-                        .IsRequired()
-                        .HasColumnType("ntext");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("ntext")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Keyword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -89,7 +94,7 @@ namespace BookStore.DAL.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("AuthorBooks");
+                    b.ToTable("AuthorBook");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Book", b =>
@@ -107,13 +112,17 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .HasColumnType("ntext");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("ntext")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<int>("InfoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Keyword")
-                        .HasColumnType("nvarchar(60)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("Slug")
                         .IsRequired()
@@ -124,9 +133,7 @@ namespace BookStore.DAL.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(70)")
-                        .HasDefaultValue("Unknow");
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<DateTime?>("UpdateAt")
                         .HasColumnType("datetime2");
@@ -176,7 +183,7 @@ namespace BookStore.DAL.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BookImages");
+                    b.ToTable("BookImage");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Edition", b =>
@@ -197,26 +204,34 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Format")
-                        .HasColumnType("nvarchar(20)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("ISBN")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(10)
-                        .HasColumnType("char(10)")
-                        .HasDefaultValue("Unknow");
+                        .HasColumnType("char(10)");
 
-                    b.Property<int?>("Pages")
-                        .HasColumnType("int");
+                    b.Property<int>("Pages")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,0)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(1m);
 
                     b.Property<string>("PrintRunSize")
-                        .HasColumnType("nvarchar(30)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(30)")
+                        .HasDefaultValue("Unknow");
 
-                    b.Property<DateTime?>("PublicationDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("PublicationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
                     b.Property<int>("PublisherId")
                         .HasColumnType("int");
@@ -250,7 +265,7 @@ namespace BookStore.DAL.Migrations
 
                     b.HasIndex("EditionId");
 
-                    b.ToTable("EditionPublishers");
+                    b.ToTable("EditionPublisher");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Info", b =>
@@ -267,13 +282,17 @@ namespace BookStore.DAL.Migrations
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DiscountPercent")
-                        .HasColumnType("int");
+                    b.Property<int>("DiscountPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("Language")
-                        .HasColumnType("nvarchar(20)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Unknow");
 
-                    b.Property<int>("SeriesId")
+                    b.Property<int?>("SeriesId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -291,7 +310,8 @@ namespace BookStore.DAL.Migrations
                     b.HasKey("InfoId");
 
                     b.HasIndex("SeriesId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SeriesId] IS NOT NULL");
 
                     b.ToTable("Info");
                 });
@@ -311,12 +331,14 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .IsRequired()
-                        .HasColumnType("ntext");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("ntext")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("Keyword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("MenuName")
                         .IsRequired()
@@ -342,7 +364,7 @@ namespace BookStore.DAL.Migrations
 
                     b.HasKey("MenuId");
 
-                    b.ToTable("Menus");
+                    b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Order", b =>
@@ -368,9 +390,7 @@ namespace BookStore.DAL.Migrations
 
                     b.Property<string>("ShipName")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(60)")
-                        .HasDefaultValue("Unknow");
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("ShipPhone")
                         .IsRequired()
@@ -450,7 +470,6 @@ namespace BookStore.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PublisherId"), 1L, 1);
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(20)")
                         .HasDefaultValue("Unknow");
@@ -462,10 +481,14 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .HasColumnType("ntext");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("ntext")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("Keyword")
-                        .HasColumnType("nvarchar(60)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<string>("PulishingHouse")
                         .IsRequired()
@@ -549,6 +572,7 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SeriesName")
+                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(30)")
                         .HasDefaultValue("Unknow");
@@ -582,14 +606,17 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Decription")
-                        .HasColumnType("ntext");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("ntext")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<int?>("InfoId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Keyword")
-                        .HasColumnType("nvarchar(60)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(60)")
+                        .HasDefaultValue("Unknow");
 
                     b.Property<int?>("MenuId")
                         .HasColumnType("int");
@@ -910,9 +937,7 @@ namespace BookStore.DAL.Migrations
                 {
                     b.HasOne("BookStore.DAL.Entities.Series", "Series")
                         .WithOne("info")
-                        .HasForeignKey("BookStore.DAL.Entities.Info", "SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookStore.DAL.Entities.Info", "SeriesId");
 
                     b.Navigation("Series");
                 });
@@ -951,9 +976,7 @@ namespace BookStore.DAL.Migrations
                 {
                     b.HasOne("BookStore.DAL.Entities.Info", "Info")
                         .WithMany("Tags")
-                        .HasForeignKey("InfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InfoId");
 
                     b.HasOne("BookStore.DAL.Entities.Menu", "Menu")
                         .WithMany("Tags")

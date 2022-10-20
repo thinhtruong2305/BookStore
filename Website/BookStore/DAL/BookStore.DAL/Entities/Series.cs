@@ -14,9 +14,10 @@ namespace BookStore.DAL.Entities
     {
         public int SeriesId { get; set; }
 
+        [Required(ErrorMessage = "Bạn phải nhập tên của bộ")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Tên series")]
-        public string? SeriesName { get; set; }
+        public string SeriesName { get; set; }
 
         [RegularExpression(@"/^[0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [0-9]")]
         [Display(Name = "Đầu sách sắp ra")]

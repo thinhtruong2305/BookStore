@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "H7p7cdzGZA+O1byjqo6oXfk4Jfqh9p89ixIolgVtlU8iogIPnL2rmh5FdxjkEj+FiywN6wRyQ2ksXzujGttjsw==",
+  "dgSpecHash": "euCwdOq/sRC7ZxAnFVRQ7aiVuZlBkWvlDUhCQgbwdzvg/EjZBUQgSxjP/Ryp0D2fMIBVN13zmp1HgMSKtsvxow==",
   "success": true,
   "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
   "expectedPackageFiles": [
@@ -213,12 +213,5 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

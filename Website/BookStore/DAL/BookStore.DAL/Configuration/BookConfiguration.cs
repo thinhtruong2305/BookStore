@@ -21,14 +21,15 @@ namespace BookStore.DAL.Configuration
                 .HasForeignKey<Book>(b => b.InfoId);
 
             builder.Property<string>(b => b.Title)
-                .HasColumnType("nvarchar(70)")
-                .HasDefaultValue("Unknow");
+                .HasColumnType("nvarchar(70)");
 
             builder.Property<string>(b => b.Keyword)
-                .HasColumnType("nvarchar(60)");
+                .HasColumnType("nvarchar(60)")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(b => b.Decription)
-                .HasColumnType("ntext");
+                .HasColumnType("ntext")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(b => b.Slug)
                 .HasColumnType("varchar(MAX)");

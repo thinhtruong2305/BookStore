@@ -2558,7 +2558,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
           "Microsoft.Extensions.Identity.Stores": "6.0.10",
-          "Microsoft.Extensions.Logging.Console": "6.0.0"
+          "Microsoft.Extensions.Logging.Console": "6.0.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10"
         },
         "runtime": {
           "BookStore.DAL.dll": {}

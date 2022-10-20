@@ -17,8 +17,7 @@ namespace BookStore.DAL.Configuration
             builder.Property(o => o.OrderId).UseIdentityColumn();
 
             builder.Property<string>(o => o.ShipName)
-                .HasColumnType("nvarchar(60)")
-                .HasDefaultValue("Unknow");
+                .HasColumnType("nvarchar(60)");
 
             builder.Property<string>(o => o.ShipAdress)
                 .HasColumnType("nvarchar(MAX)");

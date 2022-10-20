@@ -19,10 +19,9 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Nhà xuất bản")]
         public string PulishingHouse { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập quốc gia của sách")]
         [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Quốc gia")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Từ khóa")]

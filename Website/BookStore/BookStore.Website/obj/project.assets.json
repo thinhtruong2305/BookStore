@@ -4168,7 +4168,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.9",
           "Microsoft.Extensions.DependencyInjection": "6.0.0",
           "Microsoft.Extensions.Identity.Stores": "6.0.9",
-          "Microsoft.Extensions.Logging.Console": "6.0.0"
+          "Microsoft.Extensions.Logging.Console": "6.0.0",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.10"
         },
         "compile": {
           "bin/placeholder/BookStore.DAL.dll": {}
@@ -11504,13 +11505,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

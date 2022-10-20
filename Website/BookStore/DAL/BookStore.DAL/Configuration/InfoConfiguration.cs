@@ -18,10 +18,15 @@ namespace BookStore.DAL.Configuration
 
             builder.HasOne(info => info.Series)
                 .WithOne(s => s.info)
-                .HasForeignKey<Info>(info => info.SeriesId);
+                .HasForeignKey<Info>(info => info.SeriesId)
+                .IsRequired(false);
 
             builder.Property<string>(info => info.Language)
-                .HasColumnType("nvarchar(20)");
+                .HasColumnType("nvarchar(20)")
+                .HasDefaultValue("Unknow");
+
+            builder.Property<int>(info => info.DiscountPercent)
+                .HasDefaultValue(0);
         }
     }
 }

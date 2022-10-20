@@ -13,6 +13,7 @@ using System.Text.Unicode;
 using MediatR;
 using BookStore.Logic.MappingProfile;
 using BookStore.Logic;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,9 +65,10 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
-      name: "Myareas",
+      name: "AdminDefaultAreas",
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
+
     endpoints.MapControllerRoute(
      name: "default",
      pattern: "{controller=Home}/{action=Index}/{id?}"

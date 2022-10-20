@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eIxSkwyuJu3TuymSuYx1dxpxum28ddxbMGU9pqHLkfE=",
+  "Hash": "djGBI1P/yqJBregrxebB0OS0WpUKY4Ll1aoGyFzJS0o=",
   "Source": "BookStore.Website",
   "BasePath": "_content/BookStore.Website",
   "Mode": "Default",
@@ -1071,6 +1071,23 @@
       "OriginalItemSpec": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BookStore.Website.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\css\\admin-my-style.css",
+      "SourceId": "BookStore.Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
+      "BasePath": "_content/BookStore.Website",
+      "RelativePath": "css/admin-my-style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\admin-my-style.css"
+    },
+    {
       "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\css\\admin-style.css",
       "SourceId": "BookStore.Website",
       "SourceType": "Discovered",
@@ -1137,6 +1154,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\admin-datatables-simple-demo.js"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\js\\admin-my-script.js",
+      "SourceId": "BookStore.Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
+      "BasePath": "_content/BookStore.Website",
+      "RelativePath": "js/admin-my-script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\admin-my-script.js"
     },
     {
       "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\js\\admin-script.js",

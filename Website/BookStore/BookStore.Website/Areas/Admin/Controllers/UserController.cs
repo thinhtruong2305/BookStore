@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BookStore.Website.Areas.Identity.Controllers
+namespace BookStore.Website.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class UserController : Controller
     {
         public IActionResult Index()
         {

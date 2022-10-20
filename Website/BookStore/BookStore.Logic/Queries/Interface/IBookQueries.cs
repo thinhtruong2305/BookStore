@@ -14,5 +14,11 @@ namespace BookStore.Logic.Queries.Interface
     {
         public List<BookSummaryClientModel> GetAllClient();
         public Task<List<BookSummaryClientModel>> GetAllClientAsync();
+        public BookDetailClientModel GetDetailClient(int BookId);
+        public Task<BookDetailClientModel> GetDetailClientAsync(int BookId);
+        public List<BookSummaryModel> GetAll();
+        public Task<List<BookSummaryModel>> GetAllAsync();
+        public BookDetailModel GetDetail(int BookId);
+        public Task<BookDetailModel> GetDetailAsync(int BookId);
     }
 }

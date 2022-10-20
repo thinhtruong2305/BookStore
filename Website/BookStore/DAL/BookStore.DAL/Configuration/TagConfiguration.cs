@@ -23,17 +23,20 @@ namespace BookStore.DAL.Configuration
 
             builder.HasOne(t => t.Info)
                 .WithMany(info => info.Tags)
-                .HasForeignKey(t => t.InfoId);
+                .HasForeignKey(t => t.InfoId)
+                .IsRequired(false);
 
             builder.Property<string>(t => t.TagName)
                 .HasColumnType("nvarchar(30)")
                 .HasDefaultValue("Unknow");
 
             builder.Property<string>(t => t.Keyword)
-                .HasColumnType("nvarchar(60)");
+                .HasColumnType("nvarchar(60)")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(t => t.Decription)
-                .HasColumnType("ntext");
+                .HasColumnType("ntext")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(t => t.Slug)
                 .HasColumnType("varchar(MAX)");
