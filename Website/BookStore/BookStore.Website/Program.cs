@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Configuration;
 using System;
 using BookStore.DAL;
+using BookStore.Logic;
 using Microsoft.EntityFrameworkCore;
 using BookStore.DAL.Seeder;
 using Microsoft.Extensions.Configuration;
@@ -14,25 +15,45 @@ using MediatR;
 using BookStore.Logic.MappingProfile;
 using BookStore.Logic;
 using Newtonsoft.Json;
+using BookStore.Utils.Extension;
+using BookStore.Logic.Command.Request;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(option => option.JsonSerializerOptions.PropertyNamingPolicy = null)
+    .AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
 builder.Services.AddRazorPages();
+
+//Authenticate
+builder.Services.AddCookiesAuthenticate(builder.Configuration);
+
 // Đăng ký AppDbContext
-builder.Services.AddDbContext<AppDatabase>(options => {
+builder.Services.AddSqlDatabase<AppDatabase>(builder.Configuration.GetConnectionString("Database"));
+
+//Identity
+builder.Services.AddIdentityConfig<User, IdentityRole, AppDatabase>();
+
+/*builder.Services.AddDbContext<AppDatabase>(options => {
     // Đọc chuỗi kết nối
     string connectstring = @"Data Source=DESKTOP-J98APIA;Initial Catalog=BookStore;User ID=sa;Password=Thinhyeuhocbai123";
     // Sử dụng MS SQL Server
     options.UseSqlServer(connectstring, b => b.MigrationsAssembly("BookStore.DAL"));
-});
-builder.Services.AddAutoMapper(typeof(Register).Assembly);
+});*/
+
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(AuthorMappingProfile).Assembly);
+
+//MediatR
+builder.Services.AddMediatR(typeof(LoginRequest).Assembly);
+
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
 
-builder.Services.AddIdentity<User, IdentityRole>()
+/*builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDatabase>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders();*/
 
 builder.Services.AddQueries();
 

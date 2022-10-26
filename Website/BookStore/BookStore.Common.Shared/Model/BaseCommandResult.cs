@@ -8,8 +8,8 @@ namespace BookStore.Common.Shared.Model
 {
     public class BaseCommandResult
     {
-        public bool Success { get; set; }
-        public string Message { get; set; }
-        public List<BaseError> Errors { get; set; }
+        public bool Success { get; set; } = false;
+        public string Message { get; set; } = string.Empty;
+        public List<BaseError> Errors { get; set; } = new List<BaseError>();
     }
 }

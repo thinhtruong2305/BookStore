@@ -16,11 +16,8 @@
   <ItemGroup>
     <ProjectReference Include="..\BookStore.Common.Shared\BookStore.Common.Shared.csproj" />
     <ProjectReference Include="..\BookStore.Logic.Shared\BookStore.Logic.Shared.csproj" />
+    <ProjectReference Include="..\BookStore.Utils\BookStore.Utils.csproj" />
     <ProjectReference Include="..\DAL\BookStore.DAL\BookStore.DAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Command\" />
   </ItemGroup>
 
 </Project>

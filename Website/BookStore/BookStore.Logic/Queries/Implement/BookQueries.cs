@@ -1,4 +1,4 @@
-﻿global using AutoMapper;
+﻿using AutoMapper;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;

@@ -13,6 +13,7 @@ namespace BookStore.Logic.MappingProfile
     {
         public OrderMappingProfile()
         {
+            //Map này cho phần hiển thị
             CreateMap<Order, OrderSummaryModel>()
                 .ReverseMap();
             CreateMap<Order, OrderDetailModel>()

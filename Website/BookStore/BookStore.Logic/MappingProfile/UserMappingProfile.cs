@@ -12,6 +12,7 @@ namespace BookStore.Logic.MappingProfile
     {
         public UserMappingProfile()
         {
+            //Map này cho phần hiển thị
             CreateMap<User, UserSummaryModel>()
                 .ReverseMap();
             CreateMap<User, UserSummaryModel>()

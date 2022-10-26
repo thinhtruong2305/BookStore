@@ -13,7 +13,6 @@ namespace BookStore.Logic.MappingProfile
     {
         public BookMappingProfile()
         {
-
             //Map cho phần hiển thị
             CreateMap<Book, BookSummaryClientModel>()
                 .ForMember(dest => dest.DiscountPercent, opt => opt.MapFrom(src => src.Info.DiscountPercent))

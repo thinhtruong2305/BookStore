@@ -13,6 +13,7 @@ namespace BookStore.Logic.MappingProfile
     {
         public SeriesMappingProfile()
         {
+            //Map này cho phần hiển thị
             CreateMap<Series, SeriesSummaryModel>()
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.info.Book.Title))
                 .ForMember(dest => dest.VolumeNumber, opt => opt.MapFrom(src => src.info.VolumeNumber))

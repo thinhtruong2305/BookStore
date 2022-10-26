@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -44,5 +45,10 @@ namespace BookStore.DAL.Entities
         public string Slug { get; set; }
 
         public List<AuthorBook> AuthorBooks { get; set; }
+
+        public static implicit operator Author(EntityEntry<Author> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace BookStore.Logic.MappingProfile
         public PublisherMappingProfile()
         {
             new BookMappingProfile();
+
+            //Map này cho phần hiển thị
             CreateMap<Publisher, PublisherSummaryModel>()
                 .ReverseMap();
             CreateMap<Publisher, PublisherDetailModel>()
