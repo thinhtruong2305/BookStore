@@ -13,7 +13,7 @@ namespace BookStore.DAL.Entities
     public class Rating : BaseEntity
     {
         public int RatingId { get; set; }
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         public int BookId { get; set; }
         
         [RegularExpression(@"/^[0-5]+$/", ErrorMessage = "Bạn đánh giá [0-5]")]

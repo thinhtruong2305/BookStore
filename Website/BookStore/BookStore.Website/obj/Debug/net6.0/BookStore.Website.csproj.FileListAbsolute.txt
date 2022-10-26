@@ -558,3 +558,11 @@ C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.Shared.dll
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.pdb
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Logic.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BookStore.Utils.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\bundleconfig.json
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

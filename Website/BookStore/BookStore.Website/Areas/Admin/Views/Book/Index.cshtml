@@ -1,0 +1,77 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@model IEnumerable<BookSummaryModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Books Manager</h1>
+
+<table id="datatablesSimple">
+    <thead>
+        <tr>
+            <th>Tựa sách</th>
+            <th>Tên tác giả</th>
+            <th>Đầu sách(tập)</th>
+            <th>Mã sách</th>
+            <th>Nhà xuất bản</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>
+                        @{
+                            string? resultAuthor = " ";
+                        }
+                        @foreach (var author in book.AuthorBooks)
+                        {
+                            if (author != null)
+                            {
+                                resultAuthor += author.Author.LastName.ToString() + " " + author.Author.FirstName.ToString() + ", ";
+                            }
+                        }
+                        @resultAuthor
+                    </td>
+                    <td>@book.VolumeNumber</td>
+                    <td>@book.ISBN</td>
+                    <td>
+                        @{string? resultPublisher = " ";}
+                        @foreach (var publisher in book.Pulisher)
+                        {
+                            if (publisher != null)
+                            {
+                                resultPublisher += publisher.Publisher.PulishingHouse + ", ";
+                            }
+                        }
+                        @resultPublisher
+                    </td>
+                    <td>
+                        <a class="btn btn-success d-inline" asp-action="Detail" asp-controller="Book" asp-route-id="@book.BookId">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                        <button class="btn btn-danger d-inline ms-2" onclick="onDelete(@book.BookId)"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+</table>
+

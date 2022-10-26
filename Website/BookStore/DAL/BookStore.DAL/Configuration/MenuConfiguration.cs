@@ -21,10 +21,12 @@ namespace BookStore.DAL.Configuration
                 .HasDefaultValue("Unknow");
 
             builder.Property<string>(m => m.Keyword)
-                .HasColumnType("nvarchar(60)");
+                .HasColumnType("nvarchar(60)")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(m => m.Decription)
-                .HasColumnType("ntext");
+                .HasColumnType("ntext")
+                .HasDefaultValue("Unknow");
 
             builder.Property<string>(m => m.Slug)
                 .HasColumnType("varchar(MAX)");

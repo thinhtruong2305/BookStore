@@ -14,6 +14,7 @@ namespace BookStore.DAL.Entities
     {
         public int BookId { get; set; }
         public int InfoId { get; set; }
+
         [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Tiêu đề")]

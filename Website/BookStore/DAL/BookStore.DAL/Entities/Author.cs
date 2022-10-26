@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,29 +25,30 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Tên")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập ngày sinh của tác giả")]
         [RegularExpression(@"^(?:(?:31(\/)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", ErrorMessage = "Bạn phải nhập dd/MM/yyyy hoặc dd/MMM/yyyy")]
         [Display(Name = "Ngày sinh")]
         public DateTime DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập quốc tịch của tác giả")]
         [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z]")]
         [Display(Name = "Quốc tịch")]
-        public string CountryOfResidence { get; set; }
+        public string? CountryOfResidence { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập từ khóa của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Từ khóa")]
-        public string Keyword { get; set; }
+        public string? Keyword { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập mô tả của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Mô tả")]
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
 
         [Display(Name = "Liên kết")]
         public string Slug { get; set; }
 
         public List<AuthorBook> AuthorBooks { get; set; }
+
+        public static implicit operator Author(EntityEntry<Author> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,12 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BookStore.DAL.Entities
 {
+    [Table("EditionPublisher")]
     public class EditionPublisher
     {
         public int EditionId { get; set; }
