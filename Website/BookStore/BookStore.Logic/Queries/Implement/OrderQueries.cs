@@ -39,24 +39,40 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public OrderDetailModel GetDetail(int OrderId)
+        public List<OrderSummaryModel> GetAllDelete()
         {
             return database.Orders
-                .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(od => od.Book)
-                .Select(o => mapper.Map<OrderDetailModel>(o))
-                .First();
+                .Where(o => o.Status == Common.Shared.Model.Status.Delete)
+                .Select(o => mapper.Map<OrderSummaryModel>(o))
+                .ToList();
         }
 
-        public Task<OrderDetailModel> GetDetailAsync(int OrderId)
+        public Task<List<OrderSummaryModel>> GetAllDeleteAsync()
         {
             return database.Orders
-                .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
+                .Where(o => o.Status == Common.Shared.Model.Status.Delete)
+                .Select(o => mapper.Map<OrderSummaryModel>(o))
+                .ToListAsync();
+        }
+
+        public OrderDetailModel? GetDetail(int OrderId)
+        {
+            return database.Orders
+                .Where(o => o.Status != Common.Shared.Model.Status.Delete)
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Book)
                 .Select(o => mapper.Map<OrderDetailModel>(o))
-                .FirstAsync();
+                .FirstOrDefault(o => o.OrderId == OrderId);
+        }
+
+        public Task<OrderDetailModel?> GetDetailAsync(int OrderId)
+        {
+            return database.Orders
+                .Where(o => o.Status != Common.Shared.Model.Status.Delete)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Book)
+                .Select(o => mapper.Map<OrderDetailModel>(o))
+                .FirstOrDefaultAsync(o => o.OrderId == OrderId);
         }
     }
 }

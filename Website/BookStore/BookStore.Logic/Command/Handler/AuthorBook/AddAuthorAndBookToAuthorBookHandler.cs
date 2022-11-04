@@ -1,4 +1,5 @@
-﻿using BookStore.Common.Shared.Model;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
@@ -33,7 +34,6 @@ namespace BookStore.Logic.Command.Handler
             {
                 var authorBook = mapper.Map<AuthorBook>(request);
                 database.AuthorBooks.Add(authorBook);
-                database.SaveChanges();
 
                 result.Data = authorBook;
                 result.Success = true;

@@ -1,4 +1,5 @@
-﻿using BookStore.DAL.Entities;
+﻿using AutoMapper;
+using BookStore.DAL.Entities;
 using BookStore.Logic.Shared.Model;
 using System;
 using System.Collections.Generic;

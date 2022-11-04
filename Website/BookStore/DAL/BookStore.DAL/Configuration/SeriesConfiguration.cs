@@ -17,8 +17,13 @@ namespace BookStore.DAL.Configuration
             builder.Property(s => s.SeriesId).UseIdentityColumn();
 
             builder.Property<string>(s => s.SeriesName)
-                .HasColumnType("nvarchar(30)")
-                .HasDefaultValue("Unknow");
+                .HasColumnType("nvarchar(40)")
+                .IsRequired(true);
+
+            builder.Property<int?>(s => s.PlannedVolume)
+                .HasColumnType("int")
+                .HasDefaultValue(0)
+                .IsRequired(false);
         }
     }
 }

@@ -21,25 +21,30 @@ namespace BookStore.DAL.Configuration
                 .HasForeignKey<Edition>(e => e.BookId);
 
             builder.Property<string>(e => e.ISBN)
-                .HasColumnType("char(15)");
+                .HasColumnType("char(15)")
+                .IsRequired(true);
 
             builder.Property<DateTime>(e => e.PublicationDate)
-                .HasDefaultValue(DateTime.MinValue);
+                .IsRequired(true);
 
-            builder.Property<int>(e =>e.Pages)
-                .HasDefaultValue(1);
+            builder.Property<int?>(e =>e.Pages)
+                .HasDefaultValue(1)
+                .IsRequired(false);
 
             builder.Property<string>(e => e.Format)
                 .HasColumnType("nvarchar(20)")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(e => e.PrintRunSize)
                 .HasColumnType("nvarchar(30)")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
-            builder.Property<decimal>(e => e.Price)
+            builder.Property<decimal?>(e => e.Price)
                 .HasColumnType("decimal(18,2)")
-                .HasDefaultValue(1.000);
+                .HasDefaultValue(Convert.ToDecimal(1000))
+                .IsRequired(false);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BookStore.DAL
 {
     public class AppDatabase : IdentityDbContext<User>
     {
-        public const string ConnectString = @"Data Source=DESKTOP-J98APIA;Initial Catalog=BookStore;User ID=sa;Password=Thinhyeuhocbai123";
+        public const string ConnectionString = @"Data Source=DESKTOP-J98APIA;Initial Catalog=BookStore;User ID=sa;Password=Thinhyeuhocbai123";
         public AppDatabase(DbContextOptions<AppDatabase> options) : base(options)
         {
             
@@ -27,7 +27,7 @@ namespace BookStore.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             base.OnConfiguring(builder);
-            builder.UseSqlServer(ConnectString);
+            builder.UseSqlServer(ConnectionString);
             builder.UseLoggerFactory(GetLoggerFactory());
         }
 

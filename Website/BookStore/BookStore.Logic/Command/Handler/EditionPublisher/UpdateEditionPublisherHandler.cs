@@ -1,4 +1,5 @@
-﻿using BookStore.Common.Shared.Model;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
@@ -35,7 +36,6 @@ namespace BookStore.Logic.Command.Handler
                 {
                     editionPublisher = mapper.Map<EditionPublisher>(request);
                     database.EditionPublishers.Update(editionPublisher);
-                    database.SaveChanges();
 
                     result.Success = true;
                 }

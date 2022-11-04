@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Logic.MappingProfile
 {
-    internal class EditionPublisherMappingProfile
+    public class EditionPublisherMappingProfile
     {
     }
 }

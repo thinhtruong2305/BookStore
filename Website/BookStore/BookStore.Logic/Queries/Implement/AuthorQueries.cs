@@ -37,20 +37,36 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public AuthorDetailModel GetDetail(int AuthorId)
+        public List<AuthorSummaryModel> GetAllDelete()
         {
             return database.Authors
-                .Where(a => (a.Status != Common.Shared.Model.Status.Delete) && (a.AuthorId == AuthorId))
-                .Select(a => mapper.Map<AuthorDetailModel>(a))
-                .First();
+                .Where(a => a.Status == Common.Shared.Model.Status.Delete)
+                .Select(a => mapper.Map<AuthorSummaryModel>(a))
+                .ToList();
         }
 
-        public Task<AuthorDetailModel> GetDetailAsync(int AuthorId)
+        public Task<List<AuthorSummaryModel>> GetAllDeleteAsync()
         {
             return database.Authors
-                 .Where(a => (a.Status != Common.Shared.Model.Status.Delete) && (a.AuthorId == AuthorId))
-                 .Select(a => mapper.Map<AuthorDetailModel>(a))
-                 .FirstAsync();
+                .Where(a => a.Status == Common.Shared.Model.Status.Delete)
+                .Select(a => mapper.Map<AuthorSummaryModel>(a))
+                .ToListAsync();
+        }
+
+        public AuthorDetailModel? GetDetail(int AuthorId)
+        {
+            return database.Authors
+                .Where(a => a.Status != Common.Shared.Model.Status.Delete)
+                .Select(a => mapper.Map<AuthorDetailModel>(a))
+                .FirstOrDefault(a => a.AuthorId == AuthorId);
+        }
+
+        public Task<AuthorDetailModel?> GetDetailAsync(int AuthorId)
+        {
+            return database.Authors
+                .Where(a => a.Status != Common.Shared.Model.Status.Delete)
+                .Select(a => mapper.Map<AuthorDetailModel>(a))
+                .FirstOrDefaultAsync(a => a.AuthorId == AuthorId);
         }
     }
 }

@@ -15,20 +15,20 @@ namespace BookStore.DAL.Entities
         public int BookId { get; set; }
         public int InfoId { get; set; }
 
-        [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
+        /*[Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
         [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Tiêu đề")]
+        [Display(Name = "Tiêu đề")]*/
         public string Title { get; set; }
 
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name = "Từ khóa")]
+        /*[RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
+        [Display(Name = "Từ khóa")]*/
         public string? Keyword { get; set; }
 
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
-        [Display(Name  = "Mô tả")]
+        /*[RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
+        [Display(Name  = "Mô tả")]*/
         public string? Decription { get; set; }
 
-        [Display(Name = "Liên kết")]
+        /*[Display(Name = "Liên kết")]*/
         public string Slug { get; set; }
         public List<AuthorBook> AuthorBooks { get; set; }
         public Info Info { get; set; }

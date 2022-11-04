@@ -1,4 +1,5 @@
-﻿using BookStore.Common.Shared.Model;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.Logic.Command.Request;
 using BookStore.Utils.Global;

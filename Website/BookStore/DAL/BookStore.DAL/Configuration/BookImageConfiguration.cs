@@ -19,6 +19,14 @@ namespace BookStore.DAL.Configuration
             builder.HasOne(bi => bi.Book)
                 .WithMany(b => b.BookImages)
                 .HasForeignKey(bi => bi.BookId);
+
+            builder.Property(bi => bi.FilePath)
+                .IsRequired(true);
+
+            builder.Property(bi => bi.Decription)
+                .HasColumnType("ntext")
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
         }
     }
 }

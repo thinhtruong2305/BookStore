@@ -22,3 +22,6 @@ C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\refint\BookStore.Utils.dll
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.pdb
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\ref\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Common.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Common.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.CopyComplete

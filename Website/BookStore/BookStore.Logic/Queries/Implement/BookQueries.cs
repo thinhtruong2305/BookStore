@@ -72,10 +72,32 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public BookDetailModel GetDetail(int BookId)
+        public List<BookSummaryModel> GetAllDelete()
         {
             return database.Books
-                .Where(b => (b.Status != Common.Shared.Model.Status.Delete) && (b.BookId == BookId))
+                .Where(b => b.Status == Common.Shared.Model.Status.Delete)
+                .Include(b => b.BookImages)
+                .Include(b => b.Edition)
+                .Include(b => b.Info)
+                .Select(b => mapper.Map<BookSummaryModel>(b))
+                .ToList();
+        }
+
+        public Task<List<BookSummaryModel>> GetAllDeleteAsync()
+        {
+            return database.Books
+                .Where(b => b.Status == Common.Shared.Model.Status.Delete)
+                .Include(b => b.BookImages)
+                .Include(b => b.Edition)
+                .Include(b => b.Info)
+                .Select(b => mapper.Map<BookSummaryModel>(b))
+                .ToListAsync();
+        }
+
+        public BookDetailModel? GetDetail(int BookId)
+        {
+            return database.Books
+                .Where(b => b.Status != Common.Shared.Model.Status.Delete)
                 .Include(b => b.AuthorBooks)
                     .ThenInclude(ab => ab.Author)
                 .Include(b => b.Edition)
@@ -85,26 +107,26 @@ namespace BookStore.Logic.Queries.Implement
                 .Include(b => b.Info.Series)
                 .Include(b => b.Info.Tags)
                 .Select(b => mapper.Map<BookDetailModel>(b))
-                .First();
+                .FirstOrDefault(b => b.BookId == BookId);
         }
 
-        public Task<BookDetailModel> GetDetailAsync(int BookId)
+        public Task<BookDetailModel?> GetDetailAsync(int BookId)
         {
-            return database.Books
-                .Where(b => (b.Status != Common.Shared.Model.Status.Delete) && (b.BookId == BookId))
+                return database.Books
+                .Where(b => b.Status != Common.Shared.Model.Status.Delete)
                 .Include(b => b.AuthorBooks)
                     .ThenInclude(ab => ab.Author)
                 .Include(b => b.Edition)
                     .ThenInclude(e => e.EditionPublishers)
                         .ThenInclude(ep => ep.Publisher)
                 .Include(b => b.Info)
-                    .ThenInclude(info => info.Tags)
                 .Include(b => b.Info.Series)
+                .Include(b => b.Info.Tags)
                 .Select(b => mapper.Map<BookDetailModel>(b))
-                .FirstAsync();
+                .FirstOrDefaultAsync(b => b.BookId == BookId);
         }
 
-        public BookDetailClientModel GetDetailClient(int BookId)
+        public BookDetailClientModel? GetDetailClient(int BookId)
         {
             return database.Books
                 .Where(b => (b.Status != Common.Shared.Model.Status.Delete) && (b.BookId == BookId))
@@ -116,10 +138,10 @@ namespace BookStore.Logic.Queries.Implement
                 .Include(b => b.Info)
                     .ThenInclude(info => info.Tags)
                 .Select(b => mapper.Map<BookDetailClientModel>(b))
-                .First();
+                .FirstOrDefault();
         }
 
-        public Task<BookDetailClientModel> GetDetailClientAsync(int BookId)
+        public Task<BookDetailClientModel?> GetDetailClientAsync(int BookId)
         {
             return database.Books
                .Where(b => (b.Status != Common.Shared.Model.Status.Delete) && (b.BookId == BookId))
@@ -131,7 +153,7 @@ namespace BookStore.Logic.Queries.Implement
                .Include(b => b.Info)
                    .ThenInclude(info => info.Tags)
                .Select(b => mapper.Map<BookDetailClientModel>(b))
-               .FirstAsync();
+               .FirstOrDefaultAsync();
         }
     }
 }

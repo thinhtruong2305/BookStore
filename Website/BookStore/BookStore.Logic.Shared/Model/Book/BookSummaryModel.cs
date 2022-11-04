@@ -1,4 +1,5 @@
-﻿using BookStore.DAL.Entities;
+﻿using BookStore.Common.Shared.Model;
+using BookStore.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace BookStore.Logic.Shared.Model
     public class BookSummaryModel
     {
         public int BookId { get; set; }
+        public Status Status { get; set; }
         public string Title { get; set; }
         public int VolumeNumber { get; set; }
         public string ISBN { get; set; } = String.Empty;

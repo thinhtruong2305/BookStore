@@ -1,4 +1,5 @@
-﻿using BookStore.Common.Shared.Model;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
@@ -38,7 +39,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, author);
                     author.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.Update(author);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = author;

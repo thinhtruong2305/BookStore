@@ -32,7 +32,6 @@ namespace BookStore.Logic.Command.Handler
                 var info = mapper.Map<Info>(request);
                 info.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
                 database.Infos.Add(info);
-                database.SaveChanges();
 
                 result.Success = true;
                 result.Data = info;

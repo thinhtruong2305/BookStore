@@ -14,6 +14,7 @@ namespace BookStore.Logic.Command.Request
         IIdentifiedCommand,
         IRequest<BaseCommandResultWithData<User>>
     {
+        public string? Password { get; set; }
         public string? RequestId { get; set; }
         public string? IpAddress { get; set; }
     }

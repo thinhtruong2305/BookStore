@@ -38,24 +38,40 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public PublisherDetailModel GetDetail(int PublisherId)
+        public List<PublisherSummaryModel> GetAllDelete()
         {
             return database.Publishers
-                .Where(p => (p.Status != Common.Shared.Model.Status.Delete) && (p.PublisherId == PublisherId))
-                .Include(p => p.EditionPublishers)
-                    .ThenInclude(ep => ep.Edition)
-                .Select(o => mapper.Map<PublisherDetailModel>(o))
-                .First();
+                .Where(p => p.Status == Common.Shared.Model.Status.Delete)
+                .Select(p => mapper.Map<PublisherSummaryModel>(p))
+                .ToList();
         }
 
-        public Task<PublisherDetailModel> GetDetailAsync(int PublisherId)
+        public Task<List<PublisherSummaryModel>> GetAllDeleteAsync()
         {
             return database.Publishers
-                .Where(p => (p.Status != Common.Shared.Model.Status.Delete) && (p.PublisherId == PublisherId))
+                .Where(p => p.Status == Common.Shared.Model.Status.Delete)
+                .Select(p => mapper.Map<PublisherSummaryModel>(p))
+                .ToListAsync();
+        }
+
+        public PublisherDetailModel? GetDetail(int PublisherId)
+        {
+            return database.Publishers
+                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
                 .Include(p => p.EditionPublishers)
                     .ThenInclude(ep => ep.Edition)
                 .Select(o => mapper.Map<PublisherDetailModel>(o))
-                .FirstAsync();
+                .FirstOrDefault(p => p.PublisherId == PublisherId);
+        }
+
+        public Task<PublisherDetailModel?> GetDetailAsync(int PublisherId)
+        {
+            return database.Publishers
+                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
+                .Include(p => p.EditionPublishers)
+                    .ThenInclude(ep => ep.Edition)
+                .Select(o => mapper.Map<PublisherDetailModel>(o))
+                .FirstOrDefaultAsync(p => p.PublisherId == PublisherId);
         }
     }
 }

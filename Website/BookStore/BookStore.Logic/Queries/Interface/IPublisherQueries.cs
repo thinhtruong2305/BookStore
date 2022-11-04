@@ -11,7 +11,9 @@ namespace BookStore.Logic.Queries.Interface
     {
         public List<PublisherSummaryModel> GetAll();
         public Task<List<PublisherSummaryModel>> GetAllAsync();
-        public PublisherDetailModel GetDetail(int PublisherId);
-        public Task<PublisherDetailModel> GetDetailAsync(int PublisherId);
+        public List<PublisherSummaryModel> GetAllDelete();
+        public Task<List<PublisherSummaryModel>> GetAllDeleteAsync();
+        public PublisherDetailModel? GetDetail(int PublisherId);
+        public Task<PublisherDetailModel?> GetDetailAsync(int PublisherId);
     }
 }

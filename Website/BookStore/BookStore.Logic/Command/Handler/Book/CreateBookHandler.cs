@@ -3,6 +3,7 @@ using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Logic.Shared.Interface;
 using BookStore.Utils.Global;
 using MediatR;
@@ -33,7 +34,6 @@ namespace BookStore.Logic.Command.Handler
                 var book = mapper.Map<Book>(request);
                 book.SetCreateInfo(request.UserName ?? string.Empty, AppGlobal.SysDateTime);
                 database.Books.Add(book);
-                database.SaveChanges();
 
                 result.Data = book;
                 result.Success = true;

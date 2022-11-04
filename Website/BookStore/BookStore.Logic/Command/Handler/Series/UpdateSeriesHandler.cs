@@ -37,7 +37,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, series);
                     series.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.Series.Update(series);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = series;

@@ -31,7 +31,6 @@ namespace BookStore.Logic.Command.Handler
                 var series = mapper.Map<Series>(request);
                 series.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
                 database.Series.Add(series);
-                database.SaveChanges();
 
                 result.Success = true;
                 result.Data = series;

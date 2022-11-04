@@ -37,7 +37,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, publisher);
                     publisher.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.Publishers.Update(publisher);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = publisher;

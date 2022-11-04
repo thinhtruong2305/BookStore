@@ -31,7 +31,6 @@ namespace BookStore.Logic.Command.Handler
                 var menu = mapper.Map<Menu>(request);
                 menu.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
                 database.Menus.Add(menu);
-                database.SaveChanges();
 
                 result.Success = true;
                 result.Data = menu;
