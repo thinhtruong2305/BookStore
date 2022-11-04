@@ -1,4 +1,5 @@
 ﻿using BookStore.Logic.Shared.Model;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

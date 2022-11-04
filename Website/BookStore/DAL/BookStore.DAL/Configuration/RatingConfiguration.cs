@@ -21,7 +21,12 @@ namespace BookStore.DAL.Configuration
                 .HasForeignKey(r => r.BookId);
 
             builder.Property<string>(r => r.UserName)
-               .HasColumnType("nvarchar(60)");
+               .HasColumnType("nvarchar(60)")
+               .IsRequired(true);
+
+            builder.Property<int>(r => r.Rate)
+               .HasColumnType("int")
+               .IsRequired(true);
         }
     }
 }

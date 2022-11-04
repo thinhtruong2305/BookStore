@@ -17,8 +17,16 @@ using BookStore.Logic;
 using Newtonsoft.Json;
 using BookStore.Utils.Extension;
 using BookStore.Logic.Command.Request;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using BookStore.Common.Shared.Config;
+using BookStore.Logic.Shared.Catalog.Interface;
+using BookStore.Logic.Shared.Catalog.Implement;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMvc();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
@@ -27,11 +35,65 @@ builder.Services.AddControllersWithViews()
 
 builder.Services.AddRazorPages();
 
+//Send mail
+builder.Services.Configure<MailConfig>(builder.Configuration.GetSection("MailSettings"));
+
+// Đăng ký dịch vụ Mail
+builder.Services.AddTransient<ISendMailService, SendMailService>();
+
 //Authenticate
 builder.Services.AddCookiesAuthenticate(builder.Configuration);
 
+builder.Services.ConfigureApplicationCookie(options => {
+    options.Cookie = new CookieBuilder
+    {
+        //Domain = "",
+        HttpOnly = true,
+        Name = ".aspNetCoreDemo.Security.Cookie",
+        Path = "/",
+        SameSite = SameSiteMode.Lax,
+        SecurePolicy = CookieSecurePolicy.SameAsRequest
+    };
+    options.Events = new CookieAuthenticationEvents
+    {
+        OnSignedIn = context =>
+        {
+            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                "OnSignedIn", context?.Principal?.Identity?.Name);
+            return Task.CompletedTask;
+        },
+        OnSigningOut = context =>
+        {
+            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                "OnSigningOut", context?.HttpContext?.User?.Identity?.Name);
+            return Task.CompletedTask;
+        },
+        OnValidatePrincipal = context =>
+        {
+            Console.WriteLine("{0} - {1}: {2}", DateTime.Now,
+                "OnValidatePrincipal", context?.Principal?.Identity?.Name);
+            return Task.CompletedTask;
+        }
+    };
+    options.AccessDeniedPath = "/AccessDenied";
+    options.LogoutPath = "/Logout/";
+    options.LoginPath = "/Login/";
+});
+
 // Đăng ký AppDbContext
-builder.Services.AddSqlDatabase<AppDatabase>(builder.Configuration.GetConnectionString("Database"));
+builder.Services.AddDbContext<AppDatabase>(option =>
+{
+    string connectionString = builder.Configuration.GetConnectionString("Database");
+    option.UseSqlServer(connectionString, b => b.MigrationsAssembly("BookStore.DAL"));
+});
+
+builder.Services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+builder.Services.AddSession(cfg => {                    // Đăng ký dịch vụ Session
+    cfg.Cookie.Name = "BookStore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+    cfg.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
+});
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 //Identity
 builder.Services.AddIdentityConfig<User, IdentityRole, AppDatabase>();
@@ -50,7 +112,7 @@ builder.Services.AddAutoMapper(typeof(AuthorMappingProfile).Assembly);
 builder.Services.AddMediatR(typeof(LoginRequest).Assembly);
 
 builder.Services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
-
+builder.Services.AddTransient<IFileStorageService, FileStorageService>();
 /*builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<AppDatabase>()
     .AddDefaultTokenProviders();*/
@@ -76,11 +138,13 @@ using (var scope = app.Services.CreateScope())
     await AppSeeder.InitializeAsync(database, userManager, roleManager);
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

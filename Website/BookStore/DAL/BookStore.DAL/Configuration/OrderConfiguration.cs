@@ -17,13 +17,20 @@ namespace BookStore.DAL.Configuration
             builder.Property(o => o.OrderId).UseIdentityColumn();
 
             builder.Property<string>(o => o.ShipName)
-                .HasColumnType("nvarchar(60)");
+                .HasColumnType("nvarchar(60)")
+                .IsRequired(true);
 
             builder.Property<string>(o => o.ShipAdress)
-                .HasColumnType("nvarchar(MAX)");
+                .HasColumnType("nvarchar(MAX)")
+                .IsRequired(true);
 
             builder.Property<string>(o => o.ShipPhone)
-                .HasColumnType("varchar(12)");
+                .HasColumnType("varchar(12)")
+                .IsRequired(true);
+
+            builder.Property<decimal>(o => o.TotalPrice)
+                .HasColumnType("decimal(18,2)")
+                .IsRequired(true);
         }
     }
 }

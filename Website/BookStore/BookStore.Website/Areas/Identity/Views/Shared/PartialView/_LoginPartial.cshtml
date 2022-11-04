@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BookStore.DAL.Entities
+@using System.Security.Claims;
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<style>
+    li:hover {
+        cursor: pointer;
+    }
+
+    .button-transparent {
+        background-color: transparent;
+        background-repeat: no-repeat;
+        border: none;
+        cursor: pointer;
+        outline: none;
+    }
+
+    button{
+        line-height : 4;
+    }
+</style>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if(@Context.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value == "Admin"){
+        <li>
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" title="@UserManager.GetUserName(User)!">
+                <span class="fa fa-user nav-icon"></span>
+            </a>
+        </li>
+        <li>
+            <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="button-transparent">
+                <button title="Đăng xuất" type="submit" class="button-transparent">
+                    <span class="fa fa-sign-out nav-icon"></span>
+                </button>
+             </form>
+        </li>
+    }
+    else{
+        <li>
+            <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="button-transparent">
+                <button title="Đăng xuất" type="submit" class="button-transparent">
+                    <span class="fa fa-sign-out nav-icon"></span>
+                </button>
+            </form>
+        </li>
+    }
+}
+else
+{
+    <li>
+        <a title="Đăng nhập" asp-area="Identity" asp-controller="Account" asp-action="Login">
+            <span class="fa fa-sign-in nav-icon"></span>
+        </a>
+    </li>
+}

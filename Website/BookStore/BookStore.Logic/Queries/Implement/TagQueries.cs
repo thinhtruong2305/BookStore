@@ -37,20 +37,36 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public TagDetailModel GetDetail(int TagId)
+        public List<TagSummaryModel> GetAllDelete()
         {
             return database.Tags
-                .Where(t => (t.Status != Common.Shared.Model.Status.Delete) && (t.TagId == TagId))
-                .Select(t => mapper.Map<TagDetailModel>(t))
-                .First();
+                .Where(t => t.Status == Common.Shared.Model.Status.Delete)
+                .Select(t => mapper.Map<TagSummaryModel>(t))
+                .ToList();
         }
 
-        public Task<TagDetailModel> GetDetailAsync(int TagId)
+        public Task<List<TagSummaryModel>> GetAllDeleteAsync()
         {
             return database.Tags
-                .Where(t => (t.Status != Common.Shared.Model.Status.Delete) && (t.TagId == TagId))
+                .Where(t => t.Status == Common.Shared.Model.Status.Delete)
+                .Select(t => mapper.Map<TagSummaryModel>(t))
+                .ToListAsync();
+        }
+
+        public TagDetailModel? GetDetail(int TagId)
+        {
+            return database.Tags
+                .Where(t => t.Status != Common.Shared.Model.Status.Delete)
                 .Select(t => mapper.Map<TagDetailModel>(t))
-                .FirstAsync();
+                .FirstOrDefault(t => t.TagId == TagId);
+        }
+
+        public Task<TagDetailModel?> GetDetailAsync(int TagId)
+        {
+            return database.Tags
+                .Where(t => t.Status != Common.Shared.Model.Status.Delete)
+                .Select(t => mapper.Map<TagDetailModel>(t))
+                .FirstOrDefaultAsync(t => t.TagId == TagId);
         }
     }
 }

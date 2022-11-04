@@ -3,8 +3,11 @@ using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Shared.Catalog;
+using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Utils.Global;
 using MediatR;
+using Microsoft.AspNetCore.Server.IISIntegration;
 using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
@@ -14,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Logic.Command.Handler
 {
-    public class CreateBookImageHandler : IRequestHandler<CreateBookImagesRequest, BaseCommandResultWithData<BookImage>>
+    public class CreateBookImageHandler : IRequestHandler<CreateBookImageRequest, BaseCommandResultWithData<BookImage>>
     {
         private readonly AppDatabase database;
         private readonly IMapper mapper;
@@ -24,7 +27,7 @@ namespace BookStore.Logic.Command.Handler
             this.database = database;
             this.mapper = mapper;
         }
-        public Task<BaseCommandResultWithData<BookImage>> Handle(CreateBookImagesRequest request, CancellationToken cancellationToken)
+        public Task<BaseCommandResultWithData<BookImage>> Handle(CreateBookImageRequest request, CancellationToken cancellationToken)
         {
             var result = new BaseCommandResultWithData<BookImage>();
 
@@ -33,7 +36,6 @@ namespace BookStore.Logic.Command.Handler
                 var bookImage = mapper.Map<BookImage>(request);
                 bookImage.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
                 database.BookImages.Add(bookImage);
-                database.SaveChanges();
 
                 result.Success = true;
                 result.Data = bookImage;

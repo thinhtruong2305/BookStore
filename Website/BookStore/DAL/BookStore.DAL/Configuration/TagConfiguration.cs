@@ -28,14 +28,16 @@ namespace BookStore.DAL.Configuration
 
             builder.Property<string>(t => t.TagName)
                 .HasColumnType("nvarchar(30)")
-                .HasDefaultValue("Unknow");
+                .IsRequired(true);
 
             builder.Property<string>(t => t.Keyword)
                 .HasColumnType("nvarchar(60)")
+                .IsRequired(false)
                 .HasDefaultValue("Unknow");
 
             builder.Property<string>(t => t.Decription)
                 .HasColumnType("ntext")
+                .IsRequired(false)
                 .HasDefaultValue("Unknow");
 
             builder.Property<string>(t => t.Slug)

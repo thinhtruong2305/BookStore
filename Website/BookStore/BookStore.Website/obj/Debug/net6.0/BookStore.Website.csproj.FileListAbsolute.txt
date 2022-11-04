@@ -566,3 +566,11 @@ C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\MailKit.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\MimeKit.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.Properties.Resources.resources
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.csproj.GenerateResource.cache

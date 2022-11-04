@@ -3,6 +3,7 @@ using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Utils.Global;
 using MediatR;
 using NuGet.Protocol.Plugins;
@@ -40,7 +41,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, bookImage);
                     bookImage.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.BookImages.Update(bookImage);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = bookImage;

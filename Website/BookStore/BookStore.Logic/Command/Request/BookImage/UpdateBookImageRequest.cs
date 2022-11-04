@@ -2,6 +2,7 @@
 using BookStore.DAL.Entities;
 using BookStore.Logic.Shared.Interface;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace BookStore.Logic.Command.Request
         public string? RequestId { get; set; }
         public string? IpAddress { get; set; }
         public string? UserName { get; set; }
+        public IFormFile File { get; set; }
     }
 }

@@ -15,6 +15,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Author/AddAuthorToSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXV0aG9yXEFkZEF1dGhvclRvU2Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Author/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQXV0aG9yXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/BookImage/AddBookImageToSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va0ltYWdlXEFkZEJvb2tJbWFnZVRvU2Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xEZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -23,24 +39,96 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Publisher/ShowPublisherDialog.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHVibGlzaGVyXFNob3dQdWJsaXNoZXJEaWFsb2cuY3NodG1s
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Publisher/AddPublisherToSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHVibGlzaGVyXEFkZFB1Ymxpc2hlclRvU2Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Publisher/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHVibGlzaGVyXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Shared/PartialView/BookPublisherPartialView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXFBhcnRpYWxWaWV3XEJvb2tQdWJsaXNoZXJQYXJ0aWFsVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Shared/PartialView/PopupPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXFBhcnRpYWxWaWV3XFBvcHVwUGFydGlhbFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Shared/PartialView/_SideNavAdminPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXFBhcnRpYWxWaWV3XF9TaWRlTmF2QWRtaW5QYXJ0aWFsVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Tag/AddTagToSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGFnXEFkZFRhZ1RvU2Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ErrorConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxFcnJvckNvbmZpcm1FbWFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ExternalLoginConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxFeHRlcm5hbExvZ2luQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/SendCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxTZW5kQ29kZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/UseRecoveryCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxVc2VSZWNvdmVyeUNvZGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/VerifyAuthenticatorCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxWZXJpZnlBdXRoZW50aWNhdG9yQ29kZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/VerifyCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxWZXJpZnlDb2RlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Shared/PartialView/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcU2hhcmVkXFBhcnRpYWxWaWV3XF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Shared/_LoginLayout.cshtml]
@@ -73,6 +161,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Views/Shared/_ShopLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaG9wTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Views/Shared/_ShopNavBarPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaG9wTmF2QmFyUGFydGlhbFZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Views/Shared/_ValidationScriptsPartial.cshtml]

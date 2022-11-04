@@ -1,12 +1,15 @@
-﻿using BookStore.Common.Shared.Model;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
 using BookStore.Utils.Global;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,35 +34,54 @@ namespace BookStore.Logic.Command.Handler
             this.signInManager = signInManager;
         }
 
-        public Task<BaseCommandResultWithData<User>> Handle(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResultWithData<User>> Handle(LoginRequest request, CancellationToken cancellationToken)
         {
             var result = new BaseCommandResultWithData<User>();
             try
             {
-                var user = userManager.FindByNameAsync(request.UserName).Result;
-                if (user != null)
+                var user = userManager.FindByNameAsync(request.UserNameOrEmail).Result;
+                // Tìm UserName theo Email, đăng nhập lại
+                if(user == null && new EmailAddressAttribute().IsValid(request.UserNameOrEmail))
                 {
-                    var isPasswordValid = userManager.CheckPasswordAsync(user, request.Password).Result;
-                    if (isPasswordValid)
+                    user = userManager.FindByEmailAsync(request.UserNameOrEmail).Result;
+                    if (user != null)
                     {
-                        result.Success = true;
-                        result.Data = user;
-                    }
-                    else
-                    {
-                        result.Message = AppGlobal.InvalidPassword;
+                        var check = await signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, lockoutOnFailure: true);
+                        if (check.Succeeded)
+                        {
+                            AppGlobal.RequiresTwoFactor = check.RequiresTwoFactor;
+                            AppGlobal.IsLockedOut = check.IsLockedOut;
+                            result.Data = user;
+                            result.Success = true;
+                        }
+                        else
+                        {
+                            result.Message = AppGlobal.InvalidUserName;
+                        }
                     }
                 }
                 else
                 {
-                    result.Message = AppGlobal.InvalidUserName;
+                    if (user != null)
+                    {
+                        var check = await signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, lockoutOnFailure: true);
+                        if (check.Succeeded)
+                        {
+                            result.Data = user;
+                            result.Success = true;
+                        }
+                        else
+                        {
+                            result.Message = AppGlobal.InvalidUserName;
+                        }
+                    }
                 }
             }
             catch(Exception e)
             {
                 result.Message = e.Message;
             }
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

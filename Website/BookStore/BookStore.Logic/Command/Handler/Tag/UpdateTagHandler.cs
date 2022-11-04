@@ -37,7 +37,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, tag);
                     tag.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.Tags.Update(tag);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = tag;

@@ -18,15 +18,17 @@ namespace BookStore.DAL.Configuration
 
             builder.Property<string>(m => m.MenuName)
                 .HasColumnType("nvarchar(70)")
-                .HasDefaultValue("Unknow");
+                .IsRequired(true);
 
             builder.Property<string>(m => m.Keyword)
                 .HasColumnType("nvarchar(60)")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(m => m.Decription)
                 .HasColumnType("ntext")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(m => m.Slug)
                 .HasColumnType("varchar(MAX)");

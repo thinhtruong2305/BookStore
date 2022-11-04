@@ -19,7 +19,9 @@ namespace BookStore.Logic.Queries.Implement
         private readonly IMapper mapper;
         private readonly UserManager<User> userManager;
 
-        public UserQueries(AppDatabase database, IMapper mapper, UserManager<User> userManager)
+        public UserQueries(AppDatabase database, 
+            IMapper mapper, 
+            UserManager<User> userManager)
         {
             this.database = database;
             this.mapper = mapper;

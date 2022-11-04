@@ -38,22 +38,38 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public MenuDetailModel GetDetail(int MenuId)
+        public List<MenuSummaryModel> GetAllDelete()
         {
             return database.Menus
-                .Where(m => (m.Status != Common.Shared.Model.Status.Delete) && (m.MenuId == MenuId))
-                .Include(m => m.Tags)
-                .Select(m => mapper.Map<MenuDetailModel>(m))
-                .First();
+                .Where(m => m.Status == Common.Shared.Model.Status.Delete)
+                .Select(m => mapper.Map<MenuSummaryModel>(m))
+                .ToList();
         }
 
-        public Task<MenuDetailModel> GetDetailAsync(int MenuId)
+        public Task<List<MenuSummaryModel>> GetAllDeleteAsync()
         {
             return database.Menus
-                .Where(m => (m.Status != Common.Shared.Model.Status.Delete) && (m.MenuId == MenuId))
+                .Where(m => m.Status == Common.Shared.Model.Status.Delete)
+                .Select(m => mapper.Map<MenuSummaryModel>(m))
+                .ToListAsync();
+        }
+
+        public MenuDetailModel? GetDetail(int MenuId)
+        {
+            return database.Menus
+                .Where(m => m.Status != Common.Shared.Model.Status.Delete)
                 .Include(m => m.Tags)
                 .Select(m => mapper.Map<MenuDetailModel>(m))
-                .FirstAsync();
+                .FirstOrDefault(m => m.MenuId == MenuId);
+        }
+
+        public Task<MenuDetailModel?> GetDetailAsync(int MenuId)
+        {
+            return database.Menus
+                .Where(m => m.Status != Common.Shared.Model.Status.Delete)
+                .Include(m => m.Tags)
+                .Select(m => mapper.Map<MenuDetailModel>(m))
+                .FirstOrDefaultAsync(m => m.MenuId == MenuId);
         }
     }
 }

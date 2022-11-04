@@ -23,6 +23,18 @@ namespace BookStore.DAL.Configuration
             builder.HasOne(o => o.Order)
                 .WithMany(od => od.OrderDetails)
                 .HasForeignKey(od => od.OrderId);
+
+            builder.Property<int>(od => od.Quantity)
+                .IsRequired(true);
+
+            builder.Property<decimal?>(od => od.DiscountPrice)
+                .HasColumnType("decimal(18,2)")
+                .HasDefaultValue(Convert.ToDecimal(0))
+                .IsRequired(false);
+
+            builder.Property<decimal>(od => od.Payment)
+                .HasColumnType("decimal(18,2)")
+                .IsRequired(true);
         }
     }
 }

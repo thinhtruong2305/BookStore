@@ -1,0 +1,46 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using BookStore.Website.Areas.Admin.Models
+@model PublisherViewModel
+@{
+    ViewData["Title"] = "AddPublisherToSession";
+    Layout = null;
+}
+
+<form id="form-dialog-publisher" method="post" asp-action="AddPublisherToSession" asp-controller="Publisher" enctype="multipart/form-data" asp-area="Admin">
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-12 col-lg-4 form-field p-2">
+                <input type="text" asp-for="PulishingHouse" class="form-control form-input" placeholder=" ">
+                <label class="form-label" asp-for="PulishingHouse"></label>
+            </div>
+            <div class="col-md-12 col-lg-4 form-field p-2">
+                <input type="text" asp-for="Country" class="form-control form-input" placeholder=" ">
+                <label class="form-label" asp-for="Country"></label>
+            </div>
+            <div class="col-md-12 col-lg-4 form-field p-2">
+                <input type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                <label class="form-label" asp-for="Keyword"></label>
+            </div>
+            <div class="col-md-12 form-field p-2">
+                <label asp-for="Decription"></label>
+                <input type="text" asp-for="Decription" class="form-control form-input" placeholder=" ">
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6 text-end">
+            <button id="save" class="btn btn-primary" type="button" data-bs-dismiss="modal">
+                <span class="fs-4">Back</span>  <i class="fa-solid fa-caret-left fs-4"></i>
+            </button>
+        </div>
+        <div class="col-6">
+            @*onclick="CreateBookImage('@Url.Action("Create", "BookImage")')"*@
+            <button id="save" class="btn btn-success" type="submit">
+                <span class="fs-4">Save</span> <i class="fa-solid fa-floppy-disk fs-4"></i>
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+    CKEDITOR.replace("Decription");
+</script>

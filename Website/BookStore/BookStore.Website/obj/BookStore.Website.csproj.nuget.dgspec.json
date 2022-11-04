@@ -98,6 +98,20 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.4.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[3.4.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -110,6 +124,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -227,7 +244,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -240,6 +261,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.4.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.Cookies": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -256,6 +281,10 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -267,6 +296,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.9, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[3.4.2, )"
             }
           },
           "imports": [
@@ -373,6 +406,10 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
@@ -392,6 +429,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.9, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[6.0.1, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,12 +35,11 @@ namespace BookStore.Utils.Extension
             IConfiguration configuration)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(option =>
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, option =>
                 {
-                    option.ExpireTimeSpan = TimeSpan.FromMinutes(double.Parse(configuration.GetSection("AuthCookies: TimeOut").Value));
-                    option.SlidingExpiration = true;
-                    option.AccessDeniedPath = "/Forbiden";
-                    option.LoginPath = configuration.GetSection("AuthCookies: LoginPath").Value;
+                    option.AccessDeniedPath = "/AccessDenied";
+                    option.LogoutPath = "/Logout/";
+                    option.LoginPath = "/Login/";
                 });
             return services;
         }
@@ -73,11 +73,27 @@ namespace BookStore.Utils.Extension
 
             services.Configure<IdentityOptions>(option =>
             {
-                option.Password.RequireDigit = false;
-                option.Password.RequiredLength = 1;
-                option.Password.RequireNonAlphanumeric = false;
-                option.Password.RequireUppercase = false;
-                option.Password.RequireLowercase = false;
+                // Thiết lập về Password
+                option.Password.RequireDigit = false; // Không bắt phải có số
+                option.Password.RequireLowercase = false; // Không bắt phải có chữ thường
+                option.Password.RequireNonAlphanumeric = false; // Không bắt ký tự đặc biệt
+                option.Password.RequireUppercase = false; // Không bắt buộc chữ in
+                option.Password.RequiredLength = 3; // Số ký tự tối thiểu của password
+
+                // Cấu hình Lockout - khóa user
+                option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // Khóa 5 phút
+                option.Lockout.MaxFailedAccessAttempts = 5; // Thất bại 5 lầ thì khóa
+                option.Lockout.AllowedForNewUsers = true;
+
+                // Cấu hình về User.
+                option.User.AllowedUserNameCharacters = // các ký tự đặt tên user
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                option.User.RequireUniqueEmail = true;  // Email là duy nhất
+
+                // Cấu hình đăng nhập.
+                option.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
+                option.SignIn.RequireConfirmedPhoneNumber = false;     // Xác thực số điện thoại
+
             });
             return services;
         }

@@ -38,7 +38,6 @@ namespace BookStore.Logic.Command.Handler
                     mapper.Map(request, menu);
                     menu.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
                     database.Menus.Update(menu);
-                    database.SaveChanges();
 
                     result.Success = true;
                     result.Data = menu;

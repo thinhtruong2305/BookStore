@@ -18,19 +18,22 @@ namespace BookStore.DAL.Configuration
 
             builder.Property<string>(p => p.PulishingHouse)
                 .HasColumnType("nvarchar(50)")
-                .HasDefaultValue("Unknow");
+                .IsRequired(true);
 
             builder.Property<string>(p => p.Country)
                 .HasColumnType("nvarchar(20)")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(p => p.Keyword)
                 .HasColumnType("nvarchar(60)")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(p => p.Decription)
                 .HasColumnType("ntext")
-                .HasDefaultValue("Unknow");
+                .HasDefaultValue("Unknow")
+                .IsRequired(false);
 
             builder.Property<string>(p => p.Slug)
                 .HasColumnType("varchar(MAX)");

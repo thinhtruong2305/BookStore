@@ -33,7 +33,6 @@ namespace BookStore.Logic.Command.Handler
                 var edition = mapper.Map<Edition>(request);
                 request.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
                 database.Editions.Add(edition);
-                database.SaveChanges();
 
                 result.Success = true;
                 result.Data = edition;
