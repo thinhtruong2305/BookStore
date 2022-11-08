@@ -33,9 +33,8 @@ namespace BookStore.Logic.Command.Handler
             try
             {
                 var authorBook = mapper.Map<AuthorBook>(request);
-                database.AuthorBooks.Add(authorBook);
-
-                result.Data = authorBook;
+                
+                result.Data = database.AuthorBooks.Add(authorBook);
                 result.Success = true;
             }
             catch (Exception e)

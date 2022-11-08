@@ -1,44 +1,65 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using BookStore.Website.Areas.Admin.Models
 @model AuthorViewModel
-
 @{
     ViewData["Title"] = "AddAuthorToSession";
     Layout = null;
 }
-
-<form id="form-dialog-author" method="post" asp-action="AddAuthorToSession" asp-controller="Author" enctype="multipart/form-data" asp-area="Admin">
+<script src="~/ckeditor/ckeditor.js"></script>
+<form method="post" id="form-dialog" autocomplete="off" asp-action="AddAuthorToSession" asp-controller="Author" enctype="multipart/form-data" asp-area="Admin">
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="text" asp-for="FirstName" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" maxlength="25" required type="text" asp-for="FirstName" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="FirstName"></label>
+                <div class="row">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="text" asp-for="LastName" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" maxlength="25" required type="text" asp-for="LastName" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="LastName"></label>
+                <div class="row">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="date" asp-for="DateOfBirth" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" data-date-format="dd/MM/yyyy" type="date" asp-for="DateOfBirth" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="DateOfBirth"></label>
+                <div class="row">
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-6 form-field p-2">
-                <input type="text" asp-for="CountryOfResidence" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" maxlength="20" type="text" asp-for="CountryOfResidence" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="CountryOfResidence"></label>
+                <div class="row">
+                    <span asp-validation-for="CountryOfResidence" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-6 form-field p-2">
-                <input type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" maxlenght="60" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="Keyword"></label>
+                <div class="row">
+                    <span asp-validation-for="Keyword" class="text-danger"></span>
+                </div>
             </div>
-            <div class="col-md-12 form-field p-2">
-                <label asp-for="Decription"></label>
-                <input type="text" asp-for="Decription" class="form-control form-input" placeholder=" ">
+            <div class="col-md-12 form-field">
+                <label for="Decription">Mô tả</label>
+                <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="@Model.Decription" class="form-control form-input" placeholder=" "></textarea>
+                <script>
+                    // Replace all three <textarea> elements above with CKEditor instances.
+                    CKEDITOR.replaceAll();
+                </script>
+                <div class="row">
+                    <span asp-validation-for="Decription" class="text-danger"></span>
+                </div>
             </div>
         </div>
     </div>
     <div class="row mt-2">
         <div class="col-6 text-end">
-            <button id="save" class="btn btn-primary" type="button" data-bs-dismiss="modal">
+            <button id="back" class="btn btn-primary" type="button" data-bs-dismiss="modal">
                 <span class="fs-4">Back</span>  <i class="fa-solid fa-caret-left fs-4"></i>
             </button>
         </div>
@@ -50,7 +71,8 @@
         </div>
     </div>
 </form>
-<script>
-    CKEDITOR.replace("Decription");
-</script>
+@section scripts
+{
 
+    <partial name="_ValidationScriptsPartial" />
+}

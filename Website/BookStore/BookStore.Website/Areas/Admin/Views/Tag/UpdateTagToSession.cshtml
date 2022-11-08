@@ -1,0 +1,63 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using BookStore.Website.Areas.Admin.Models
+@model TagViewModel
+
+
+@{
+    ViewData["Title"] = "UpdateTagToSession";
+    Layout = null;
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+<form autocomplete="off" id="form-tag-dialog" method="post" asp-action="UpdateTagToSession" asp-controller="Tag" enctype="multipart/form-data" asp-area="Admin">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <input type="hidden" asp-for="TagId" />
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-12 col-lg-6 form-field p-2">
+                <input required autocomplete="off" type="text" asp-for="TagName" class="form-control form-input" placeholder=" ">
+                <label class="form-label" asp-for="TagName"></label>
+                <div class="row">
+                    <span asp-validation-for="TagName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 form-field p-2">
+                <input type="text" autocomplete="off" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                <label class="form-label" asp-for="Keyword"></label>
+                <div class="row">
+                    <span asp-validation-for="Keyword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-12 form-field">
+                <label asp-for="Decription"></label>
+                <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
+                <script>
+                    // Replace all three <textarea> elements above with CKEditor instances.
+                    CKEDITOR.replaceAll();
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6 text-end">
+            <button id="back" class="btn btn-primary" type="button" data-bs-dismiss="modal">
+                <span class="fs-4">Back</span>  <i class="fa-solid fa-caret-left fs-4"></i>
+            </button>
+        </div>
+        <div class="col-6">
+            @*onclick="CreateBookImage('@Url.Action("Create", "BookImage")')"*@
+            <button id="save" class="btn btn-success" type="submit">
+                <span class="fs-4">Save</span> <i class="fa-solid fa-floppy-disk fs-4"></i>
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+    CKEDITOR.replace("Decription", {
+        language: "vi"
+    });
+</script>
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

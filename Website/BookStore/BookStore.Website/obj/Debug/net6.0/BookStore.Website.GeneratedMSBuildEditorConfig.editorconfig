@@ -31,16 +31,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Detail.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xEZXRhaWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/ListTrash.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xMaXN0VHJhc2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Trash.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xUcmFzaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Book/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQm9va1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Home/Index.cshtml]
@@ -73,6 +81,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Tag/AddTagToSession.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGFnXEFkZFRhZ1RvU2Vzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Admin/Views/Tag/UpdateTagToSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVGFnXFVwZGF0ZVRhZ1RvU2Vzc2lvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/Desktop/Code/CSharp/GraduationProject/Website/BookStore/BookStore.Website/Areas/Identity/Views/Account/AccessDenied.cshtml]

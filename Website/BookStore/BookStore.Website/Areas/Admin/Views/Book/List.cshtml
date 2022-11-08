@@ -2,6 +2,7 @@
 @using BookStore.Logic.Shared.Model
 @using BookStore.Common.Shared.Model
 @model IEnumerable<BookSummaryModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @if (Model != null)
 {
@@ -52,7 +53,7 @@
                 }
             </td>
             <td>
-                <a class="btn btn-success" asp-action="Detail" asp-controller="Book" asp-route-id="@book.BookId">
+                <a class="btn btn-success" asp-action="Update" asp-controller="Book" asp-route-id="@book.BookId">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
                 <button class="btn btn-danger" onclick="OnDelete('@Url.Action("Delete", "Book", new{@id = book.BookId})', '@Url.Action("List", "Book")')">

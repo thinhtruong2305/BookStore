@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,5 +21,10 @@ namespace BookStore.DAL.Entities
         [Display(Name = "Đánh giá")]*/
         public int Rate { get; set; }
         public Book Book { get; set; }
+
+        public static implicit operator Rating(EntityEntry<Rating> v)
+        {
+            return v.Entity;
+        }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -97,7 +98,7 @@ namespace BookStore.Logic.Queries.Implement
         public BookDetailModel? GetDetail(int BookId)
         {
             return database.Books
-                .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+                .Where(b => (b.Status != Common.Shared.Model.Status.Delete) && (b.BookId == BookId))
                 .Include(b => b.AuthorBooks)
                     .ThenInclude(ab => ab.Author)
                 .Include(b => b.Edition)
@@ -105,9 +106,8 @@ namespace BookStore.Logic.Queries.Implement
                         .ThenInclude(ep => ep.Publisher)
                 .Include(b => b.Info)
                 .Include(b => b.Info.Series)
-                .Include(b => b.Info.Tags)
                 .Select(b => mapper.Map<BookDetailModel>(b))
-                .FirstOrDefault(b => b.BookId == BookId);
+                .FirstOrDefault();
         }
 
         public Task<BookDetailModel?> GetDetailAsync(int BookId)
@@ -121,7 +121,6 @@ namespace BookStore.Logic.Queries.Implement
                         .ThenInclude(ep => ep.Publisher)
                 .Include(b => b.Info)
                 .Include(b => b.Info.Series)
-                .Include(b => b.Info.Tags)
                 .Select(b => mapper.Map<BookDetailModel>(b))
                 .FirstOrDefaultAsync(b => b.BookId == BookId);
         }
@@ -136,7 +135,7 @@ namespace BookStore.Logic.Queries.Implement
                     .ThenInclude(e => e.EditionPublishers)
                         .ThenInclude(ep => ep.Publisher)
                 .Include(b => b.Info)
-                    .ThenInclude(info => info.Tags)
+                    .ThenInclude(info => info.TagInfos)
                 .Select(b => mapper.Map<BookDetailClientModel>(b))
                 .FirstOrDefault();
         }
@@ -151,9 +150,65 @@ namespace BookStore.Logic.Queries.Implement
                    .ThenInclude(e => e.EditionPublishers)
                        .ThenInclude(ep => ep.Publisher)
                .Include(b => b.Info)
-                   .ThenInclude(info => info.Tags)
+                    .ThenInclude(info => info.TagInfos)
                .Select(b => mapper.Map<BookDetailClientModel>(b))
                .FirstOrDefaultAsync();
+        }
+
+        public Book? GetBookByTitle(string Title)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .Include(b => b.AuthorBooks)
+                   .ThenInclude(ab => ab.Author)
+               .Include(b => b.Edition)
+                   .ThenInclude(e => e.EditionPublishers)
+                       .ThenInclude(ep => ep.Publisher)
+               .Include(b => b.Info)
+                    .ThenInclude(info => info.TagInfos)
+               .FirstOrDefault(b => b.Title == Title);
+        }
+
+        public Task<Book?> GetBookByTitleAsync(string Title)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .Include(b => b.AuthorBooks)
+                   .ThenInclude(ab => ab.Author)
+               .Include(b => b.Edition)
+                   .ThenInclude(e => e.EditionPublishers)
+                       .ThenInclude(ep => ep.Publisher)
+               .Include(b => b.Info)
+                    .ThenInclude(info => info.TagInfos)
+               .FirstOrDefaultAsync(b => b.Title == Title);
+        }
+
+        public Book? GetBookByISBN(string ISBN)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .Include(b => b.AuthorBooks)
+                   .ThenInclude(ab => ab.Author)
+               .Include(b => b.Edition)
+                   .ThenInclude(e => e.EditionPublishers)
+                       .ThenInclude(ep => ep.Publisher)
+               .Include(b => b.Info)
+                    .ThenInclude(info => info.TagInfos)
+               .FirstOrDefault(b => b.Edition.ISBN == ISBN);
+        }
+
+        public Task<Book?> GetBookByISBNAsync(string ISBN)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .Include(b => b.AuthorBooks)
+                   .ThenInclude(ab => ab.Author)
+               .Include(b => b.Edition)
+                   .ThenInclude(e => e.EditionPublishers)
+                       .ThenInclude(ep => ep.Publisher)
+               .Include(b => b.Info)
+                    .ThenInclude(info => info.TagInfos)
+               .FirstOrDefaultAsync(b => b.Edition.ISBN == ISBN);
         }
     }
 }

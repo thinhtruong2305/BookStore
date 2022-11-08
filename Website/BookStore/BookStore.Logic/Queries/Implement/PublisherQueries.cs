@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL;
+using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +73,36 @@ namespace BookStore.Logic.Queries.Implement
                     .ThenInclude(ep => ep.Edition)
                 .Select(o => mapper.Map<PublisherDetailModel>(o))
                 .FirstOrDefaultAsync(p => p.PublisherId == PublisherId);
+        }
+
+        public List<PublisherDetailModel> GetListPublisherDetailByEditionId(int EditionId)
+        {
+            return database.EditionPublishers
+                .Where(ep => ep.EditionId == EditionId)
+                .Select(ep => mapper.Map<PublisherDetailModel>(ep.Publisher))
+                .ToList();
+        }
+
+        public Task<List<PublisherDetailModel>> GetListPublisherDetailByEditionIdAsync(int EditionId)
+        {
+            return database.EditionPublishers
+                .Where(ep => ep.EditionId == EditionId)
+                .Select(ep => mapper.Map<PublisherDetailModel>(ep.Publisher))
+                .ToListAsync();
+        }
+
+        public Publisher? GetPublisherByPulishingHouse(string PublishingHouse)
+        {
+            return database.Publishers
+                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
+                .FirstOrDefault(p => p.PulishingHouse == PublishingHouse);
+        }
+
+        public Task<Publisher?> GetPublisherByPulishingHouseAsync(string PublishingHouse)
+        {
+            return database.Publishers
+                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
+                .FirstOrDefaultAsync(p => p.PulishingHouse == PublishingHouse);
         }
     }
 }

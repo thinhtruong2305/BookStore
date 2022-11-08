@@ -29,10 +29,9 @@ namespace BookStore.Logic.Command.Handler
             try
             {
                 var editionPublisher = mapper.Map<EditionPublisher>(request);
-                database.EditionPublishers.Add(editionPublisher);
 
                 result.Success = true;
-                result.Data = editionPublisher;
+                result.Data = database.EditionPublishers.Add(editionPublisher);
             }
             catch (Exception e)
             {

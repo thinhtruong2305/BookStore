@@ -14,15 +14,17 @@ namespace BookStore.Logic.Shared.Catalog.Implement
     public class FileStorageService : IFileStorageService
     {
         private readonly string _bookContentFolder;
+        private readonly IWebHostEnvironment webHostEnvironment;
         private const string BOOK_CONTENT_FOLDER_NAME = "uploads";
 
         public FileStorageService(IWebHostEnvironment webHostEnvironment)
         {
             _bookContentFolder = Path.Combine(webHostEnvironment.WebRootPath, BOOK_CONTENT_FOLDER_NAME);
+            this.webHostEnvironment = webHostEnvironment;
         }
         public async Task DeleteFileAsync(string fileName)
         {
-            var filePath = Path.Combine(_bookContentFolder, fileName);
+            var filePath = webHostEnvironment.WebRootPath + fileName;
             if (File.Exists(filePath))
             {
                 await Task.Run(() => File.Delete(filePath));

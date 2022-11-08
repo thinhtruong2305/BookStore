@@ -30,7 +30,7 @@ namespace BookStore.Logic.MappingProfile
             CreateMap<Book, BookDetailClientModel>()
                 .ForMember(dest => dest.DiscountPercent, opt => opt.MapFrom(src => src.Info.DiscountPercent))
                 .ForMember(dest => dest.VolumeNumber, opt => opt.MapFrom(src => src.Info.VolumeNumber))
-                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Info.Tags))
+                .ForMember(dest => dest.TagInfos, opt => opt.MapFrom(src => src.Info.TagInfos))
                 .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Edition.Price))
                 .ForMember(dest => dest.DiscountPrice, opt => opt.MapFrom(src => src.Edition.Price - (src.Edition.Price * (src.Info.DiscountPercent / 100))))
                 .ForMember(dest => dest.Format, opt => opt.MapFrom(src => src.Edition.Format))
@@ -40,8 +40,8 @@ namespace BookStore.Logic.MappingProfile
                 .ReverseMap();
 
             CreateMap<Book, BookDetailModel>()
-                .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Info.Tags))
                 .ForMember(dest => dest.Series, opt => opt.MapFrom(src => src.Info.Series))
+                .ForMember(dest => dest.TagInfos, opt => opt.MapFrom(src => src.Info.TagInfos))
                 .ForMember(dest => dest.EditionPulisher, opt => opt.MapFrom(src => src.Edition.EditionPublishers))
                 .ForMember(dest => dest.AuthorBooks, opt => opt.MapFrom(src => src.AuthorBooks))
                 .ReverseMap();

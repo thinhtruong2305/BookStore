@@ -289,8 +289,7 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasDefaultValue("Unknow");
 
-                    b.Property<int?>("SeriesId")
-                        .IsRequired()
+                    b.Property<int>("SeriesId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -311,55 +310,6 @@ namespace BookStore.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("Info");
-                });
-
-            modelBuilder.Entity("BookStore.DAL.Entities.Menu", b =>
-                {
-                    b.Property<int>("MenuId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MenuId"), 1L, 1);
-
-                    b.Property<DateTime?>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreateBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Decription")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("ntext")
-                        .HasDefaultValue("Unknow");
-
-                    b.Property<string>("Keyword")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(60)")
-                        .HasDefaultValue("Unknow");
-
-                    b.Property<string>("MenuName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("varchar(MAX)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdateBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MenuId");
-
-                    b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Order", b =>
@@ -602,15 +552,12 @@ namespace BookStore.DAL.Migrations
                         .HasColumnType("ntext")
                         .HasDefaultValue("Unknow");
 
-                    b.Property<int>("InfoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Keyword")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(60)")
                         .HasDefaultValue("Unknow");
 
-                    b.Property<int>("MenuId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
@@ -632,11 +579,22 @@ namespace BookStore.DAL.Migrations
 
                     b.HasKey("TagId");
 
-                    b.HasIndex("InfoId");
-
-                    b.HasIndex("MenuId");
-
                     b.ToTable("Tag");
+                });
+
+            modelBuilder.Entity("BookStore.DAL.Entities.TagInfo", b =>
+                {
+                    b.Property<int>("InfoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InfoId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("TagInfos");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.User", b =>
@@ -964,19 +922,23 @@ namespace BookStore.DAL.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("BookStore.DAL.Entities.Tag", b =>
+            modelBuilder.Entity("BookStore.DAL.Entities.TagInfo", b =>
                 {
                     b.HasOne("BookStore.DAL.Entities.Info", "Info")
-                        .WithMany("Tags")
-                        .HasForeignKey("InfoId");
+                        .WithMany("TagInfos")
+                        .HasForeignKey("InfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("BookStore.DAL.Entities.Menu", "Menu")
-                        .WithMany("Tags")
-                        .HasForeignKey("MenuId");
+                    b.HasOne("BookStore.DAL.Entities.Tag", "Tag")
+                        .WithMany("TagInfos")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Info");
 
-                    b.Navigation("Menu");
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1060,12 +1022,7 @@ namespace BookStore.DAL.Migrations
                     b.Navigation("Book")
                         .IsRequired();
 
-                    b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("BookStore.DAL.Entities.Menu", b =>
-                {
-                    b.Navigation("Tags");
+                    b.Navigation("TagInfos");
                 });
 
             modelBuilder.Entity("BookStore.DAL.Entities.Order", b =>
@@ -1082,6 +1039,11 @@ namespace BookStore.DAL.Migrations
                 {
                     b.Navigation("info")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BookStore.DAL.Entities.Tag", b =>
+                {
+                    b.Navigation("TagInfos");
                 });
 #pragma warning restore 612, 618
         }

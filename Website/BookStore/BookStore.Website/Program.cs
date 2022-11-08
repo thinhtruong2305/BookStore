@@ -13,7 +13,6 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using MediatR;
 using BookStore.Logic.MappingProfile;
-using BookStore.Logic;
 using Newtonsoft.Json;
 using BookStore.Utils.Extension;
 using BookStore.Logic.Command.Request;
@@ -23,6 +22,9 @@ using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Logic.Shared.Catalog.Implement;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BookStore.Website.Areas.Admin.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using BookStore.Website.Areas.Admin.Models.MappingProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +109,7 @@ builder.Services.AddIdentityConfig<User, IdentityRole, AppDatabase>();
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(AuthorMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(BookViewMappingProfile).Assembly);
 
 //MediatR
 builder.Services.AddMediatR(typeof(LoginRequest).Assembly);

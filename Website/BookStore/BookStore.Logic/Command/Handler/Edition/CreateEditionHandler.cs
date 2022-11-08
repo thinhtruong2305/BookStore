@@ -32,10 +32,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var edition = mapper.Map<Edition>(request);
                 request.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                database.Editions.Add(edition);
 
                 result.Success = true;
-                result.Data = edition;
+                result.Data = database.Editions.Add(edition); ;
             }
             catch (Exception e)
             {

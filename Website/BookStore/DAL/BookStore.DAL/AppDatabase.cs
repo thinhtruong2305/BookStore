@@ -62,13 +62,13 @@ namespace BookStore.DAL
             modelBuilder.ApplyConfiguration(new EditionConfiguration());
             modelBuilder.ApplyConfiguration(new EditionPublisherConfiguration());
             modelBuilder.ApplyConfiguration(new InfoConfiguration());
-            modelBuilder.ApplyConfiguration(new MenuConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new PublisherConfiguration());
             modelBuilder.ApplyConfiguration(new RatingConfiguration());
             modelBuilder.ApplyConfiguration(new SeriesConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new TagInfoConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
         public virtual DbSet<Author> Authors => Set<Author>();
@@ -78,12 +78,12 @@ namespace BookStore.DAL
         public virtual DbSet<Edition> Editions => Set<Edition>();
         public virtual DbSet<EditionPublisher> EditionPublishers => Set<EditionPublisher>();
         public virtual DbSet<Info> Infos => Set<Info>();
-        public virtual DbSet<Menu> Menus => Set<Menu>();
         public virtual DbSet<Order> Orders => Set<Order>();
         public virtual DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
         public virtual DbSet<Publisher> Publishers => Set<Publisher>();
         public virtual DbSet<Rating> Ratings => Set<Rating>();
         public virtual DbSet<Tag> Tags => Set<Tag>();
+        public virtual DbSet<TagInfo> TagInfos => Set<TagInfo>();
         public virtual DbSet<Series> Series => Set<Series>();
         public virtual DbSet<User> Users => Set<User>();
     }

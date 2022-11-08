@@ -1,0 +1,55 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@using BookStore.Common.Shared.Model
+@model IEnumerable<BookSummaryModel>
+
+@if (Model != null)
+{
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>
+                @{
+                    string? resultAuthor = " ";
+                }
+                @foreach (var author in book.AuthorBooks)
+                {
+                    if (author != null)
+                    {
+                        resultAuthor += author.Author.LastName.ToString() + " " + author.Author.FirstName.ToString() + ", ";
+                    }
+                }
+                @resultAuthor
+            </td>
+            <td>@book.VolumeNumber</td>
+            <td>@book.ISBN</td>
+            <td>
+                @{
+                    string? resultPublisher = " ";
+                }
+                @foreach (var publisher in book.Pulisher)
+                {
+                    if (publisher != null)
+                    {
+                        resultPublisher += publisher.Publisher.PulishingHouse + ", ";
+                    }
+                }
+                @resultPublisher
+            </td>
+            <td>
+                <button class="btn btn-danger" onclick="Recovery('@Url.Action("ReTrash", "Book", new {@id = book.BookId})', '@Url.Action("ListTrash", "Book")')">
+                    <i class="fa-solid fa-trash-can-undo"></i>
+                </button>
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Detail" asp-controller="Book" asp-route-id="@book.BookId">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <button class="btn btn-danger" onclick="OnRemove('@Url.Action("Remove", "Book", new{@id = book.BookId})', '@Url.Action("ListTrash", "Book")')">
+                    <i class="fa-solid fa-eraser"></i>
+                </button>
+            </td>
+        </tr>
+    }
+}

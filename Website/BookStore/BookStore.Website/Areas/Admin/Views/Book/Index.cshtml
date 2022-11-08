@@ -9,8 +9,6 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Books Manager</h1>
-
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -18,10 +16,10 @@
                 <strong class="text-uppercase text-danger">Danh sách loại sản phẩm</strong>
             </div>
             <div class="col-md-6 text-end">
-                <a onclick="ShowPopup('@Url.Action("Create", "Book", new {Area = "Admin"}, Context.Request.Scheme)', 'New Book')" class="btn btn-sm btn-success">
+                <a asp-action="Create" asp-controller="Book" asp-area="Admin" class="btn btn-sm btn-success">
                     <i class="fa-solid fa-plus"></i> Thêm
                 </a>
-                <a href="@Url.Action("Trash", "Author")" class="btn btn-sm btn-danger">
+                <a asp-action="Trash" asp-controller="Book" asp-area="Admin" class="btn btn-sm btn-danger">
                     <i class="fa-solid fa-trash-alt"></i> Thùng rác
                 </a>
             </div>

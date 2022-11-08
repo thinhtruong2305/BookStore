@@ -1,4 +1,5 @@
 ﻿ using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -36,5 +37,10 @@ namespace BookStore.DAL.Entities
         public OrderDetail OrderDetail { get; set; }
         public List<BookImage> BookImages { get; set; }
         public List<Rating> Ratings { get; set; }
+
+        public static implicit operator Book(EntityEntry<Book> v)
+        {
+            return v.Entity;
+        }
     }
 }

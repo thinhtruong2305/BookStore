@@ -12,8 +12,8 @@ namespace BookStore.Logic.Shared.Model
     {
         public int BookId { get; set; }
         public string Title { get; set; }
-        public string Keyword { get; set; } = String.Empty;
-        public string Decription { get; set; } = String.Empty;
+        public string Keyword { get; set; }
+        public string Decription { get; set; }
         public string Slug { get; set; }
         public int? DiscountPercent { get; set; }
         public decimal Price { get; set; }

@@ -12,20 +12,21 @@ namespace BookStore.Website.Areas.Admin.Models
     [BindProperties]
     public class BookViewModel : BaseViewModel
     {
+        //[RegularExpression(@"/^[0-9a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêếìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\ ]+$/", ErrorMessage = "Bạn phải nhập ký tự và số")]
+
         //Database Model
         public int BookId { get; set; }
         public int InfoId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
+        [StringLength(70, MinimumLength = 3, ErrorMessage = "Bạn phải nhập từ {1} đến {0}")]
         [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
+        [StringLength(60, ErrorMessage = "Bạn phải nhập được đến {0}")]
         [Display(Name = "Từ khóa")]
         public string? Keyword { get; set; }
 
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Mô tả")]
         public string? Decription { get; set; }
 
@@ -33,10 +34,6 @@ namespace BookStore.Website.Areas.Admin.Models
         public string? Slug { get; set; }
 
         //ViewModel dùng để hiển thị và trích xuất dữ liệu
-/*      public List<PublisherViewModel>? PublishersViewModel { get; set; }
-        public List<AuthorViewModel>? AuthorsViewModel { get; set; }
-        public List<BookImageViewModel>? BookImagesViewModel { get; set; }
-        public List<TagViewModel>? TagsViewModel { get; set; }*/
         public SeriesViewModel SeriesViewModel { get; set; }
         public InfoViewModel InfoViewModel { get; set; }
         public EditionViewModel EditionViewModel { get; set; }
@@ -49,7 +46,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Keyword = Keyword,
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active
+                Status = Common.Shared.Model.Status.Active,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -62,7 +62,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                Info = info
+                Info = info,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -75,7 +78,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
         public CreateBookRequest ToCreateCommand(List<BookImage> bookImages)
@@ -87,7 +93,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                BookImages = bookImages
+                BookImages = bookImages,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -101,7 +110,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 Info = info,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -115,7 +127,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 BookImages = bookImages,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -129,7 +144,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 BookImages = bookImages,
-                Info = info
+                Info = info,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -144,7 +162,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Status = Common.Shared.Model.Status.Active,
                 Info = info,
                 Edition = edition,
-                BookImages = bookImages
+                BookImages = bookImages,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -157,9 +178,11 @@ namespace BookStore.Website.Areas.Admin.Models
                 Keyword = Keyword,
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
-
         public UpdateBookRequest ToUpdateCommand(Info info)
         {
             return new UpdateBookRequest
@@ -170,7 +193,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                Info = info
+                Info = info,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -184,7 +210,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
         public UpdateBookRequest ToUpdateCommand(List<BookImage> bookImages)
@@ -197,7 +226,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                BookImages = bookImages
+                BookImages = bookImages,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -212,7 +244,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 Info = info,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -227,7 +262,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 BookImages = bookImages,
-                Edition = edition
+                Edition = edition,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -242,7 +280,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
                 BookImages = bookImages,
-                Info = info
+                Info = info,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -258,7 +299,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 Status = Common.Shared.Model.Status.Active,
                 Info = info,
                 Edition = edition,
-                BookImages = bookImages
+                BookImages = bookImages,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
     }

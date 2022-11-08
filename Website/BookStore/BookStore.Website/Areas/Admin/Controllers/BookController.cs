@@ -12,6 +12,7 @@ using BookStore.Website.Areas.Admin.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using System.Data;
@@ -25,6 +26,10 @@ namespace BookStore.Website.Areas.Admin.Controllers
     public class BookController : Controller
     {
         private readonly IBookQueries bookQueries;
+        private readonly ITagQueries tagQueries;
+        private readonly IPublisherQueries publisherQueries;
+        private readonly IAuthorQueries authorQueries;
+        private readonly IBookImageQueries bookImageQueries;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
         private readonly AppDatabase database;
@@ -33,12 +38,20 @@ namespace BookStore.Website.Areas.Admin.Controllers
         public const string TAGS = "tags";
         public const string AUTHORS = "authors";
 
-        public BookController(IBookQueries bookQueries, 
+        public BookController(IBookQueries bookQueries,
+            ITagQueries tagQueries,
+            IPublisherQueries publisherQueries,
+            IAuthorQueries authorQueries,
+            IBookImageQueries bookImageQueries,
             IMediator mediator,
             IMapper mapper,
             AppDatabase database)
         {
             this.bookQueries = bookQueries;
+            this.tagQueries = tagQueries;
+            this.publisherQueries = publisherQueries;
+            this.authorQueries = authorQueries;
+            this.bookImageQueries = bookImageQueries;
             this.mediator = mediator;
             this.mapper = mapper;
             this.database = database;
@@ -56,12 +69,6 @@ namespace BookStore.Website.Areas.Admin.Controllers
             return PartialView(model);
         }
 
-        public IActionResult Trash()
-        {
-            var model = new List<BookSummaryModel>();
-            model = bookQueries.GetAllDelete();
-            return View(model);
-        }
         [HttpGet]
         public async Task<IActionResult> StatusAsync(int id)
         {
@@ -76,12 +83,32 @@ namespace BookStore.Website.Areas.Admin.Controllers
             return Json(new { success = result.Success, message = result.Message });
         }
 
-        [HttpGet]
-        public IActionResult Detail(int id)
+        public IActionResult Trash()
         {
-            var model = new BookDetailModel();
-            model = bookQueries.GetDetail(id);
+            var model = new List<BookSummaryModel>();
+            model = bookQueries.GetAllDelete();
             return View(model);
+        }
+
+        public IActionResult ListTrash()
+        {
+            var model = new List<BookSummaryModel>();
+            model = bookQueries.GetAllDelete();
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReTrash(int id)
+        {
+            var command = new RecoveryBookRequest()
+            {
+                Id = id,
+                RequestId = HttpContext.Connection?.Id,
+                IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+            };
+            var result = await mediator.Send(command);
+            return Json(new { success = result.Success, message = result.Message });
         }
 
         [HttpGet]
@@ -121,6 +148,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
             {
                 tagsView = JsonConvert.DeserializeObject<List<TagViewModel>>(tags);
             }
+
             if (ModelState.IsValid)
             {
                 List<Tag> listTag = new List<Tag>();
@@ -142,93 +170,71 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 //Liên kết nhiều nhiều
                 var authorBookResult = new BaseCommandResultWithData<AuthorBook>();
                 var editionPublisherResult = new BaseCommandResultWithData<EditionPublisher>();
+                var tagInfoResult = new BaseCommandResultWithData<TagInfo>();
                 SetContextToModel(model, tagsView, publishersView, authorsView, bookImagesView);
 
-                if(tagsView != null)
-                {
-                    if(tagsView.Count > 0)
-                    {
-                        tagsView.ForEach(async t =>
-                        {
-                            tagResult = await mediator.Send(t.ToCreateCommand());
-                            if (tagResult.Success)
-                                listTag.Add(tagResult.Data);
-                        });
-                    }
-                }
-                if(publishersView != null)
-                {
-                    if(publishersView.Count > 0)
-                    {
-                        publishersView.ForEach(async p =>
-                        {
-                            publisherResult = await mediator.Send(p.ToCreateCommand());
-                            if (publisherResult.Success)
-                                listPublisher.Add(publisherResult.Data);
-                        });
-                    }
-                }
-                if(authorsView != null)
-                {
-                    if(authorsView.Count > 0)
-                    {
-                        authorsView.ForEach(async a =>
-                        {
-                            authorResult = await mediator.Send(a.ToCreateCommand());
-                            if (authorResult.Success)
-                                listAuthor.Add(authorResult.Data);
-                        });
-                    }
-                }
-                if(bookImagesView != null)
-                {
-                    if(bookImagesView.Count > 0)
-                    {
-                        bookImagesView.ForEach(async a =>
-                        {
-                            bookImageResult = await mediator.Send(a.ToCreateCommand());
-                            if (bookImageResult.Success)
-                                listBookImage.Add(bookImageResult.Data);
-                        });
-                    }
-                }
+                await CreateTagAndAddToListAsync(tagsView, listTag, tagResult);
+                await CreateAuthorAndAddToListAsync(authorsView, listAuthor, authorResult);
+                await CreatePublisherAndAddToListAsync(publishersView, listPublisher, publisherResult);
+                await CreateBookImageAndAddToListAsync(bookImagesView, listBookImage, bookImageResult);
 
                 seriesResult = await mediator.Send(model.SeriesViewModel.ToCreateCommand());
                 if (seriesResult.Success)
                 {
-                    infoResult = await mediator.Send(model.InfoViewModel.ToCreateCommand(seriesResult.Data, listTag));
+                    infoResult = await mediator.Send(model.InfoViewModel.ToCreateCommand(seriesResult.Data));
+                }
+                var edition = bookQueries.GetBookByISBN(model.EditionViewModel.ISBN);
+                if (edition != null)
+                {
+                    model.EditionViewModel.ISBN = " ";
+                    return View(model);
+                }
+                editionResult = await mediator.Send(model.EditionViewModel.ToCreateCommand());
+                if (editionResult.Success && infoResult.Success && listBookImage.Count > 0)
+                {
+                    string? decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                    model.Decription = decodedHtml;
+                    bookResult = await mediator.Send(model.ToCreateCommand(infoResult.Data, editionResult.Data, listBookImage));
                 }
 
-                editionResult = await mediator.Send(model.EditionViewModel.ToCreateCommand());
-                if(editionResult.Success && infoResult.Success && listBookImage.Count > 0)
+                if(infoResult.Success && listTag.Count > 0)
                 {
-                    bookResult = await mediator.Send(model.ToCreateCommand(infoResult.Data, editionResult.Data, listBookImage));
+                    foreach (var item in listTag)
+                    {
+                        tagInfoResult = await mediator.Send(new AddTagAndInfoToTagInfoRequest
+                        {
+                            Tag = item,
+                            Info = infoResult.Data
+                        });
+                    }
                 }
 
                 if(bookResult.Success && listAuthor.Count > 0)
                 {
-                    listAuthor.ForEach(async a =>
+                    foreach (var item in listAuthor)
                     {
                         authorBookResult = await mediator.Send(new AddAuthorAndBookToAuthorBookRequest
                         {
-                            Author = a,
+                            Author = item,
                             Book = bookResult.Data
                         });
-                    });
+                    }
                 }
 
                 if (editionResult.Success && listPublisher.Count > 0)
                 {
-                    listPublisher.ForEach(async p =>
+                    foreach (var item in listPublisher)
                     {
                         editionPublisherResult = await mediator.Send(new AddEditionAndPublisherToEditionPubliserRequest
                         {
                             Edition = editionResult.Data,
-                            Publisher = p
+                            Publisher = item
                         });
-                    });
+                    }
 
                 }
+                database.SaveChanges();
+                ClearSessionCreatBook();
                 return RedirectToAction("Index", "Book");
             }
             else
@@ -239,9 +245,31 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update(int? id)
+        public IActionResult Update(int id)
         {
-            return View();
+            var session = HttpContext.Session;
+
+            var book = new BookDetailModel();
+            book = bookQueries.GetDetail(id);
+            var model = mapper.Map<BookViewModel>(book);
+
+            var tagsView = mapper.Map<List<TagViewModel>>(tagQueries.GetListTagDetailByInfoId(book.InfoId));
+            string tags = JsonConvert.SerializeObject(tagsView);
+            session.SetString(TAGS, tags);
+
+            var authorView = mapper.Map<List<AuthorViewModel>>(authorQueries.GetAuthorDetailModelByBookId(book.BookId));
+            string authors = JsonConvert.SerializeObject(authorView);
+            session.SetString(AUTHORS, authors);
+
+            var bookImageView = mapper.Map<List<BookImageViewModel>>(bookImageQueries.GetListBookImageByBookId(book.BookId));
+            string bookImages = JsonConvert.SerializeObject(bookImageView);
+            session.SetString(BOOKIMAGES, bookImages);
+
+            var publisherView = mapper.Map<List<PublisherViewModel>>(publisherQueries.GetListPublisherDetailByEditionId(book.Edition.EditionId));
+            string publishers = JsonConvert.SerializeObject(publisherView);
+            session.SetString(PUBLISHERS, publishers);
+
+            return View(model);
         }
         [HttpPost]
         public IActionResult Update(BookViewModel model)
@@ -289,6 +317,111 @@ namespace BookStore.Website.Areas.Admin.Controllers
             model.InfoViewModel.SetFromContext(HttpContext);
             model.EditionViewModel.SetFromContext(HttpContext);
             model.SeriesViewModel.SetFromContext(HttpContext);
+        }
+        public async Task CreateTagAndAddToListAsync(List<TagViewModel> tagsView, List<Tag> listTag, BaseCommandResultWithData<Tag> tagResult)
+        {
+            if (tagsView != null)
+            {
+                if (tagsView.Count > 0)
+                {
+                    foreach (var item in tagsView)
+                    {
+                        var tag = tagQueries.GetTagByName(item.TagName);
+                        if (tag == null)
+                        {
+                            tagResult = await mediator.Send(item.ToCreateCommand());
+                            if (tagResult.Success)
+                            {
+                                listTag.Add(tagResult.Data);
+                            }
+                        }
+                        else
+                        {
+                            listTag.Add(tag);
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task CreateAuthorAndAddToListAsync(List<AuthorViewModel> authorsView, List<Author> listAuthor, BaseCommandResultWithData<Author> authorResult)
+        {
+            if (authorsView != null)
+            {
+                if (authorsView.Count > 0)
+                {
+                    foreach (var item in authorsView)
+                    {
+                        var author = authorQueries.GetAuthorByName(item.FirstName, item.LastName);
+                        if (author == null)
+                        {
+                            authorResult = await mediator.Send(item.ToCreateCommand());
+                            if (authorResult.Success)
+                            {
+                                listAuthor.Add(authorResult.Data);
+                            }
+                        }
+                        else
+                        {
+                            listAuthor.Add(author);
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task CreatePublisherAndAddToListAsync(List<PublisherViewModel> publishersView, List<Publisher> listPublisher, BaseCommandResultWithData<Publisher> publisherResult)
+        {
+            if (publishersView != null)
+            {
+                if (publishersView.Count > 0)
+                {
+
+                    foreach (var item in publishersView)
+                    {
+                        var publisher = publisherQueries.GetPublisherByPulishingHouse(item.PulishingHouse);
+                        if (publisher == null)
+                        {
+                            publisherResult = await mediator.Send(item.ToCreateCommand());
+                            if (publisherResult.Success)
+                            {
+                                listPublisher.Add(publisherResult.Data);
+                            }
+                        }
+                        else
+                        {
+                            listPublisher.Add(publisher);
+                        }
+                    }
+                }
+            }
+        }
+
+        public async Task CreateBookImageAndAddToListAsync(List<BookImageViewModel> bookImagesView, List<BookImage> listBookImage, BaseCommandResultWithData<BookImage> bookImageResult)
+        {
+            if (bookImagesView != null)
+            {
+                if (bookImagesView.Count > 0)
+                {
+                    foreach (var item in bookImagesView)
+                    {
+                        bookImageResult = await mediator.Send(item.ToCreateCommand());
+                        if (bookImageResult.Success)
+                        {
+                            listBookImage.Add(bookImageResult.Data);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ClearSessionCreatBook()
+        {
+            var session = HttpContext.Session;
+            session.SetString(BOOKIMAGES, "");
+            session.SetString(TAGS, "");
+            session.SetString(PUBLISHERS, "");
+            session.SetString(AUTHORS, "");
         }
     }
 }

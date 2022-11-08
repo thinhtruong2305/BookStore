@@ -3,11 +3,11 @@
 @model BookImageViewModel
 
 @{
-    ViewData["Title"] = "AddBookImageToSession";
+    ViewData["Title"] = "AddBookImageToSession1";
     Layout = null;
 }
-
-<form id="form-dialog-book-image" method="post" asp-action="AddBookImageToSession" asp-controller="BookImage" enctype="multipart/form-data" asp-area="Admin">
+<script src="~/ckeditor/ckeditor.js"></script>
+<form id="form-dialog" method="post" autocomplete="off" asp-action="AddBookImageToSession" asp-controller="BookImage" enctype="multipart/form-data" asp-area="Admin">
     <div id="book" class="container">
         <div class="row">
             <div class="col-md-12">
@@ -30,17 +30,22 @@
                                 }
                             </div>
                             <div class="row text-center p-5">
-                                <input onchange="OnLoadImage('#FileUpLoad', '#image-display')" type="file" asp-for="@Model.FileUpLoad" />
+                                <input required onchange="OnLoadImage('#FileUpLoad', '#image-display')" type="file" asp-for="@Model.FileUpLoad" />
                                 <label onclick="OnLoadImage('#FileUpLoad', '#image-display')" asp-for="@Model.FileUpLoad" for="FileUpLoad" class="btn btn-outline-success">
                                     Thêm ảnh <i class="fa-solid fa-plus fs-5 p2"></i>
                                 </label>
+                                <span asp-validation-for="@Model.FileUpLoad" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 form-field">
                         <div>
-                            <label>Mô tả</label>
-                            <input type="text" asp-for="@Model.Decription" class="form-control" placeholder=" ">
+                            <label asp-for="@Model.Decription"></label>
+                            <textarea type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
+                            <script>
+                                // Replace all three <textarea> elements above with CKEditor instances.
+                                CKEDITOR.replaceAll();
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -49,7 +54,7 @@
     </div>
     <div class="row mt-2">
         <div class="col-6 text-end">
-            <button id="save" class="btn btn-primary" type="button" data-bs-dismiss="modal">
+            <button id="back" class="btn btn-primary" type="button" data-bs-dismiss="modal">
                 <span class="fs-4">Back</span>  <i class="fa-solid fa-caret-left fs-4"></i>
             </button>
         </div>
@@ -61,6 +66,7 @@
         </div>
     </div>
 </form>
-<script>
-    CKEDITOR.replace("Decription");
-</script>
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

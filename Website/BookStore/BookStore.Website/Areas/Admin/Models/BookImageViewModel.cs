@@ -11,15 +11,10 @@ namespace BookStore.Website.Areas.Admin.Models
     public class BookImageViewModel : BaseViewModel
     {
         public int BookImageId { get; set; }
-
-        [Required(ErrorMessage = "Bạn không được để trống")]
         public string FilePath { get; set; }
+        [Display(Name = "Mô tả")]
         public string Decription { get; set; }
 
-        [Required(ErrorMessage = "Chọn một file")]
-        [DataType(DataType.Upload)]
-        [FileExtensions(Extensions = "png,jpg,jpeg,gif")]
-        [Display(Name = "Chọn file upload")]
         [BindProperty]
         public IFormFile FileUpLoad { get; set; }
 

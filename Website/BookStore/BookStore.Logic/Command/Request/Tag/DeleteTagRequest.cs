@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BookStore.Logic.Command.Request
 {
     public class DeleteTagRequest : IIdentifiedCommand,
-        IRequest<BaseCommandResultWithData<Tag>>
+        IRequest<BaseCommandResult>
     {
         public int? Id { get; set; }
         public string? RequestId { get; set; }

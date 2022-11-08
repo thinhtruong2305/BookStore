@@ -5,25 +5,39 @@
     ViewData["Title"] = "AddPublisherToSession";
     Layout = null;
 }
-
-<form id="form-dialog-publisher" method="post" asp-action="AddPublisherToSession" asp-controller="Publisher" enctype="multipart/form-data" asp-area="Admin">
+<script src="~/ckeditor/ckeditor.js"></script>
+<form id="form-dialog" method="post" autocomplete="off" asp-action="AddPublisherToSession" asp-controller="Publisher" enctype="multipart/form-data" asp-area="Admin">
+    <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="text" asp-for="PulishingHouse" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" type="text" asp-for="PulishingHouse" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="PulishingHouse"></label>
+                <div class="row">
+                    <span asp-validation-for="PulishingHouse" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="text" asp-for="Country" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" type="text" asp-for="Country" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="Country"></label>
+                <div class="row">
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-md-12 col-lg-4 form-field p-2">
-                <input type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                <input autocomplete="off" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
                 <label class="form-label" asp-for="Keyword"></label>
+                <div class="row">
+                    <span asp-validation-for="Keyword" class="text-danger"></span>
+                </div>
             </div>
-            <div class="col-md-12 form-field p-2">
+            <div class="col-md-12 form-field p-2 mt-3">
                 <label asp-for="Decription"></label>
-                <input type="text" asp-for="Decription" class="form-control form-input" placeholder=" ">
+                <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
+                <script>
+                    // Replace all three <textarea> elements above with CKEditor instances.
+                    CKEDITOR.replaceAll();
+                </script>
             </div>
         </div>
     </div>
@@ -42,5 +56,11 @@
     </div>
 </form>
 <script>
-    CKEDITOR.replace("Decription");
+    CKEDITOR.replace("Decription", {
+        language: "vi"
+    });
 </script>
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

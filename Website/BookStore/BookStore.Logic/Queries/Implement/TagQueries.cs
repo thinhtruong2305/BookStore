@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL;
+using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
 using Microsoft.EntityFrameworkCore;
@@ -56,9 +57,9 @@ namespace BookStore.Logic.Queries.Implement
         public TagDetailModel? GetDetail(int TagId)
         {
             return database.Tags
-                .Where(t => t.Status != Common.Shared.Model.Status.Delete)
+                .Where(t => (t.Status != Common.Shared.Model.Status.Delete) && (t.TagId == TagId))
                 .Select(t => mapper.Map<TagDetailModel>(t))
-                .FirstOrDefault(t => t.TagId == TagId);
+                .FirstOrDefault();
         }
 
         public Task<TagDetailModel?> GetDetailAsync(int TagId)
@@ -67,6 +68,34 @@ namespace BookStore.Logic.Queries.Implement
                 .Where(t => t.Status != Common.Shared.Model.Status.Delete)
                 .Select(t => mapper.Map<TagDetailModel>(t))
                 .FirstOrDefaultAsync(t => t.TagId == TagId);
+        }
+
+        public List<TagDetailModel> GetListTagDetailByInfoId(int InfoId)
+        {
+            return database.TagInfos
+                .Where(ti => (ti.Tag.Status != Common.Shared.Model.Status.Delete) && (ti.InfoId == InfoId))
+                .Select(ti => mapper.Map<TagDetailModel>(ti.Tag))
+                .ToList();
+        }
+
+        public Task<List<TagDetailModel>> GetListTagDetailByInfoIdAsync(int InfoId)
+        {
+            return database.TagInfos
+                .Where(ti => (ti.Tag.Status != Common.Shared.Model.Status.Delete) && (ti.InfoId == InfoId))
+                .Select(ti => mapper.Map<TagDetailModel>(ti.Tag))
+                .ToListAsync();
+        }
+
+        public Tag? GetTagByName(string TagName)
+        {
+            return database.Tags.Where(t => t.Status != Common.Shared.Model.Status.Delete)
+                .FirstOrDefault(t => t.TagName == TagName);
+        }
+
+        public Task<Tag?> GetTagByNameAsync(string TagName)
+        {
+            return database.Tags.Where(t => t.Status != Common.Shared.Model.Status.Delete)
+                .FirstOrDefaultAsync(t => t.TagName == TagName);
         }
     }
 }

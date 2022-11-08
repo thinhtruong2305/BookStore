@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL;
+using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
 using Microsoft.EntityFrameworkCore;
@@ -85,6 +86,26 @@ namespace BookStore.Logic.Queries.Implement
                         .ThenInclude(b => b.AuthorBooks)
                 .Select(s => mapper.Map<SeriesDetailModel>(s))
                 .FirstOrDefaultAsync(s => s.SeriesId == SeriesId);
+        }
+
+        public Series? GetSeriesByName(string SeriesName)
+        {
+            return database.Series
+                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Include(s => s.info)
+                    .ThenInclude(info => info.Book)
+                        .ThenInclude(b => b.AuthorBooks)
+                .FirstOrDefault(s => s.SeriesName == SeriesName);
+        }
+
+        public Task<Series?> GetSeriesByNameAsync(string SeriesName)
+        {
+            return database.Series
+                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Include(s => s.info)
+                    .ThenInclude(info => info.Book)
+                        .ThenInclude(b => b.AuthorBooks)
+                .FirstOrDefaultAsync(s => s.SeriesName == SeriesName);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BookStore.Logic.Shared.Model;
+﻿using BookStore.DAL.Entities;
+using BookStore.Logic.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,7 @@ namespace BookStore.Logic.Queries.Interface
         public Task<List<SeriesSummaryModel>> GetAllDeleteAsync();
         public SeriesDetailModel? GetDetail(int SeriesId);
         public Task<SeriesDetailModel?> GetDetailAsync(int SeriesId);
+        public Series? GetSeriesByName(string SeriesName);
+        public Task<Series?> GetSeriesByNameAsync(string SeriesName);
     }
 }

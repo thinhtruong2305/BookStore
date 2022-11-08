@@ -1,5 +1,6 @@
 ﻿using BookStore.DAL;
 using BookStore.DAL.Entities;
+using BookStore.Utils.Global;
 using BookStore.Website.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,24 +40,48 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddPublisherToSession([FromForm] PublisherViewModel model)
         {
-            var session = HttpContext.Session;
-            List<PublisherViewModel> list = new List<PublisherViewModel>();
+            if (ModelState.IsValid)
+            {
+                var session = HttpContext.Session;
+                List<PublisherViewModel> list = new List<PublisherViewModel>();
 
+                string? publisherGet = session.GetString(PUBLISHERS);
+                if (publisherGet != null)
+                {
+                    List<PublisherViewModel>? listGet = JsonConvert.DeserializeObject<List<PublisherViewModel>>(publisherGet);
+                    if (listGet != null)
+                    {
+                        list = listGet;
+                    }
+                }
+                string? decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                model.Decription = decodedHtml;
+                list.Add(model);
+                string publishers = JsonConvert.SerializeObject(list);
+                session.SetString(PUBLISHERS, publishers);
+                return View("~/Areas/Admin/Views/Book/Create.cshtml");
+            }
+            return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddPublisherToSession", model) });
+        }
+
+        public IActionResult DeletePublisherFromSession(int id)
+        {
+            var session = HttpContext.Session;
             string? publisherGet = session.GetString(PUBLISHERS);
             if (publisherGet != null)
             {
-                List<PublisherViewModel>? listGet = JsonConvert.DeserializeObject<List<PublisherViewModel>>(publisherGet);
-                if (listGet != null)
+                List<PublisherViewModel>? list = JsonConvert.DeserializeObject<List<PublisherViewModel>>(publisherGet);
+                if (list != null)
                 {
-                    list = listGet;
+                    list.RemoveAt(id);
+                    string publisher = JsonConvert.SerializeObject(list);
+                    session.SetString(PUBLISHERS, publisher);
                 }
             }
-            list.Add(model);
-            string publishers = JsonConvert.SerializeObject(list);
-            session.SetString(PUBLISHERS, publishers);
-            return View("~/Areas/Admin/Views/Book/Create.cshtml");
+            return RedirectToAction("Create", "Book");
         }
 
         [HttpGet]

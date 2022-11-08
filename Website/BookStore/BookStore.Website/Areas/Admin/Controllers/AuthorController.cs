@@ -1,6 +1,7 @@
 ﻿using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
+using BookStore.Utils.Global;
 using BookStore.Website.Areas.Admin.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,9 @@ namespace BookStore.Website.Areas.Admin.Controllers
             this.authorQueries = authorQueries;
             this.mediator = mediator;
         }
+
+
+
         public IActionResult Index()
         {
             var model = new List<AuthorSummaryModel>();
@@ -52,24 +56,49 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddAuthorToSession([FromForm] AuthorViewModel model)
         {
-            var session = HttpContext.Session;
-            List<AuthorViewModel> list = new List<AuthorViewModel>();
+            if (ModelState.IsValid)
+            {
+                var session = HttpContext.Session;
+                List<AuthorViewModel> list = new List<AuthorViewModel>();
 
+                string? authorGet = session.GetString(AUTHORS);
+                if (authorGet != null)
+                {
+                    List<AuthorViewModel>? listGet = JsonConvert.DeserializeObject<List<AuthorViewModel>>(authorGet);
+                    if (listGet != null)
+                    {
+                        list = listGet;
+                    }
+                }
+                string? decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                model.Decription = decodedHtml;
+                list.Add(model);
+                string authors = JsonConvert.SerializeObject(list);
+                session.SetString(AUTHORS, authors);
+                return View("~/Areas/Admin/Views/Book/Create.cshtml");
+            }
+
+            return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddAuthorToSession", model) });
+        }
+
+        public IActionResult DeleteAuthorFromSession(int id)
+        {
+            var session = HttpContext.Session;
             string? authorGet = session.GetString(AUTHORS);
             if (authorGet != null)
             {
-                List<AuthorViewModel>? listGet = JsonConvert.DeserializeObject<List<AuthorViewModel>>(authorGet);
-                if (listGet != null)
+                List<AuthorViewModel>? list = JsonConvert.DeserializeObject<List<AuthorViewModel>>(authorGet);
+                if (list != null)
                 {
-                    list = listGet;
+                    list.RemoveAt(id);
+                    string author = JsonConvert.SerializeObject(list);
+                    session.SetString(AUTHORS, author);
                 }
             }
-            list.Add(model);
-            string authors = JsonConvert.SerializeObject(list);
-            session.SetString(AUTHORS, authors);
-            return View("~/Areas/Admin/Views/Book/Create.cshtml");
+            return RedirectToAction("Create", "Book");
         }
 
         [HttpGet]
@@ -85,11 +114,6 @@ namespace BookStore.Website.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult Delete(int? id)
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Delete(AuthorViewModel model)
         {
             return View();
         }

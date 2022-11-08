@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,5 +42,10 @@ namespace BookStore.DAL.Entities
         public int? Pages { get; set; }
         public Book Book { get; set; }
         public List<EditionPublisher> EditionPublishers { get; set; }
+
+        public static implicit operator Edition(EntityEntry<Edition> v)
+        {
+            return v.Entity;
+        }
     }
 }

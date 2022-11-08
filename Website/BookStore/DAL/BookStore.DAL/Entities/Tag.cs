@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +14,7 @@ namespace BookStore.DAL.Entities
     public class Tag : BaseEntity
     {
         public int TagId { get; set; }
-        public int MenuId { get; set; }
-        public int InfoId { get; set; }
+        public int? ParentId { get; set; }
 
         /*[Required(ErrorMessage = "Bạn phải nhập tên tag")]
         [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z]")]
@@ -31,7 +31,11 @@ namespace BookStore.DAL.Entities
 
         //[Display(Name = "Liên kết")]
         public string Slug { get; set; }
-        public Info Info { get; set; }
-        public Menu Menu { get; set; }
+        public List<TagInfo> TagInfos { get; set; }
+
+        public static implicit operator Tag(EntityEntry<Tag> v)
+        {
+            return v.Entity;
+        }
     }
 }
