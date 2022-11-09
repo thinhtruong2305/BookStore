@@ -11,9 +11,11 @@ namespace BookStore.Website.Areas.Admin.Models
     public class BookImageViewModel : BaseViewModel
     {
         public int BookImageId { get; set; }
+        public int BookId { get; set; }
         public string FilePath { get; set; }
         [Display(Name = "Mô tả")]
-        public string Decription { get; set; }
+        public string? Decription { get; set; }
+        public string? ReturnUrl { get; set; }
 
         [BindProperty]
         public IFormFile FileUpLoad { get; set; }
@@ -26,6 +28,15 @@ namespace BookStore.Website.Areas.Admin.Models
                 Decription = Decription
             };
         }
+        public CreateBookImageRequest ToCreateCommand(Book Book)
+        {
+            return new CreateBookImageRequest
+            {
+                FilePath = FilePath,
+                Decription = Decription,
+                Book = Book
+            };
+        }
 
         public UpdateBookImageRequest ToUpdateCommand()
         {
@@ -33,6 +44,16 @@ namespace BookStore.Website.Areas.Admin.Models
             {
                 FilePath = FilePath,
                 Decription = Decription,
+            };
+        }
+
+        public UpdateBookImageRequest ToUpdateCommand(Book Book)
+        {
+            return new UpdateBookImageRequest
+            {
+                FilePath = FilePath,
+                Decription = Decription,
+                Book = Book
             };
         }
     }

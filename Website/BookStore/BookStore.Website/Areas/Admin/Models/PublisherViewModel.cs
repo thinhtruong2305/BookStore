@@ -10,6 +10,7 @@ namespace BookStore.Website.Areas.Admin.Models
     public class PublisherViewModel : BaseViewModel
     {
         public int PublisherId { get; set; }
+        public int EditionId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập nhà xuất bản")]
         [Display(Name = "Nhà xuất bản")]
@@ -26,6 +27,7 @@ namespace BookStore.Website.Areas.Admin.Models
 
         [Display(Name = "Liên kết")]
         public string? Slug { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public CreatePublisherRequest ToCreateCommand()
         {

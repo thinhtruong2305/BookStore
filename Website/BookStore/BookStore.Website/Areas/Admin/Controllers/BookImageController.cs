@@ -14,6 +14,8 @@ using BookStore.Logic.Command.Request;
 using MediatR;
 using System.Security.Claims;
 using AutoMapper;
+using BookStore.Common.Shared.Model;
+using BookStore.DAL;
 
 namespace BookStore.Website.Areas.Admin.Controllers
 {
@@ -25,17 +27,59 @@ namespace BookStore.Website.Areas.Admin.Controllers
         private readonly IBookImageQueries bookImageQueries;
         private readonly IMediator mediator;
         private readonly IMapper mapper;
+        private readonly AppDatabase database;
         public const string BOOKIMAGES = "bookimages";
 
         public BookImageController(IFileStorageService storageService,
             IBookImageQueries bookImageQueries,
             IMediator mediator,
-            IMapper mapper)
+            IMapper mapper,
+            AppDatabase database)
         {
             this.storageService = storageService;
             this.bookImageQueries = bookImageQueries;
             this.mediator = mediator;
             this.mapper = mapper;
+            this.database = database;
+        }
+
+        [HttpGet]
+        public IActionResult CreateBookImageToBook(string returnUrl, int BookId)
+        {
+            BookImageViewModel model = new BookImageViewModel();
+            model.BookId = BookId;
+            model.ReturnUrl = returnUrl;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(BookImageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var bookImageSave = new BookImage();
+                var bookImage = bookImageQueries.GetBookImageById(model.BookImageId);
+                if (bookImage == null)
+                {
+                    var bookImageResult = new BaseCommandResultWithData<BookImage>();
+                    bookImageResult = await mediator.Send(model.ToCreateCommand());
+                    bookImageSave = bookImageResult.Data;
+                }
+                bookImageSave = bookImage;
+                if (model.BookId != 0)
+                {
+                    var book = database.Books
+                         .Where(i => i.Status != Status.Delete)
+                         .FirstOrDefault(i => i.BookId == model.BookId);
+                    if (book != null)
+                    {
+                        var bookImageResult = new BaseCommandResultWithData<BookImage>();
+                        bookImageResult = await mediator.Send(model.ToCreateCommand(book));
+                    }
+                }
+            }
+            database.SaveChanges();
+            return LocalRedirect(model.ReturnUrl);
         }
 
         [HttpGet]
@@ -80,7 +124,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RemoveBookImageFromSession(int id)
+        public async Task<IActionResult> DeleteBookImageFromBook(string returnUrl, int id, int BookImageId)
         {
             var session = HttpContext.Session;
             string? bookImagesGet = session.GetString(BOOKIMAGES);
@@ -89,7 +133,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 List<BookImageViewModel>? list = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImagesGet);
                 if (list != null)
                 {
-                    var bookImage =bookImageQueries.GetBookImageById(id);
+                    var bookImage =bookImageQueries.GetBookImageById(BookImageId);
 
                     if (bookImage == null)
                     {
@@ -109,11 +153,10 @@ namespace BookStore.Website.Areas.Admin.Controllers
                         };
                         var result = await mediator.Send(command);
                         var book = mapper.Map<BookViewModel>(bookImage.Book);
-                        return RedirectToAction("Detail", "Book", book);
                     }
                 }
             }
-            return RedirectToAction("Detail", "Book");
+            return LocalRedirect(returnUrl);
         }
     }
 }

@@ -37,10 +37,10 @@
 }
 
 <div class="container-fluid px-4"></div>
-<h1 class="mt-4">Thêm mới sách</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item active">Book</li>
+    <li class="breadcrumb-item ">Book</li>
+    <li class="breadcrumb-item active">Create</li>
 </ol>
 <form id="form-create-book" asp-action="Create" asp-controller="Book" asp-area="Admin" enctype="multipart/form-data" method="post">
     <div class="card">
@@ -76,8 +76,7 @@
                                             {
                                                 for (int i = 0; i < listBookImage.Count; i++)
                                                 {
-                                                    if(listBookImage[i].BookImageId == 0){
-                                                        <div class="text-center float-start col-lg-4 col-md-12">
+                                                    <div class="text-center float-start col-lg-4 col-md-12">
                                                         <div class="card h-100">
                                                             <!-- Product image-->
                                                             <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
@@ -87,34 +86,26 @@
                                                                     <label>@listBookImage[i].Decription</label>
                                                                 </div>
                                                             </div>
-                                                            <!-- Product actions-->
-                                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                <a asp-action="RemoveBookImageFromSession" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
-                                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    }else{
-                                                        <div class="text-center float-start col-lg-4 col-md-12">
-                                                        <div class="card h-100">
-                                                            <!-- Product image-->
-                                                            <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
-                                                            <!-- Product details-->
-                                                            <div class="card-body p-4">
-                                                                <div class="text-center">
-                                                                    <label>@listBookImage[i].Decription</label>
+                                                            @if(listBookImage[i].BookImageId == 0)
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                            <!-- Product actions-->
-                                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                <a asp-action="RemoveBookImageFromSession" asp-controller="BookImage" asp-area="Admin" asp-route-id="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
-                                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                                </a>
-                                                            </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
+                                                                </div>
+                                                            }
                                                         </div>
                                                     </div>
-                                                    }
                                                 }
                                             }
                                         }
@@ -124,7 +115,7 @@
                                             </div>
                                         }
                                         <div class="m-2 float-start">
-                                            <a onclick="AddCreateThingToBook('@Url.Action("AddBookImageToSession", "BookImage")', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                            <a onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </a>
                                         </div>
@@ -172,9 +163,6 @@
                                                     <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromSession" asp-controller="Author" asp-route-id="@i">
                                                         <i class="fa-solid fa-x"></i>
                                                     </a>
-                                                    <!--<button type="button" class="btn btn-info float-start m-2">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
-                                                    </button>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -215,9 +203,6 @@
                                                     <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromSession" asp-controller="Publisher" asp-route-id="@i">
                                                         <i class="fa-solid fa-x"></i>
                                                     </a>
-                                                    <!--<button type="button" class="btn btn-info float-start m-2">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
-                                                    </button>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -254,12 +239,9 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="container">
-                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromSession" asp-controller="Tag" asp-route-id="@i">
+                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromBook" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i" asp-route-TagId="@listTag[i].TagId" asp-route-InfoId="@Model.InfoId">
                                                                 <i class="fa-solid fa-x"></i>
                                                             </a>
-                                                            <!--<a type="button" class="btn btn-info float-start m-2" asp-action="UpdateTagToSession" asp-controller="Tag" asp-route-id="@i">
-                                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                            </a>-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -275,11 +257,8 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="container">
-                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromSession" asp-controller="Tag" asp-route-id="@listTag[i].TagId">
+                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromBook" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i" asp-route-TagId="@listTag[i].TagId" asp-route-InfoId="@Model.InfoId">
                                                                 <i class="fa-solid fa-x"></i>
-                                                            </a>
-                                                            <a type="button" class="btn btn-info float-start m-2" onclick="AddCreateThingToBook('@Url.Action("UpdateTagToSession", "Tag", new{returnUrl = @Url.Action("Create", "Book"), @id = @listTag[i].TagId})', 'Cập nhật thể loại')">
-                                                                <i class="fa-regular fa-pen-to-square"></i>
                                                             </a>
                                                         </div>
                                                     </div>

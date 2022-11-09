@@ -8,6 +8,7 @@
 }
 <script src="~/ckeditor/ckeditor.js"></script>
 <form id="form-dialog" method="post" autocomplete="off" asp-action="AddBookImageToSession" asp-controller="BookImage" enctype="multipart/form-data" asp-area="Admin">
+    <input type="hidden" asp-for="ReturnUrl" />
     <div id="book" class="container">
         <div class="row">
             <div class="col-md-12">

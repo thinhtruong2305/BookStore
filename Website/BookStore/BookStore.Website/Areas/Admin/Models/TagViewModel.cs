@@ -11,6 +11,7 @@ namespace BookStore.Website.Areas.Admin.Models
     {
         public int TagId { get; set; }
         public int? ParentId { get; set; }
+        public int? InfoId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên tag")]
         [Display(Name = "Tên tag")]
@@ -24,7 +25,7 @@ namespace BookStore.Website.Areas.Admin.Models
 
         [Display(Name = "Liên kết")]
         public string? Slug { get; set; }
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public CreateTagRequest ToCreateCommand()
         {

@@ -1,11 +1,19 @@
-﻿using BookStore.DAL;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
+using BookStore.DAL;
 using BookStore.DAL.Entities;
+using BookStore.Logic.Command.Request;
+using BookStore.Logic.Queries.Implement;
+using BookStore.Logic.Queries.Interface;
 using BookStore.Utils.Global;
 using BookStore.Website.Areas.Admin.Models;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Data;
+using System.Net;
+using System.Security.Claims;
 
 namespace BookStore.Website.Areas.Admin.Controllers
 {
@@ -14,22 +22,64 @@ namespace BookStore.Website.Areas.Admin.Controllers
     public class PublisherController : Controller
     {
         public const string PUBLISHERS = "publishers";
+        private readonly IPublisherQueries publisherQueries;
+        private readonly IMediator mediator;
+        private readonly AppDatabase database;
+
+        public PublisherController(IPublisherQueries publisherQueries,
+            IMediator mediator,
+            AppDatabase database)
+        {
+            this.publisherQueries = publisherQueries;
+            this.mediator = mediator;
+            this.database = database;
+        }
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreatePublisherToBook(string returnUrl, int EditionId)
         {
-            return View();
+            PublisherViewModel model = new PublisherViewModel();
+            model.EditionId = EditionId;
+            model.ReturnUrl = returnUrl;
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Create(PublisherViewModel model)
+        public async Task<IActionResult> CreateAsync(PublisherViewModel model)
         {
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var publisherSave = new Publisher();
+                var publisher = publisherQueries.GetPublisherByPulishingHouse(model.PulishingHouse);
+                if (publisher == null)
+                {
+                    var publisherResult = new BaseCommandResultWithData<Publisher>();
+                    publisherResult = await mediator.Send(model.ToCreateCommand());
+                    publisherSave = publisherResult.Data;
+                }
+                publisherSave = publisher;
+                if (model.EditionId != 0)
+                {
+                    var edition = database.Editions
+                         .Where(e => e.Status != Status.Delete)
+                         .FirstOrDefault(e => e.EditionId == model.EditionId);
+                    if (edition != null)
+                    {
+                        var authorBookResult = new BaseCommandResultWithData<EditionPublisher>();
+                        authorBookResult = await mediator.Send(new AddEditionAndPublisherToEditionPubliserRequest
+                        {
+                            Edition = edition,
+                            Publisher = publisherSave
+                        });
+                    }
+                }
+            }
+            database.SaveChanges();
+            return LocalRedirect(model.ReturnUrl);
         }
 
         [HttpGet]
@@ -67,7 +117,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
             return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddPublisherToSession", model) });
         }
 
-        public IActionResult DeletePublisherFromSession(int id)
+        public async Task<IActionResult> DeletePublisherFromBookAsync(string returnUrl, int id, int PublisherId, int EditionId)
         {
             var session = HttpContext.Session;
             string? publisherGet = session.GetString(PUBLISHERS);
@@ -76,12 +126,28 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 List<PublisherViewModel>? list = JsonConvert.DeserializeObject<List<PublisherViewModel>>(publisherGet);
                 if (list != null)
                 {
-                    list.RemoveAt(id);
-                    string publisher = JsonConvert.SerializeObject(list);
-                    session.SetString(PUBLISHERS, publisher);
+                    var publisher = publisherQueries.GetDetail(PublisherId);
+                    if (publisher == null)
+                    {
+                        list.RemoveAt(id);
+                        string publishers = JsonConvert.SerializeObject(list);
+                        session.SetString(PUBLISHERS, publishers);
+                    }
+                    else
+                    {
+                        var command = new DeleteEditionPublisherRequest()
+                        {
+                            PublisherId = PublisherId,
+                            EditionId = EditionId,
+                            RequestId = HttpContext.Connection?.Id,
+                            IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                            UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+                        };
+                        var result = await mediator.Send(command);
+                    }
                 }
             }
-            return RedirectToAction("Create", "Book");
+            return LocalRedirect(returnUrl ?? "/");
         }
 
         [HttpGet]

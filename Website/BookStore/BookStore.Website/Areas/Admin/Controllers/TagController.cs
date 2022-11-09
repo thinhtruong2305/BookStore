@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Common.Shared.Model;
+using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
 using BookStore.Logic.Queries.Interface;
@@ -9,6 +10,7 @@ using BookStore.Website.Areas.Admin.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Internal;
 using Newtonsoft.Json;
@@ -25,14 +27,17 @@ namespace BookStore.Website.Areas.Admin.Controllers
         private readonly ITagQueries tagQueries;
         private readonly IMapper mapper;
         private readonly IMediator mediator;
+        private readonly AppDatabase database;
 
         public TagController(ITagQueries tagQueries,
             IMapper mapper,
-            IMediator mediator)
+            IMediator mediator,
+            AppDatabase database)
         {
             this.tagQueries = tagQueries;
             this.mapper = mapper;
             this.mediator = mediator;
+            this.database = database;
         }
         public IActionResult Index()
         {
@@ -40,16 +45,46 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateTagToBook(string returnUrl, int InfoId)
         {
-            return View();
+            TagViewModel model = new TagViewModel();
+            model.InfoId = InfoId;
+            model.ReturnUrl = returnUrl;
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Create(TagViewModel model)
+        public async Task<IActionResult> CreateAsync(TagViewModel model)
         {
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var tagSave = new Tag();
+                var tag = tagQueries.GetTagByName(model.TagName);
+                if(tag == null)
+                {
+                    var tagResult = new BaseCommandResultWithData<Tag>();
+                    tagResult = await mediator.Send(model.ToCreateCommand());
+                    tagSave = tagResult.Data;
+                }
+                tagSave = tag;
+                if (model.InfoId != 0)
+                {
+                    var info = database.Infos
+                         .Where(i => i.Status != Status.Delete)
+                         .FirstOrDefault(i => i.InfoId == model.InfoId);
+                    if (info != null)
+                    {
+                        var tagInfoResult = new BaseCommandResultWithData<TagInfo>();
+                        tagInfoResult = await mediator.Send(new AddTagAndInfoToTagInfoRequest
+                        {
+                            Tag = tagSave,
+                            Info = info
+                        });
+                    }
+                }
+            }
+            database.SaveChanges();
+            return LocalRedirect(model.ReturnUrl);
         }
 
         public IActionResult AddTagToSession(string returnUrl)
@@ -82,13 +117,12 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 list.Add(model);
                 string tags = JsonConvert.SerializeObject(list);
                 session.SetString(TAGS, tags);
-                return Redirect(model.ReturnUrl);
             }
-            return Json(new { success = false, message = "Thao tác thêm thể loại sai vui lòng thử lại", html = AppGlobal.RenderRazorViewToString(this, "AddTagToSession", model) });
+            return LocalRedirect(model.ReturnUrl);
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteTagFromSessionAsync(string returnUrl, int id)
+        public async Task<IActionResult> DeleteTagFromBookAsync(string returnUrl, int id, int TagId, int InfoId)
         {
             var session = HttpContext.Session;
             string? tagGet = session.GetString(TAGS);
@@ -97,7 +131,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 List<TagViewModel>? list = JsonConvert.DeserializeObject<List<TagViewModel>>(tagGet);
                 if (list != null)
                 {
-                    var tag = tagQueries.GetDetail(id);
+                    var tag = tagQueries.GetDetail(TagId);
                     if (tag == null)
                     {
                         list.RemoveAt(id);
@@ -106,23 +140,23 @@ namespace BookStore.Website.Areas.Admin.Controllers
                     }
                     else
                     {
-                        var command = new DeleteTagRequest()
+                        var command = new DeleteTagInfoRequest()
                         {
-                            Id = id,
+                            TagId = TagId,
+                            InfoId = InfoId,
                             RequestId = HttpContext.Connection?.Id,
                             IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
                             UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
                         };
                         var result = await mediator.Send(command);
-                        var book = mapper.Map<BookViewModel>(tag);
                     }
                 }
             }
-            return RedirectToAction(returnUrl);
+            return LocalRedirect(returnUrl ?? "/");
         }
 
         [HttpGet]
-        public IActionResult UpdateTagToSession(string returnUrl, int id)
+        public IActionResult UpdateTagToBook(string returnUrl, int id)
         {
             TagViewModel model = new TagViewModel();
             var session = HttpContext.Session;

@@ -1,4 +1,9 @@
-﻿using BookStore.DAL.Entities;
+﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
+using BookStore.DAL;
+using BookStore.DAL.Entities;
+using BookStore.Logic.Command.Request;
+using BookStore.Logic.Queries.Implement;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
 using BookStore.Utils.Global;
@@ -8,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Data;
+using System.Security.Claims;
 
 namespace BookStore.Website.Areas.Admin.Controllers
 {
@@ -17,16 +23,20 @@ namespace BookStore.Website.Areas.Admin.Controllers
     {
         private readonly IAuthorQueries authorQueries;
         private readonly IMediator mediator;
+        private readonly IMapper mapper;
+        private readonly AppDatabase database;
         public const string AUTHORS = "authors";
 
         public AuthorController(IAuthorQueries authorQueries,
-            IMediator mediator)
+            IMediator mediator,
+            IMapper mapper,
+            AppDatabase database)
         {
             this.authorQueries = authorQueries;
             this.mediator = mediator;
+            this.mapper = mapper;
+            this.database = database;
         }
-
-
 
         public IActionResult Index()
         {
@@ -36,28 +46,59 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult CreateAuthorToBook(string returnUrl, int BookId)
         {
-            return View();
+            AuthorViewModel model = new AuthorViewModel();
+            model.BookId = BookId;
+            model.ReturnUrl = returnUrl;
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Create(AuthorViewModel model)
+        public async Task<IActionResult> CreateAsync(AuthorViewModel model)
         {
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var authorSave = new Author();
+                var author = authorQueries.GetAuthorByName(model.FirstName, model.LastName);
+                if (author == null)
+                {
+                    var ạuthorResult = new BaseCommandResultWithData<Author>();
+                    ạuthorResult = await mediator.Send(model.ToCreateCommand());
+                    authorSave = ạuthorResult.Data;
+                }
+                authorSave = author;
+                if (model.BookId != 0)
+                {
+                    var book = database.Books
+                         .Where(i => i.Status != Status.Delete)
+                         .FirstOrDefault(i => i.BookId == model.BookId);
+                    if (book != null)
+                    {
+                        var authorBookResult = new BaseCommandResultWithData<AuthorBook>();
+                        authorBookResult = await mediator.Send(new AddAuthorAndBookToAuthorBookRequest
+                        {
+                            Author = authorSave,
+                            Book = book
+                        });
+                    }
+                }
+            }
+            database.SaveChanges();
+            return LocalRedirect(model.ReturnUrl);
         }
 
         [HttpGet]
-        public IActionResult AddAuthorToSession()
+        public IActionResult AddAuthorToSession(string returnUrl)
         {
             AuthorViewModel model = new AuthorViewModel();
+            model.ReturnUrl = returnUrl;
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddAuthorToSession([FromForm] AuthorViewModel model)
+        public IActionResult AddAuthorToSession(AuthorViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -78,13 +119,11 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 list.Add(model);
                 string authors = JsonConvert.SerializeObject(list);
                 session.SetString(AUTHORS, authors);
-                return View("~/Areas/Admin/Views/Book/Create.cshtml");
             }
-
-            return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddAuthorToSession", model) });
+            return LocalRedirect(model.ReturnUrl);
         }
 
-        public IActionResult DeleteAuthorFromSession(int id)
+        public async Task<IActionResult> DeleteAuthorFromBookAsync(string returnUrl, int id, int AuthorId, int BookId)
         {
             var session = HttpContext.Session;
             string? authorGet = session.GetString(AUTHORS);
@@ -93,23 +132,67 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 List<AuthorViewModel>? list = JsonConvert.DeserializeObject<List<AuthorViewModel>>(authorGet);
                 if (list != null)
                 {
-                    list.RemoveAt(id);
-                    string author = JsonConvert.SerializeObject(list);
-                    session.SetString(AUTHORS, author);
+                    var author = authorQueries.GetDetail(AuthorId);
+                    if (author == null)
+                    {
+                        list.RemoveAt(id);
+                        string authors = JsonConvert.SerializeObject(list);
+                        session.SetString(AUTHORS, authors);
+                    }
+                    else
+                    {
+                        var command = new DeleteAuthorBookRequest()
+                        {
+                            AuthorId = AuthorId,
+                            BookId = BookId,
+                            RequestId = HttpContext.Connection?.Id,
+                            IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                            UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+                        };
+                        var result = await mediator.Send(command);
+                    }
                 }
             }
-            return RedirectToAction("Create", "Book");
+            return LocalRedirect(returnUrl ?? "/");
         }
 
         [HttpGet]
-        public IActionResult Update(int? id)
+        public IActionResult Update(string returnUrl, int id)
         {
-            return View();
+            AuthorViewModel model = new AuthorViewModel();
+            var session = HttpContext.Session;
+            string? tagGet = session.GetString(AUTHORS);
+            if (tagGet != null)
+            {
+                List<AuthorViewModel>? list = JsonConvert.DeserializeObject<List<AuthorViewModel>>(tagGet);
+                if (list != null)
+                {
+                    var author = mapper.Map<AuthorViewModel>(authorQueries.GetDetail(id));
+                    if (author == null)
+                    {
+                        model = list[id];
+                        model.ReturnUrl = returnUrl;
+                    }
+                    else
+                    {
+                        model = author;
+                        model.ReturnUrl = returnUrl;
+                    }
+                }
+            }
+            return View(model);
         }
         [HttpPost]
-        public IActionResult Update(AuthorViewModel model)
+        public async Task<IActionResult> UpdateAsync(AuthorViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                model.SetFromContext(HttpContext);
+                var commandResult = new BaseCommandResultWithData<Author>();
+                var updateCommand = model.ToUpdateCommand();
+                commandResult = await mediator.Send(updateCommand);
+            }
+            return Redirect(model.ReturnUrl);
         }
 
         [HttpGet]

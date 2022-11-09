@@ -37,10 +37,10 @@
 }
 
 <div class="container-fluid px-4"></div>
-<h1 class="mt-4">Thêm mới sách</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item active">Book</li>
+    <li class="breadcrumb-item">Book</li>
+    <li class="breadcrumb-item active">Update</li>
 </ol>
 <form id="form-create-book" asp-action="Update" asp-controller="Book" asp-area="Admin" enctype="multipart/form-data" method="post">
     <div class="card">
@@ -76,8 +76,7 @@
                                             {
                                                 for (int i = 0; i < listBookImage.Count; i++)
                                                 {
-                                                    if(listBookImage[i].BookImageId == 0){
-                                                        <div class="text-center float-start col-lg-4 col-md-12">
+                                                    <div class="text-center float-start col-lg-4 col-md-12">
                                                         <div class="card h-100">
                                                             <!-- Product image-->
                                                             <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
@@ -87,34 +86,26 @@
                                                                     <label>@listBookImage[i].Decription</label>
                                                                 </div>
                                                             </div>
-                                                            <!-- Product actions-->
-                                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                <a asp-action="RemoveBookImageFromSession" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
-                                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    }else{
-                                                        <div class="text-center float-start col-lg-4 col-md-12">
-                                                        <div class="card h-100">
-                                                            <!-- Product image-->
-                                                            <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
-                                                            <!-- Product details-->
-                                                            <div class="card-body p-4">
-                                                                <div class="text-center">
-                                                                    <label>@listBookImage[i].Decription</label>
+                                                            @if(listBookImage[i].BookImageId == 0)
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                            <!-- Product actions-->
-                                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                <a asp-action="RemoveBookImageFromSession" asp-controller="BookImage" asp-area="Admin" asp-route-id="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
-                                                                    <i class="fa-solid fa-circle-xmark"></i>
-                                                                </a>
-                                                            </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
+                                                                </div>
+                                                            }
                                                         </div>
                                                     </div>
-                                                    }
                                                 }
                                             }
                                         }
@@ -124,7 +115,7 @@
                                             </div>
                                         }
                                         <div class="m-2 float-start">
-                                            <a onclick="AddCreateThingToBook('@Url.Action("AddBookImageToSession", "BookImage")', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                            <a onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </a>
                                         </div>
@@ -167,22 +158,32 @@
                                                     <label class="form-label" asp-for="@listAuthor[i].DateOfBirth"></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="container">
-                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromSession" asp-controller="Author" asp-route-id="@i">
-                                                        <i class="fa-solid fa-x"></i>
-                                                    </a>
-                                                    <!--<button type="button" class="btn btn-info float-start m-2">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
-                                                    </button>-->
+                                            @if(listAuthor[i].AuthorId == 0)
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromBook" asp-controller="Author" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromBook" asp-controller="Author" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-AuthorId="@listAuthor[i].AuthorId" asp-route-BookId="@Model.BookId">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
                                     }
                                 }
                             }
                         </div>
-                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddAuthorToSession", "Author")', 'Thêm tác giả')">
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreateAuthorToBook", "Author", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm tác giả')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -210,22 +211,32 @@
                                                     <label class="form-label" asp-for="@listPublisher[i].Country"></label>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="container">
-                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromSession" asp-controller="Publisher" asp-route-id="@i">
-                                                        <i class="fa-solid fa-x"></i>
-                                                    </a>
-                                                    <!--<button type="button" class="btn btn-info float-start m-2">
-                                                        <i class="fa-regular fa-pen-to-square"></i>
-                                                    </button>-->
+                                            @if(listPublisher[i].EditionId == 0)
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromBook" asp-controller="Publisher" asp-route-id="@i">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeletePublisherFromBook" asp-controller="Publisher" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-PublisherId="@listPublisher[i].PublisherId" asp-route-EditionId="@Model.EditionViewModel.EditionId">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
                                     }
                                 }
                             }
                         </div>
-                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddPublisherToSession", "Publisher")', 'Thêm nhà xuất bản')">
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreatePublisherToBook", "Publisher", new{returnUrl = @Url.Action("Update", "Book"), EditionId = Model.EditionViewModel.EditionId})', 'Thêm nhà xuất bản')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -243,54 +254,40 @@
                                     {
                                         @for (int i = 0; i < listTag.Count; i++)
                                         {
-                                            if(listTag[i].TagId == 0)
-                                            {
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-12 col-lg-6 form-field">
-                                                            <input type="text" asp-for="@listTag[i].TagName" class="form-control form-input" placeholder=" ">
-                                                            <label class="form-label" asp-for="@listTag[i].TagName"></label>
-                                                        </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-6 form-field">
+                                                        <input type="text" asp-for="@listTag[i].TagName" class="form-control form-input" placeholder=" ">
+                                                        <label class="form-label" asp-for="@listTag[i].TagName"></label>
                                                     </div>
+                                                </div>
+                                                @if(listTag[i].TagId == 0)
+                                                {
                                                     <div class="row">
                                                         <div class="container">
                                                             <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromSession" asp-controller="Tag" asp-route-id="@i">
                                                                 <i class="fa-solid fa-x"></i>
                                                             </a>
-                                                            <!--<a type="button" class="btn btn-info float-start m-2" asp-action="UpdateTagToSession" asp-controller="Tag" asp-route-id="@i">
-                                                                <i class="fa-regular fa-pen-to-square"></i>
-                                                            </a>-->
                                                         </div>
                                                     </div>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="col-md-6">
-                                                    <div class="row">
-                                                        <div class="col-md-12 col-lg-6 form-field">
-                                                            <input type="text" asp-for="@listTag[i].TagName" class="form-control form-input" placeholder=" ">
-                                                            <label class="form-label" asp-for="@listTag[i].TagName"></label>
-                                                        </div>
-                                                    </div>
+                                                }
+                                                else
+                                                {
                                                     <div class="row">
                                                         <div class="container">
-                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromSession" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@listTag[i].TagId">
+                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromBook" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-TagId="@listTag[i].TagId" asp-route-InfoId="@Model.InfoId">
                                                                 <i class="fa-solid fa-x"></i>
-                                                            </a>
-                                                            <a type="button" class="btn btn-info float-start m-2" asp-action="UpdateTagToSession" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@listTag[i].TagId">
-                                                                <i class="fa-regular fa-pen-to-square"></i>
                                                             </a>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            }
+                                                }
+                                            </div>
                                         }
                                     }
                                 }
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddTagToSession", "Tag", new{returnUrl = @Url.Action("Create", "Book")})', 'Thêm thể loại')">
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreateTagToBook", "Tag", new{returnUrl = @Url.Action("Update", "Book"), InfoId = Model.InfoId})', 'Thêm thể loại')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>

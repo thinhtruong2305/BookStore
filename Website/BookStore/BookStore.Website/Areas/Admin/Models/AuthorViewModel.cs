@@ -12,6 +12,7 @@ namespace BookStore.Website.Areas.Admin.Models
     public class AuthorViewModel : BaseViewModel
     {
         public int AuthorId { get; set; }
+        public int? BookId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập họ và tên lót")]
         [StringLength(25, MinimumLength = 3, ErrorMessage = "Bạn phải nhập từ {1} đến {0}")]
@@ -36,6 +37,7 @@ namespace BookStore.Website.Areas.Admin.Models
 
         [Display(Name = "Mô tả")]
         public string? Decription { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public CreateAuthorRequest ToCreateCommand()
         {
