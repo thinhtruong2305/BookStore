@@ -67,7 +67,10 @@ namespace BookStore.Website.Areas.Admin.Controllers
                     ạuthorResult = await mediator.Send(model.ToCreateCommand());
                     authorSave = ạuthorResult.Data;
                 }
-                authorSave = author;
+                else
+                {
+                    authorSave = author;
+                }
                 if (model.BookId != 0)
                 {
                     var book = database.Books

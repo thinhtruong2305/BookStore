@@ -51,42 +51,7 @@
                             <label class="form-check-label" asp-for="RememberMe"></label>
                         </div>
                         <hr />
-                        @{
-                            var schemes = await SignInManager.GetExternalAuthenticationSchemesAsync();
-                            var loginProviders = schemes.ToList();
-                            if (loginProviders.Count == 0)
-                            {
-                            }
-                            else
-                            {
-                                <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
-                                    <div>
-                                        <p>
-                                            @foreach (var provider in loginProviders)
-                                            {
-                                                var cssClass = "btn btn-user btn-block";
-                                                var icon = "";
-                                                if (provider.Name == "Google")
-                                                {
-                                                    cssClass = "btn btn-google btn-user btn-block";
-                                                    icon = "<i class=\"fab fa-google\"></i>";
-                                                }
-                                                else if (provider.Name == "Facebook")
-                                                {
-                                                    cssClass = "btn btn-facebook btn-user btn-block";
-                                                    icon = "<i class=\"fab fa-facebook\"></i>";
-                                                }
-                                                <button type="submit" class="@cssClass"
-                                                name="provider" value="@provider.Name"
-                                                title="Log in using your @provider.Name account">
-                                                    @Html.Raw(icon) @provider.Name
-                                                </button>
-                                            }
-                                        </p>
-                                    </div>
-                                </form>
-                            }
-                        }
+                        @await Html.PartialAsync("~/Areas/Identity/Views/Shared/PartialView/_ExternalLoginPartialView.cshtml")
                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                             <button type="submit" class="btn btn-primary btn-user btn-block">Đăng nhập</button>
                         </div>

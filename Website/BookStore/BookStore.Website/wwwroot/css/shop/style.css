@@ -2309,7 +2309,59 @@ button#btn-signup {
     -moz-opacity: 0;
     filter: alpha(opacity=0);
 }
+.input-email{
+    padding: 15px;
+    padding-left: 10px;
+    width: 30%;
+}
+.button-email{
+    padding:25px;
+    line-height:0;
+}
+.form-email{
+    width: 70%;
+    margin: 0 auto;
+}
+.tab1 p {
+    margin-top: 10px;
+    word-spacing: 5px;
+}
 
+.tab2 .content {
+    padding: 5px;
+    color: #FFF;
+    margin: 5px;
+    background-color: #E5F3FF;
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+.tab2 .content p {
+    padding: 5px;
+    color: #000;
+    margin: 5px;
+    background-color: #E5F3FF;
+    margin: 0px auto;
+    text-align: center;
+}
+
+.tab2 .content button {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background-color: #0088FF;
+    border: none;
+    border-radius: 2px;
+    line-height: 2;
+}
+
+.tab3 {
+    margin: 15px;
+    padding-top: 20px;
+    border: none;
+}
 /*-- //bottom-to-top --*/
 
 /* -- Responsive code -- */

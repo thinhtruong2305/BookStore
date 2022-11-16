@@ -57,17 +57,17 @@ namespace BookStore.Logic.Queries.Implement
         public AuthorDetailModel? GetDetail(int AuthorId)
         {
             return database.Authors
-                .Where(a => a.Status != Common.Shared.Model.Status.Delete)
+                .Where(a => (a.Status != Common.Shared.Model.Status.Delete) && (a.AuthorId == AuthorId))
                 .Select(a => mapper.Map<AuthorDetailModel>(a))
-                .FirstOrDefault(a => a.AuthorId == AuthorId);
+                .FirstOrDefault();
         }
 
         public Task<AuthorDetailModel?> GetDetailAsync(int AuthorId)
         {
             return database.Authors
-                .Where(a => a.Status != Common.Shared.Model.Status.Delete)
+                .Where(a => (a.Status != Common.Shared.Model.Status.Delete) && (a.AuthorId == AuthorId))
                 .Select(a => mapper.Map<AuthorDetailModel>(a))
-                .FirstOrDefaultAsync(a => a.AuthorId == AuthorId);
+                .FirstOrDefaultAsync();
         }
 
         public Author? GetAuthorByName(string FirstName, string LastName)

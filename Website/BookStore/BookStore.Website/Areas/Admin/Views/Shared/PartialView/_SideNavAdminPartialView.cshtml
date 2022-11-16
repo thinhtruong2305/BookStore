@@ -3,11 +3,15 @@
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" asp-action="Index" asp-controller="Home" asp-area="Admin">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                Dashboard
+                Trang chính
             </a>
             <div class="sb-sidenav-menu-heading">Quản lý</div>
+            <a class="nav-link" asp-action="Index" asp-controller="Category" asp-area="Admin">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-folder"></i></div>
+                Danh mục
+            </a>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSach" aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                 Sách

@@ -1,0 +1,113 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Identity
+@using BookStore.Website.Areas.Identity.Models.Account
+@using BookStore.DAL.Entities
+
+@model RegisterViewModel
+@inject SignInManager<User> SignInManager
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                <div class="card-body">
+                    @{
+                        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                        {
+                            var messages = Model.ErrorMessage.Split("/r/n");
+                            <ul>
+                                @foreach (var message in messages)
+                                {
+                                    @if (!string.IsNullOrEmpty(message))
+                                    {
+                                        <li class="text-danger mb-1">@message</li>
+                                    }
+                                }
+                            </ul>
+                        }
+                    }
+                    <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" enctype="multipart/form-data" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="FirstName" placeholder="name@example.com" />
+                                    <label asp-for="FirstName"></label>
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="LastName" placeholder="name@example.com" />
+                                    <label asp-for="LastName"></label>
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="DateOfBirth" placeholder="name@example.com" />
+                                    <label asp-for="DateOfBirth"></label>
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="Address" placeholder="name@example.com" />
+                                    <label asp-for="Address"></label>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="UserName" placeholder=" " />
+                                    <label asp-for="UserName"></label>
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="Email" placeholder="name@example.com" />
+                                    <label asp-for="Email"></label>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" asp-for="Password" placeholder="name@example.com" />
+                                    <label asp-for="Password"></label>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-2">
+                                <input class="form-control" asp-for="ConfirmPassword" placeholder="name@example.com" />
+                                <label asp-for="ConfirmPassword"></label>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            </div>
+                        </div>
+                        <hr />
+                        @await Html.PartialAsync("~/Areas/Identity/Views/Shared/PartialView/_ExternalLoginPartialView.cshtml")
+                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button type="submit" class="btn btn-primary btn-user btn-block">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <div class="text-center">
+                        <a class="small" asp-action="ForgotPassword">Quên mật khẩu?</a>
+                        &middot;
+                        <a class="small" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Chưa có tài khoản? Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

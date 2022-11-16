@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BookStore.Logic.Queries.Implement
 {
@@ -136,6 +138,7 @@ namespace BookStore.Logic.Queries.Implement
                         .ThenInclude(ep => ep.Publisher)
                 .Include(b => b.Info)
                     .ThenInclude(info => info.TagInfos)
+                .Include(b => b.BookImages)
                 .Select(b => mapper.Map<BookDetailClientModel>(b))
                 .FirstOrDefault();
         }
@@ -209,6 +212,67 @@ namespace BookStore.Logic.Queries.Implement
                .Include(b => b.Info)
                     .ThenInclude(info => info.TagInfos)
                .FirstOrDefaultAsync(b => b.Edition.ISBN == ISBN);
+        }
+
+        public Book? GetBookByTitleAndVolumNumber(string Title, int volume)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .Include(b => b.AuthorBooks)
+               .Include(b => b.Edition)
+               .Include(b => b.Info)
+               .Include(b => b.BookImages)
+               .Include(b => b.Category)
+               .FirstOrDefault(b => b.Title == Title && b.Info.VolumeNumber == volume);
+        }
+
+        public Task<Book?> GetBookByTitleAndVolumNumberAsync(string Title, int volume)
+        {
+            return database.Books
+               .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+               .FirstOrDefaultAsync(b => b.Title == Title && b.Info.VolumeNumber == volume);
+        }
+
+        public BasePaging<BookSummaryClientModel> GetAllClientPaging(BaseQuery query)
+        {
+            var books = database.Books.
+                Where(b => (b.Title!.Contains(query.Keywords ?? string.Empty) ||
+                            b.Decription!.Contains(query.Keywords ?? string.Empty)) &&
+                b.Status != Status.Delete)
+            .Skip(((query.PageIndex - 1) * query.PageSize) ?? 0).Take((query.PageSize * query.PageIndex) ?? 20)
+            .Select(x => mapper.Map<BookSummaryClientModel>(x))
+            .ToList();
+            var postCount = database.Books.Count();
+
+            return new BasePaging<BookSummaryClientModel>()
+            {
+                Items = books,
+                PageSize = query.PageSize ?? 1,
+                PageIndex = query.PageIndex ?? 20,
+                TotalItem = postCount,
+                TotalPage = (int)Math.Ceiling((double)postCount / (query.PageSize ?? 20))
+            };
+        }
+
+        public Task<BasePaging<BookSummaryClientModel>> GetAllClientPagingAsync(BaseQuery query)
+        {
+            var books = database.Books.
+                Where(b => (b.Title!.Contains(query.Keywords ?? string.Empty) ||
+                            b.Decription!.Contains(query.Keywords ?? string.Empty)) &&
+                b.Status != Status.Delete)
+            .Skip(((query.PageIndex - 1) * query.PageSize) ?? 0).Take((query.PageSize * query.PageIndex) ?? 20)
+            .Select(x => mapper.Map<BookSummaryClientModel>(x))
+            .ToList();
+            var postCount = database.Books.Count();
+
+            return Task.FromResult(new BasePaging<BookSummaryClientModel>()
+            {
+                Items = books,
+                PageSize = query.PageSize ?? 1,
+                PageIndex = query.PageIndex ?? 20,
+                TotalItem = postCount,
+                TotalPage = (int)Math.Ceiling((double)postCount / (query.PageSize ?? 20))
+            });
         }
     }
 }

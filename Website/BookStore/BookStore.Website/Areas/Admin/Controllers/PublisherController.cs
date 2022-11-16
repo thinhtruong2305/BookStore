@@ -83,9 +83,10 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddPublisherToSession()
+        public IActionResult AddPublisherToSession(string returnUrl)
         {
             PublisherViewModel model = new PublisherViewModel();
+            model.ReturnUrl = returnUrl;
             return View(model);
         }
 
@@ -112,9 +113,8 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 list.Add(model);
                 string publishers = JsonConvert.SerializeObject(list);
                 session.SetString(PUBLISHERS, publishers);
-                return View("~/Areas/Admin/Views/Book/Create.cshtml");
             }
-            return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddPublisherToSession", model) });
+            return LocalRedirect(model.ReturnUrl ?? "/Admin");
         }
 
         public async Task<IActionResult> DeletePublisherFromBookAsync(string returnUrl, int id, int PublisherId, int EditionId)
@@ -147,7 +147,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
                     }
                 }
             }
-            return LocalRedirect(returnUrl ?? "/");
+            return LocalRedirect(returnUrl ?? "/Admin");
         }
 
         [HttpGet]

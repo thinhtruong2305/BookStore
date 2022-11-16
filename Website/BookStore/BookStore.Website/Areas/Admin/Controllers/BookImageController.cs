@@ -53,7 +53,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(BookImageViewModel model)
+        public async Task<IActionResult> CreateAsync(BookImageViewModel model, string ReturnUrl, int BookId, IFormFile FileUpLoad)
         {
             if (ModelState.IsValid)
             {
@@ -62,11 +62,15 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 if (bookImage == null)
                 {
                     var bookImageResult = new BaseCommandResultWithData<BookImage>();
+                    string path = await storageService.SaveFile(FileUpLoad);
+                    model.FilePath = path;
+                    string decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                    model.Decription = decodedHtml;
                     bookImageResult = await mediator.Send(model.ToCreateCommand());
                     bookImageSave = bookImageResult.Data;
                 }
                 bookImageSave = bookImage;
-                if (model.BookId != 0)
+                if (BookId != 0)
                 {
                     var book = database.Books
                          .Where(i => i.Status != Status.Delete)
@@ -79,19 +83,20 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 }
             }
             database.SaveChanges();
-            return LocalRedirect(model.ReturnUrl);
+            return LocalRedirect(ReturnUrl);
         }
 
         [HttpGet]
-        public IActionResult AddBookImageToSession()
+        public IActionResult AddBookImageToSession(string returnUrl)
         {
             BookImageViewModel model = new BookImageViewModel();
+            model.ReturnUrl = returnUrl;
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddBookImageToSession([FromForm] BookImageViewModel model, IFormFile FileUpLoad)
+        public async Task<IActionResult> AddBookImageToSession(BookImageViewModel model, string ReturnUrl, IFormFile FileUpLoad)
         {
             if (FileUpLoad != null)
             {
@@ -117,14 +122,13 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 model.Decription = decodedHtml;
                 list.Add(model);
                 string bookImages = JsonConvert.SerializeObject(list);
-                session.SetString(BOOKIMAGES, bookImages);
-                return View("~/Areas/Admin/Views/Book/Create.cshtml");
+                session.SetString(BOOKIMAGES, bookImages);  
             }
-            return Json(new { isValid = false, html = AppGlobal.RenderRazorViewToString(this, "AddBookImageToSession", model) });
+            return LocalRedirect(ReturnUrl ?? "/Admin");
         }
 
         [HttpGet]
-        public async Task<IActionResult> DeleteBookImageFromBook(string returnUrl, int id, int BookImageId)
+        public async Task<IActionResult> DeleteBookImageFromBookAsync(string returnUrl, int id, int BookImageId)
         {
             var session = HttpContext.Session;
             string? bookImagesGet = session.GetString(BOOKIMAGES);

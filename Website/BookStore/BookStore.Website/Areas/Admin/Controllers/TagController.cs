@@ -118,7 +118,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 string tags = JsonConvert.SerializeObject(list);
                 session.SetString(TAGS, tags);
             }
-            return LocalRedirect(model.ReturnUrl);
+            return LocalRedirect(model.ReturnUrl ?? "/Admin");
         }
 
         [HttpGet]
@@ -152,7 +152,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
                     }
                 }
             }
-            return LocalRedirect(returnUrl ?? "/");
+            return LocalRedirect(returnUrl ?? "/Admin");
         }
 
         [HttpGet]

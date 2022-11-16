@@ -1,0 +1,190 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using BookStore.Website.Areas.Admin.Models
+@using BookStore.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Newtonsoft.Json;
+@model OrderViewModel
+
+@{
+    ViewData["Title"] = "SingleProduct";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+@{
+    List<OrderDetail>? listOrderDetail = new List<OrderDetail>();
+}
+@{
+    string? orderDetails = HttpContextAccessor.HttpContext?.Session.GetString("carts");
+    if (orderDetails != null)
+        listOrderDetail = JsonConvert.DeserializeObject<List<OrderDetail>>(orderDetails);
+}
+<!--checkout-->
+<div class="innerf-pages section">
+    <div class="container">
+        <div class="privacy about">
+            <h4 class="rad-txt">
+                <span class="abtxt1">review</span>
+                <span class="abtext">your order</span>
+            </h4>
+            <div class="checkout-right">
+                <h4>
+                    Your shopping cart contains:
+                    @if(listOrderDetail != null)
+                    {
+                        <span>@listOrderDetail.Count Products</span>
+                    }
+                    else
+                    {
+                        <span>0 Products</span>
+                    }
+                </h4>
+                <table class="timetable_sub table-responsive">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Hình ảnh</th>
+                            <th>Số lượng</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (listOrderDetail != null)
+                        {
+                            @for(int i = 0; i < listOrderDetail.Count; i++)
+                            {
+                                <tr class="rem">
+                                    <td class="invert">@i<input type="hidden" asp-for="@listOrderDetail[i].BookId"/></td>
+                                    <td class="invert-image">
+                                        <a asp-controller="Shop" asp-action="SingleProduct" asp-route-Slug="@listOrderDetail[i].Book.Slug" asp-route-id="@listOrderDetail[i].Book.BookId">
+                                            @{
+                                                var image = listOrderDetail[i].Book.BookImages.FirstOrDefault();
+                                                if (image != null)
+                                                {
+                                                            <img src="@image.FilePath" alt="@image.Decription">
+                                                }
+                                                else
+                                                {
+                                                            <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="unknow">
+                                                }
+                                            }
+                                        </a>
+                                    </td>
+                                    <td class="invert">
+                                        <div class="quantity">
+                                            <div class="quantity-select">
+                                                <div class="entry value-minus">
+                                                    <form action="#" method="post">
+                                                        <input type="hidden" name="cmd" value="_cart">
+                                                        <input type="hidden" name="add" value="1">
+                                                        <input type="hidden" name="quantity" value="-1">
+                                                        <input type="hidden" name="chr_item" value="@listOrderDetail[i].Book.Title @listOrderDetail[i].Book.Info.VolumeNumber">
+                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Payment">
+                                                        <input type="hidden" name="currency_code" value="VND">
+                                                        <button type="submit" class="entry value-minus">&nbsp;</button>
+                                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                    </form>
+                                                </div>
+                                                <div class="entry value">
+                                                    <span>@listOrderDetail[i].Quantity</span>
+                                                </div>
+                                                <div class="entry value-plus active">
+                                                    <form action="#" method="post">
+                                                        <input type="hidden" name="cmd" value="_cart">
+                                                        <input type="hidden" name="add" value="1">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <input type="hidden" name="chr_item" value="@listOrderDetail[i].Book.Title @listOrderDetail[i].Book.Info.VolumeNumber">
+                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Payment">
+                                                        <input type="hidden" name="currency_code" value="VND">
+                                                        <button type="submit" class="entry value-plus">&nbsp;</button>
+                                                        <a href="#" data-toggle="modal" data-target="#myModal1"></a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="invert">@listOrderDetail[i].Book.Title</td>
+                                    <td class="invert">
+                                        @if (listOrderDetail[i].Payment == listOrderDetail[i].DiscountPrice)
+                                        {
+											@listOrderDetail[i].Payment;
+										}
+										else{
+											@listOrderDetail[i].DiscountPrice;
+										}
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="checkout-left">
+                <div class="col-md-4 checkout-left-basket">
+                    <h4>Continue to basket</h4>
+                    <ul>
+                    @if (listOrderDetail != null)
+                        {
+                            @foreach (var item in listOrderDetail)
+                            {
+                                <li>
+                                    @item.Book.Title
+                                    <i>-</i>
+                                    <span>$
+                                        @if (item.Payment == item.DiscountPrice)
+                                        {
+                                            @item.Payment;
+                                        }
+                                        else
+                                        {
+                                            @item.DiscountPrice;
+                                        }
+                                    </span>
+                                </li>
+                            }
+                            <li>
+                                Total
+                                <i>-</i>
+                                <span>$@listOrderDetail.Select(od => od.Payment == od.DiscountPrice ? od.Payment : od.DiscountPrice).Sum()</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-8 address_form">
+                    <h4>Billing Address</h4>
+                    <form asp-action="Create" asp-controller="Order" asp-area="Admin" method="post" class="creditly-card-form shopf-sear-headinfo_form">
+                        <input type="hidden" asp-for="TotalPrice" value="@listOrderDetail.Select(od => od.Payment).Sum()" />
+                        <div class="creditly-wrapper wrapper">
+                            <div class="information-wrapper">
+                                <div class="first-row form-group">
+                                    <div class="controls">
+                                        <label class="control-label" asp-for="ShipName"></label>
+                                        <input required class="billing-address-name form-control" type="text" asp-for="ShipName" placeholder="Họ và tên">
+                                    </div>
+                                    <div class="card_number_grids">
+                                        <div class="card_number_grid_left">
+                                            <div class="controls">
+                                                <label class="control-label" asp-for="ShipPhone"></label>
+                                                <input required class="form-control" type="text" asp-for="ShipPhone" placeholder="Số điện thoại">
+                                            </div>
+                                        </div>
+                                        <div class="card_number_grid_right">
+                                            <div class="controls">
+                                                <label class="control-label" asp-for="ShipAdress"></label>
+                                                <input required class="form-control" type="text" asp-for="ShipAdress" placeholder="Địa chỉ">
+                                            </div>
+                                        </div>
+                                        <div class="clear"> </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="submit check_out">place order</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--//checkout-->

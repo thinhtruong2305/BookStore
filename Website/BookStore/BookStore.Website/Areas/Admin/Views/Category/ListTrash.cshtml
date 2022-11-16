@@ -1,0 +1,29 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@using BookStore.Common.Shared.Model
+@model IEnumerable<CategorySummaryModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@if (Model != null)
+{
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Name</td>
+            <td>@category.Keyword</td>
+            <td>
+                <button class="btn btn-danger" onclick="Recovery('@Url.Action("ReTrash", "Book", new {@id = category.CategoryId})', '@Url.Action("ListTrash", "Book")')">
+                    <i class="fa-solid fa-trash-can-undo"></i>
+                </button>
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Detail" asp-controller="Category" asp-route-id="@category.CategoryId">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <button class="btn btn-danger" onclick="OnRemove('@Url.Action("Remove", "Book", new{@id = category.CategoryId})', '@Url.Action("ListTrash", "Book")')">
+                    <i class="fa-solid fa-eraser"></i>
+                </button>
+            </td>
+        </tr>
+    }
+}

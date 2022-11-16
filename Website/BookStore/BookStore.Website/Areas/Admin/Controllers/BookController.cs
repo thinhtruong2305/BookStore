@@ -3,6 +3,7 @@ using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Queries.Implement;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Logic.Shared.Model;
@@ -13,6 +14,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using System.Data;
@@ -27,6 +29,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
     {
         private readonly IBookQueries bookQueries;
         private readonly ITagQueries tagQueries;
+        private readonly ICategoryQueries categoryQueries;
         private readonly IPublisherQueries publisherQueries;
         private readonly IAuthorQueries authorQueries;
         private readonly IBookImageQueries bookImageQueries;
@@ -40,6 +43,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
 
         public BookController(IBookQueries bookQueries,
             ITagQueries tagQueries,
+            ICategoryQueries categoryQueries,
             IPublisherQueries publisherQueries,
             IAuthorQueries authorQueries,
             IBookImageQueries bookImageQueries,
@@ -49,6 +53,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
         {
             this.bookQueries = bookQueries;
             this.tagQueries = tagQueries;
+            this.categoryQueries = categoryQueries;
             this.publisherQueries = publisherQueries;
             this.authorQueries = authorQueries;
             this.bookImageQueries = bookImageQueries;
@@ -115,6 +120,10 @@ namespace BookStore.Website.Areas.Admin.Controllers
         public IActionResult Create()
         {
             BookViewModel model = new BookViewModel();
+            if (categoryQueries.GetAll().Count > 0)
+            {
+                model.Categories = categoryQueries.GetAll();
+            }
             return View(model);
         }
 
@@ -241,7 +250,7 @@ namespace BookStore.Website.Areas.Admin.Controllers
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
             }
-            return View("Create");
+            return View("Create", model);
         }
 
         [HttpGet]
@@ -268,13 +277,49 @@ namespace BookStore.Website.Areas.Admin.Controllers
             var publisherView = mapper.Map<List<PublisherViewModel>>(publisherQueries.GetListPublisherDetailByEditionId(book.Edition.EditionId));
             string publishers = JsonConvert.SerializeObject(publisherView);
             session.SetString(PUBLISHERS, publishers);
-
+            if (categoryQueries.GetAll().Count > 0)
+            {
+                model.Categories = categoryQueries.GetAll();
+            }
             return View(model);
         }
         [HttpPost]
-        public IActionResult Update(BookViewModel model)
+        public async Task<IActionResult> UpdateAsync(BookViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                model.SetFromContext(HttpContext);
+                model.InfoViewModel.SetFromContext(HttpContext);
+                model.EditionViewModel.SetFromContext(HttpContext);
+                model.SeriesViewModel.SetFromContext(HttpContext);
+                //Command result
+                var bookResult = new BaseCommandResultWithData<Book>();
+                //Không dùng list
+                var infoResult = new BaseCommandResultWithData<Info>();
+                var editionResult = new BaseCommandResultWithData<Edition>();
+                var seriesResult = new BaseCommandResultWithData<Series>();
+
+                seriesResult = await mediator.Send(model.SeriesViewModel.ToUpdateCommand());
+                if (seriesResult.Success)
+                {
+                    infoResult = await mediator.Send(model.InfoViewModel.ToUpdateCommand(seriesResult.Data.SeriesId));
+                }
+                editionResult = await mediator.Send(model.EditionViewModel.ToUpdateCommand(model.BookId));
+                if (editionResult.Success && infoResult.Success)
+                {
+                    string? decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                    model.Decription = decodedHtml;
+                    bookResult = await mediator.Send(model.ToUpdateCommand(infoResult.Data.InfoId, model.CategoryId));
+                }
+                database.SaveChanges();
+                ClearSessionCreatBook();
+                return RedirectToAction("Index", "Book");
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+            }
+            return View("Create", model);
         }
 
         [HttpGet]
@@ -414,7 +459,6 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 }
             }
         }
-
         public void ClearSessionCreatBook()
         {
             var session = HttpContext.Session;

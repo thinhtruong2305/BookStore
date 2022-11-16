@@ -4,6 +4,7 @@ using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
@@ -31,13 +32,14 @@ namespace BookStore.Logic.Command.Handler
             {
                 var info = database.Infos
                     .Where(info => info.Status != Status.Delete)
+                    .AsNoTracking()
                     .FirstOrDefault(info => info.InfoId == request.InfoId);
 
                 if(info != null)
                 {
-                    mapper.Map(request, info);
-                    info.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.Infos.Update(info);
+                    var infoSave = mapper.Map(request, info);
+                    infoSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
+                    database.Infos.Update(infoSave);
 
                     result.Success = true;
                     result.Data = info;

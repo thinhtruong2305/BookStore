@@ -17,13 +17,16 @@ namespace BookStore.Logic.Shared.Model
         public int? DiscountPercent { get; set; }
         public decimal Price { get; set; }
         public decimal DiscountPrice { get; set; }
+        public string Language { get; set; }
         public string Format { get; set; }
         public string PrintRunSize { get; set; }
+        public DateTime PublicationDate { get; set; }
         public int? Pages { get; set; }
         public int VolumeNumber { get; set; }
         public List<EditionPublisher> EditionPublisher { get; set; }
         public List<TagInfo> TagInfos { get; set; }
         public List<AuthorBook> AuthorBooks { get; set; }
         public List<BookImage> BookImages { get; set; }
+        public List<Rating> Ratings { get; set; }
     }
 }

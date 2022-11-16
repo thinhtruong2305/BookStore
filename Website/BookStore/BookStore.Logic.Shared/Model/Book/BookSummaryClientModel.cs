@@ -19,5 +19,9 @@ namespace BookStore.Logic.Shared.Model
         public decimal Price { get; set; }
         public decimal DiscountPrice { get; set; }
         public List<BookImage> BookImages { get; set; }
+        public List<AuthorBook> AuthorBooks { get; set; }
+        public Category Category { get; set; }
+        public Info Info { get; set; }
+        public List<Rating> Ratings { get; set; }
     }
 }

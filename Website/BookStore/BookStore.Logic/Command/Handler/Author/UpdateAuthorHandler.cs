@@ -36,12 +36,11 @@ namespace BookStore.Logic.Command.Handler
 
                 if(author != null)
                 {
-                    mapper.Map(request, author);
-                    author.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.Update(author);
+                    var authorSave = mapper.Map(request, author);
+                    authorSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
 
                     result.Success = true;
-                    result.Data = author;
+                    result.Data = database.Update(authorSave);
                 }
                 else
                 {

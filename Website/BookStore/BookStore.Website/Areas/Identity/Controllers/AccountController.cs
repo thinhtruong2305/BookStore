@@ -163,7 +163,7 @@ namespace BookStore.Website.Areas.Identity.Controllers
 
                     await emailSender.SendEmailAsync(model.Email,
                         "Xác nhận địa chỉ email",
-                        @$"Bạn đã đăng ký tài khoản trên RazorWeb, 
+                        @$"Bạn đã đăng ký tài khoản trên BookStore, 
                            hãy <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>bấm vào đây</a> 
                            để kích hoạt tài khoản.");
 

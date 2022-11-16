@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL.Entities;
+using BookStore.Logic.Command.Request;
 using BookStore.Logic.Shared.Model;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,17 @@ namespace BookStore.Logic.MappingProfile
             CreateMap<Series, SeriesDetailModel>()
                 .ForMember(dest => dest.AuthorBooks, opt => opt.MapFrom(src => src.info.Book.AuthorBooks))
                 .ReverseMap();
+
+            //Map phần này cho phần Create Update Delete
+            //Create
+            CreateMap<CreateSeriesRequest, Series>();
+
+            //Update
+            CreateMap<UpdateSeriesRequest, Series>();
+
+            //Delete
+            CreateMap<DeleteSeriesRequest, Series>()
+                .ForMember(dest => dest.SeriesId, opt => opt.MapFrom(src => src.Id));
         }
     }
 }

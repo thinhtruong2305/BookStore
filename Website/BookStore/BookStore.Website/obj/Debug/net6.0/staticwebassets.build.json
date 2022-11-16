@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iwbt/Jps46stIzhP9N0tuP+/S5+rbIAx65i18TS6PdU=",
+  "Hash": "Plpi9wW90FWECDzvvsgKukanAx7bzcFH4D/tDdK2CGk=",
   "Source": "BookStore.Website",
   "BasePath": "_content/BookStore.Website",
   "Mode": "Default",
@@ -8602,12 +8602,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\21c4a260-ddb2-41d6-8d69-65b812897529.png",
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\389d4db0-c01a-4232-b642-85166293ee0f.png",
       "SourceId": "BookStore.Website",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
       "BasePath": "_content/BookStore.Website",
-      "RelativePath": "uploads/21c4a260-ddb2-41d6-8d69-65b812897529.png",
+      "RelativePath": "uploads/389d4db0-c01a-4232-b642-85166293ee0f.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -8616,15 +8616,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\21c4a260-ddb2-41d6-8d69-65b812897529.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\389d4db0-c01a-4232-b642-85166293ee0f.png"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\4192fc5f-c191-4144-b6d2-79051dcb0244.png",
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\4de05699-c4e9-48f2-93af-09e322d2c69e.png",
       "SourceId": "BookStore.Website",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
       "BasePath": "_content/BookStore.Website",
-      "RelativePath": "uploads/4192fc5f-c191-4144-b6d2-79051dcb0244.png",
+      "RelativePath": "uploads/4de05699-c4e9-48f2-93af-09e322d2c69e.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -8633,15 +8633,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\4192fc5f-c191-4144-b6d2-79051dcb0244.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\4de05699-c4e9-48f2-93af-09e322d2c69e.png"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\bf53db88-00c9-4c75-93f0-9da1b80edac3.png",
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\58441827-3f53-4444-9aa3-4a430d935fc2.png",
       "SourceId": "BookStore.Website",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
       "BasePath": "_content/BookStore.Website",
-      "RelativePath": "uploads/bf53db88-00c9-4c75-93f0-9da1b80edac3.png",
+      "RelativePath": "uploads/58441827-3f53-4444-9aa3-4a430d935fc2.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -8650,15 +8650,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\bf53db88-00c9-4c75-93f0-9da1b80edac3.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\58441827-3f53-4444-9aa3-4a430d935fc2.png"
     },
     {
-      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\f5682efe-4971-4f7d-9d0e-3d41543ea58a.png",
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\6adf4483-dac7-4162-ad57-8197c8239db5.png",
       "SourceId": "BookStore.Website",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
       "BasePath": "_content/BookStore.Website",
-      "RelativePath": "uploads/f5682efe-4971-4f7d-9d0e-3d41543ea58a.png",
+      "RelativePath": "uploads/6adf4483-dac7-4162-ad57-8197c8239db5.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -8667,7 +8667,41 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\f5682efe-4971-4f7d-9d0e-3d41543ea58a.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\6adf4483-dac7-4162-ad57-8197c8239db5.png"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\6b3ed7cd-a9a0-4767-91b1-586c2e4b84f2.png",
+      "SourceId": "BookStore.Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
+      "BasePath": "_content/BookStore.Website",
+      "RelativePath": "uploads/6b3ed7cd-a9a0-4767-91b1-586c2e4b84f2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6b3ed7cd-a9a0-4767-91b1-586c2e4b84f2.png"
+    },
+    {
+      "Identity": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\uploads\\b3f60491-bf1d-4a51-ab36-3afa000aa0ce.png",
+      "SourceId": "BookStore.Website",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\wwwroot\\",
+      "BasePath": "_content/BookStore.Website",
+      "RelativePath": "uploads/b3f60491-bf1d-4a51-ab36-3afa000aa0ce.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\b3f60491-bf1d-4a51-ab36-3afa000aa0ce.png"
     }
   ]
 }

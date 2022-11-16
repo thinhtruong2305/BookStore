@@ -14,6 +14,7 @@ namespace BookStore.Logic
         public static IServiceCollection AddQueries(this IServiceCollection services)
         {
             services.AddScoped<IBookQueries, BookQueries>();
+            services.AddScoped<ICategoryQueries, CategoryQueries>();
             services.AddScoped<IBookImageQueries, BookImageQueries>();
             services.AddScoped<IAuthorQueries, AuthorQueries>();
             services.AddScoped<IAuthorQueries, AuthorQueries>();

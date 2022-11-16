@@ -30,11 +30,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var orderDetail = mapper.Map<OrderDetail>(request);
                 orderDetail.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
-                database.OrderDetails.Add(orderDetail);
-                database.SaveChanges();
 
                 result.Success = true;
-                result.Data = orderDetail;
+                result.Data = database.OrderDetails.Add(orderDetail);
             }
             catch (Exception e)
             {

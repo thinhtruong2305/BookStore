@@ -90,7 +90,7 @@
                                                             {
                                                                 <!-- Product actions-->
                                                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
                                                                         <i class="fa-solid fa-circle-xmark"></i>
                                                                     </a>
                                                                 </div>
@@ -99,7 +99,7 @@
                                                             {
                                                                 <!-- Product actions-->
                                                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
                                                                         <i class="fa-solid fa-circle-xmark"></i>
                                                                     </a>
                                                                 </div>
@@ -115,7 +115,7 @@
                                             </div>
                                         }
                                         <div class="m-2 float-start">
-                                            <a onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                            <a onclick="AddCreateThingToBook('@Url.Action("AddBookImageToSession", "BookImage", new{returnUrl = Url.Action("Create", "Book")})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </a>
                                         </div>
@@ -160,7 +160,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="container">
-                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromSession" asp-controller="Author" asp-route-id="@i">
+                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromBook" asp-controller="Author" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i">
                                                         <i class="fa-solid fa-x"></i>
                                                     </a>
                                                 </div>
@@ -170,7 +170,7 @@
                                 }
                             }
                         </div>
-                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddAuthorToSession", "Author")', 'Thêm tác giả')">
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddAuthorToSession", "Author", new{returnUrl = Url.Action("Create", "Book")})', 'Thêm tác giả')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -200,7 +200,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="container">
-                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromSession" asp-controller="Publisher" asp-route-id="@i">
+                                                    <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromBook" asp-controller="Publisher" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i">
                                                         <i class="fa-solid fa-x"></i>
                                                     </a>
                                                 </div>
@@ -210,7 +210,7 @@
                                 }
                             }
                         </div>
-                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddPublisherToSession", "Publisher")', 'Thêm nhà xuất bản')">
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("AddPublisherToSession", "Publisher", new{returnUrl = Url.Action("Create", "Book")})', 'Thêm nhà xuất bản')">
                             <i class="fa-solid fa-plus"></i>
                         </button>
                     </div>
@@ -284,19 +284,38 @@
                             </div>
                             <div class="col-md-12 mt-2">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
                                         <input maxlength="70" required type="text" asp-for="Title" class="form-control form-input" placeholder=" ">
                                         <label class="form-label" asp-for="Title"></label>
                                         <div class="row">
                                             <span asp-validation-for="Title" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
                                         <input maxlength="60" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
                                         <label class="form-label" for="Keyword" asp-for="Keyword"></label>
                                         <div class="row">
                                             <span asp-validation-for="Keyword" class="text-danger"></span>
                                         </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        @if(Model.Categories != null){
+                                            <select class="form-control form-input" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "CategoryId", "Name"))">
+                                            <option>Chọn danh mục</option>
+                                        </select>
+                                        <div class="row">
+                                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <select class="form-control form-input" asp-for="CategoryId">
+                                                <option value="0">Chọn danh mục cha</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                            </div>
+                                        }
                                     </div>
                                     <div class="col-md-12 col-lg-6 form-field p-2">
                                         <input required type="text" asp-for="SeriesViewModel.SeriesName" class="form-control form-input" placeholder=" ">
@@ -314,9 +333,10 @@
                                     </div>
                                     <div class="col-md-12 col-lg-12 form-field mt-3">
                                         <label for="Decription">Mô tả</label>
-                                        <input type="text" asp-for="Decription" class="form-control form-input" placeholder=" ">
+                                        <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
                                         <script>
-                                            CKEDITOR.replace("Decription");
+                                            // Replace all three <textarea> elements above with CKEditor instances.
+                                            CKEDITOR.replaceAll();
                                         </script>
                                     </div>
                                 </div>

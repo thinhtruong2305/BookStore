@@ -69,23 +69,23 @@ namespace BookStore.Logic.Queries.Implement
         public SeriesDetailModel? GetDetail(int SeriesId)
         {
             return database.Series
-                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Where(s => (s.Status != Common.Shared.Model.Status.Delete) && (s.SeriesId == SeriesId))
                 .Include(s => s.info)
                     .ThenInclude(info => info.Book)
                         .ThenInclude(b => b.AuthorBooks)
                 .Select(s => mapper.Map<SeriesDetailModel>(s))
-                .FirstOrDefault(s => s.SeriesId == SeriesId);
+                .FirstOrDefault();
         }
 
         public Task<SeriesDetailModel?> GetDetailAsync(int SeriesId)
         {
             return database.Series
-                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Where(s => (s.Status != Common.Shared.Model.Status.Delete) && (s.SeriesId == SeriesId))
                 .Include(s => s.info)
                     .ThenInclude(info => info.Book)
                         .ThenInclude(b => b.AuthorBooks)
                 .Select(s => mapper.Map<SeriesDetailModel>(s))
-                .FirstOrDefaultAsync(s => s.SeriesId == SeriesId);
+                .FirstOrDefaultAsync();
         }
 
         public Series? GetSeriesByName(string SeriesName)

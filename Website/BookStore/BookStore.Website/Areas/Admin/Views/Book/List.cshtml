@@ -18,10 +18,10 @@
                 {
                     if (author != null)
                     {
-                        resultAuthor += author.Author.LastName.ToString() + " " + author.Author.FirstName.ToString() + ", ";
+                        resultAuthor += author.Author.FirstName.ToString() + " " + author.Author.LastName.ToString() + "<br />";
                     }
                 }
-                @resultAuthor
+                @Html.Raw(resultAuthor)
             </td>
             <td>@book.VolumeNumber</td>
             <td>@book.ISBN</td>
@@ -33,10 +33,10 @@
                 {
                     if (publisher != null)
                     {
-                        resultPublisher += publisher.Publisher.PulishingHouse + ", ";
+                        resultPublisher += publisher.Publisher.PulishingHouse + Html.Raw("<br />");
                     }
                 }
-                @resultPublisher
+                @Html.Raw(resultPublisher)
             </td>
             <td>
                 @if (@book.Status == Status.Active)

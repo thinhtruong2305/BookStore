@@ -34,12 +34,11 @@ namespace BookStore.Logic.Command.Handler
 
                 if (tag != null)
                 {
-                    mapper.Map(request, tag);
-                    tag.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.Tags.Update(tag);
+                    var tagSave = mapper.Map<Tag>(request);
+                    tagSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
 
                     result.Success = true;
-                    result.Data = tag;
+                    result.Data = database.Tags.Update(tagSave);
                 }
                 else
                 {

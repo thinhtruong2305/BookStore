@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using BookStore.Website.Areas.Admin.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using BookStore.Website.Areas.Admin.Models.MappingProfile;
+using Microsoft.AspNetCore.Routing.Template;
 
 var builder = WebApplication.CreateBuilder(args);
 

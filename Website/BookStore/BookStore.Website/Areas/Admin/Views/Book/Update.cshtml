@@ -115,9 +115,9 @@
                                             </div>
                                         }
                                         <div class="m-2 float-start">
-                                            <a onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                            <button type="button" onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
                                                 <i class="fa-solid fa-circle-plus"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -141,19 +141,19 @@
                                     {
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <div class="col-md-12 col-lg-5 form-field">
-                                                    <input type="text" asp-for="@listAuthor[i].FirstName" class="form-control form-input" placeholder=" ">
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input readonly type="text" asp-for="@listAuthor[i].FirstName" class="form-control form-input" placeholder=" ">
                                                     <label class="form-label" asp-for="@listAuthor[i].FirstName"></label>
                                                 </div>
-                                                <div class="col-md-12 col-lg-5 form-field">
-                                                    <input type="text" asp-for="@listAuthor[i].LastName" class="form-control form-input" placeholder=" ">
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input readonly type="text" asp-for="@listAuthor[i].LastName" class="form-control form-input" placeholder=" ">
                                                     <label class="form-label" asp-for="@listAuthor[i].LastName"></label>
                                                 </div>
-                                                <div class="col-md-12 col-lg-5 form-field">
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
                                                     <input type="text" asp-for="@listAuthor[i].CountryOfResidence" class="form-control form-input" placeholder=" ">
                                                     <label class="form-label" asp-for="@listAuthor[i].CountryOfResidence"></label>
                                                 </div>
-                                                <div class="col-md-12 col-lg-5 form-field">
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
                                                     <input type="date" asp-for="@listAuthor[i].DateOfBirth" class="form-control form-input" placeholder=" ">
                                                     <label class="form-label" asp-for="@listAuthor[i].DateOfBirth"></label>
                                                 </div>
@@ -300,22 +300,47 @@
                             <div class="col-md-12">
                                 <h2 class="title mb-5">Sách</h2>
                             </div>
+                            <input type="hidden" asp-for="Slug"/>
+                            <input type="hidden" asp-for="BookId"/>
+                            <input type="hidden" asp-for="InfoId"/>
                             <div class="col-md-12 mt-2">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
                                         <input maxlength="70" required type="text" asp-for="Title" class="form-control form-input" placeholder=" ">
                                         <label class="form-label" asp-for="Title"></label>
                                         <div class="row">
                                             <span asp-validation-for="Title" class="text-danger"></span>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
                                         <input maxlength="60" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
                                         <label class="form-label" for="Keyword" asp-for="Keyword"></label>
                                         <div class="row">
                                             <span asp-validation-for="Keyword" class="text-danger"></span>
                                         </div>
                                     </div>
+                                    <input type="hidden" asp-for="Categories"/>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        @if (Model.Categories != null)
+                                        {
+                                            <select class="form-control form-input" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "CategoryId", "Name"))">
+                                                <option>Chọn danh mục</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <select class="form-control form-input" asp-for="CategoryId">
+                                                <option value="0">Chọn danh mục cha</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <input type="hidden" asp-for="SeriesViewModel.SeriesId"/>
                                     <div class="col-md-12 col-lg-6 form-field p-2">
                                         <input required type="text" asp-for="SeriesViewModel.SeriesName" class="form-control form-input" placeholder=" ">
                                         <label class="form-label" asp-for="SeriesViewModel.SeriesName"></label>
@@ -332,9 +357,10 @@
                                     </div>
                                     <div class="col-md-12 col-lg-12 form-field mt-3">
                                         <label for="Decription">Mô tả</label>
-                                        <input type="text" asp-for="Decription" class="form-control form-input" placeholder=" ">
+                                        <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
                                         <script>
-                                            CKEDITOR.replace("Decription");
+                                            // Replace all three <textarea> elements above with CKEditor instances.
+                                            CKEDITOR.replaceAll();
                                         </script>
                                     </div>
                                 </div>
@@ -349,6 +375,7 @@
                     <div id="info" class="container">
                         <h5 class="title">Chi tiết</h5>
                         <div class="row">
+                            <input type="hidden" asp-for="InfoViewModel.InfoId"/>
                             <div class="col-md-12 col-lg-4 form-field p-2">
                                 <input type="text" asp-for="InfoViewModel.DiscountPercent" class="form-control form-input" placeholder=" ">
                                 <label class="form-label" asp-for="InfoViewModel.DiscountPercent"></label>
@@ -379,6 +406,7 @@
                     <div id="edition" class="container">
                         <h5 class="title">Bản quyền</h5>
                         <div class="row">
+                        <input type="hidden" asp-for="EditionViewModel.EditionId"/>
                             <div class="col-md-12 col-lg-4 form-field p-2">
                                 <input required maxlength="14" type="text" asp-for="EditionViewModel.ISBN" class="form-control form-input" placeholder=" ">
                                 <label class="form-label" asp-for="EditionViewModel.ISBN"></label>

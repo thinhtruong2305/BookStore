@@ -9,7 +9,6 @@ body a {
 /*-- / --*/
 
 /*-- checkout --*/
-
 .checkout h2 {
 	font-size: 1em;
 	color: #212121;
@@ -59,10 +58,8 @@ td.invert-image a img {
 	position: relative;
 }
 
-.close1,
-.close2,
-.close3 {
-	background: url('../images/close_1.jpg') no-repeat 0px 0px;
+.close {
+	background: url('../../images/close_1.jpg') no-repeat 0px 0px;
 	cursor: pointer;
 	width: 41px;
 	height: 39px;
@@ -586,9 +583,8 @@ button.submit.check_out:hover {
 /*-- //Pay-page --*/
 
 @media(max-width:991px) {
-	.close1,
-	.close2,
-	.close3 {
+	.close
+	{
 		right: 8px;
 	}
 	.tab-grid {

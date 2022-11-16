@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Shared.Model;
 using BookStore.Utils.Global;
 using BookStore.Website.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace BookStore.Website.Areas.Admin.Models
         //Database Model
         public int BookId { get; set; }
         public int InfoId { get; set; }
+        public int CategoryId { get; set; } = 0;
 
         [Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
         [StringLength(70, MinimumLength = 3, ErrorMessage = "Bạn phải nhập từ {1} đến {0}")]
@@ -37,11 +39,13 @@ namespace BookStore.Website.Areas.Admin.Models
         public SeriesViewModel SeriesViewModel { get; set; }
         public InfoViewModel InfoViewModel { get; set; }
         public EditionViewModel EditionViewModel { get; set; }
+        public List<CategorySummaryModel>? Categories { get; set; }
 
         public CreateBookRequest ToCreateCommand()
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -57,6 +61,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -73,6 +78,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -88,6 +94,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -104,6 +111,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -121,6 +129,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -138,6 +147,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -155,6 +165,8 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateBookRequest
             {
+                CategoryId = CategoryId,
+                InfoId = info.InfoId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -174,6 +186,7 @@ namespace BookStore.Website.Areas.Admin.Models
             return new UpdateBookRequest
             {
                 BookId = BookId,
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
@@ -183,123 +196,18 @@ namespace BookStore.Website.Areas.Admin.Models
                 RequestId = RequestId
             };
         }
-        public UpdateBookRequest ToUpdateCommand(Info info)
+        public UpdateBookRequest ToUpdateCommand(int InfoId, int CategoryId)
         {
             return new UpdateBookRequest
             {
                 BookId = BookId,
+                CategoryId = CategoryId,
                 Title = Title,
                 Keyword = Keyword,
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(Title),
                 Status = Common.Shared.Model.Status.Active,
-                Info = info,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-
-        public UpdateBookRequest ToUpdateCommand(Edition edition)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                Edition = edition,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-        public UpdateBookRequest ToUpdateCommand(List<BookImage> bookImages)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                BookImages = bookImages,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-
-        public UpdateBookRequest ToUpdateCommand(Info info, Edition edition)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                Info = info,
-                Edition = edition,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-
-        public UpdateBookRequest ToUpdateCommand(List<BookImage> bookImages, Edition edition)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                BookImages = bookImages,
-                Edition = edition,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-
-        public UpdateBookRequest ToUpdateCommand(List<BookImage> bookImages, Info info)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                BookImages = bookImages,
-                Info = info,
-                UserName = UserName,
-                IpAddress = IpAddress,
-                RequestId = RequestId
-            };
-        }
-
-        public UpdateBookRequest ToUpdateCommand(Info info, Edition edition, List<BookImage> bookImages)
-        {
-            return new UpdateBookRequest
-            {
-                BookId = BookId,
-                Title = Title,
-                Keyword = Keyword,
-                Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(Title),
-                Status = Common.Shared.Model.Status.Active,
-                Info = info,
-                Edition = edition,
-                BookImages = bookImages,
+                InfoId = InfoId,
                 UserName = UserName,
                 IpAddress = IpAddress,
                 RequestId = RequestId

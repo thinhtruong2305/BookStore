@@ -32,6 +32,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new UpdateSeriesRequest()
             {
+                SeriesId = SeriesId,
                 SeriesName = SeriesName,
                 PlannedVolume = PlannedVolume,
                 UserName = UserName,

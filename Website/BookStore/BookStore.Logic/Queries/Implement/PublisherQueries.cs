@@ -58,17 +58,17 @@ namespace BookStore.Logic.Queries.Implement
         public PublisherDetailModel? GetDetail(int PublisherId)
         {
             return database.Publishers
-                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
+                .Where(p => (p.Status != Common.Shared.Model.Status.Delete) && (p.PublisherId == PublisherId))
                 .Include(p => p.EditionPublishers)
                     .ThenInclude(ep => ep.Edition)
                 .Select(o => mapper.Map<PublisherDetailModel>(o))
-                .FirstOrDefault(p => p.PublisherId == PublisherId);
+                .FirstOrDefault();
         }
 
         public Task<PublisherDetailModel?> GetDetailAsync(int PublisherId)
         {
             return database.Publishers
-                .Where(p => p.Status != Common.Shared.Model.Status.Delete)
+                .Where(p => (p.Status != Common.Shared.Model.Status.Delete) && (p.PublisherId == PublisherId))
                 .Include(p => p.EditionPublishers)
                     .ThenInclude(ep => ep.Edition)
                 .Select(o => mapper.Map<PublisherDetailModel>(o))

@@ -38,12 +38,11 @@ namespace BookStore.Logic.Command.Handler
 
                 if(bookImage != null)
                 {
-                    mapper.Map(request, bookImage);
-                    bookImage.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.BookImages.Update(bookImage);
+                    var bookImageSave = mapper.Map(request, bookImage);
+                    bookImageSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
 
                     result.Success = true;
-                    result.Data = bookImage;
+                    result.Data = database.BookImages.Update(bookImageSave); ;
                 }
                 else
                 {

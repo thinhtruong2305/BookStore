@@ -59,6 +59,7 @@ namespace BookStore.DAL
             modelBuilder.ApplyConfiguration(new BookAuthorConfiguration());
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new BookImageConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new EditionConfiguration());
             modelBuilder.ApplyConfiguration(new EditionPublisherConfiguration());
             modelBuilder.ApplyConfiguration(new InfoConfiguration());
@@ -75,6 +76,7 @@ namespace BookStore.DAL
         public virtual DbSet<AuthorBook> AuthorBooks => Set<AuthorBook>();
         public virtual DbSet<Book> Books => Set<Book>();
         public virtual DbSet<BookImage> BookImages => Set<BookImage>();
+        public virtual DbSet<Category> Categories => Set<Category>();
         public virtual DbSet<Edition> Editions => Set<Edition>();
         public virtual DbSet<EditionPublisher> EditionPublishers => Set<EditionPublisher>();
         public virtual DbSet<Info> Infos => Set<Info>();

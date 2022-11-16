@@ -10,9 +10,8 @@ namespace BookStore.Website.Areas.Admin.Models
     {
         public int EditionId { get; set; }
 
-        [StringLength(14, ErrorMessage = "Bạn phải nhập được đến {0}")]
         [Display(Name = "Mã sách")]
-        public string ISBN { get; set; }
+        public string? ISBN { get; set; }
 
         [Display(Name = "Ngày xuất bản")]
         [DataType(DataType.Date)]
@@ -46,10 +45,12 @@ namespace BookStore.Website.Areas.Admin.Models
                 RequestId = RequestId
             };
         }
-        public UpdateEditionRequest ToUpdateCommand()
+        public UpdateEditionRequest ToUpdateCommand(int BookId)
         {
             return new UpdateEditionRequest
             {
+                EditionId = EditionId,
+                BookId = BookId,
                 ISBN = ISBN,
                 PublicationDate = PublicationDate,
                 Format = Format,

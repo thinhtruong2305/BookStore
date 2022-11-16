@@ -58,21 +58,22 @@ namespace BookStore.Logic.Queries.Implement
         public OrderDetailModel? GetDetail(int OrderId)
         {
             return database.Orders
-                .Where(o => o.Status != Common.Shared.Model.Status.Delete)
+                .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.BookImages)
                 .Select(o => mapper.Map<OrderDetailModel>(o))
-                .FirstOrDefault(o => o.OrderId == OrderId);
+                .FirstOrDefault();
         }
 
         public Task<OrderDetailModel?> GetDetailAsync(int OrderId)
         {
             return database.Orders
-                .Where(o => o.Status != Common.Shared.Model.Status.Delete)
+                .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Book)
                 .Select(o => mapper.Map<OrderDetailModel>(o))
-                .FirstOrDefaultAsync(o => o.OrderId == OrderId);
+                .FirstOrDefaultAsync();
         }
     }
 }

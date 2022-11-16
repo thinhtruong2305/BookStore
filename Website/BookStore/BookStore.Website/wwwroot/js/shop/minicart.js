@@ -1736,7 +1736,6 @@ Cart.prototype.add = function add(data) {
     return idx;
 };
 
-
 /**
  * Returns the carts current items.
  *
@@ -1868,7 +1867,7 @@ Cart.prototype.save = function save() {
  *
  * @param {object} The initiating event
  */
-Cart.prototype.new_checkout = function new_checkout(evt) {
+    Cart.prototype.new_checkout = function new_checkout(evt) {
     this.fire('new_checkout', evt);
 };
 
@@ -1903,7 +1902,7 @@ var defaults = module.exports = {
 
     parent: (typeof document !== 'undefined') ? document.body : null,
 
-    action: 'checkout.html',
+    action: '/Shop/Checkout',
 
     target: '',
 
@@ -2887,7 +2886,6 @@ View.prototype.addItem = function addItem(idx, data) {
     var els = this.el.querySelectorAll('.' + constants.ITEM_CLASS);
     css.add(els[idx], constants.ITEM_CHANGED_CLASS);
 };
-
 
 /**
  * Changes an item in the view.

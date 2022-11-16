@@ -31,11 +31,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var order = mapper.Map<Order>(request);
                 order.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
-                database.Orders.Add(order);
-                database.SaveChanges();
 
                 result.Success = true;
-                result.Data = order;
+                result.Data = database.Orders.Add(order);
             }
             catch (Exception e)
             {

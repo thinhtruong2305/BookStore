@@ -62,15 +62,16 @@ namespace BookStore.Website.Areas.Admin.Models
                 RequestId = RequestId
             };
         }
-        public UpdateInfoRequest ToUpdateCommand(Series series)
+        public UpdateInfoRequest ToUpdateCommand(int SeriesId)
         {
             return new UpdateInfoRequest
             {
+                InfoId= InfoId,
                 DiscountPercent = DiscountPercent,
                 Language = Language,
                 VolumeNumber = VolumeNumber,
                 Status = Common.Shared.Model.Status.Active,
-                Series = series,
+                SeriesId = SeriesId,
                 UserName = UserName,
                 IpAddress = IpAddress,
                 RequestId = RequestId

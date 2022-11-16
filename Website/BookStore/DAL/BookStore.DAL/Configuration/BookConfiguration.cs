@@ -20,6 +20,10 @@ namespace BookStore.DAL.Configuration
                 .WithOne(info => info.Book)
                 .HasForeignKey<Book>(b => b.InfoId);
 
+            builder.HasOne(b => b.Category)
+                .WithMany(c => c.Books)
+                .HasForeignKey(b => b.CategoryId);
+
             builder.Property<string>(b => b.Title)
                 .HasColumnType("nvarchar(70)")
                 .IsRequired(true);
