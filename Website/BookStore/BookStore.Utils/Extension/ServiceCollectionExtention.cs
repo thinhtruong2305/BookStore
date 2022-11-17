@@ -93,7 +93,7 @@ namespace BookStore.Utils.Extension
                 // Cấu hình đăng nhập.
                 option.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
                 option.SignIn.RequireConfirmedPhoneNumber = false;     // Xác thực số điện thoại
-
+                option.SignIn.RequireConfirmedAccount = true;
             });
             return services;
         }

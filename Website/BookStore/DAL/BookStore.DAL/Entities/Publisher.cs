@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,5 +35,10 @@ namespace BookStore.DAL.Entities
         /*[Display(Name = "Liên kết")]*/
         public string Slug { get; set; }
         public List<EditionPublisher> EditionPublishers { get; set; }
+
+        public static implicit operator Publisher(EntityEntry<Publisher> v)
+        {
+            return v.Entity;
+        }
     }
 }

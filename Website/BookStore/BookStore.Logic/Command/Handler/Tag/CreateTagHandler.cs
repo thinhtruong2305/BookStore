@@ -30,10 +30,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var tag = mapper.Map<Tag>(request);
                 tag.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
-                database.Tags.Add(tag);
-
+                
+                result.Data = database.Tags.Add(tag);
                 result.Success = true;
-                result.Data = tag;
             }
             catch (Exception e)
             {

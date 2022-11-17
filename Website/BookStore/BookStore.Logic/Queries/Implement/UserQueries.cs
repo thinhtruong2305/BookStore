@@ -41,20 +41,20 @@ namespace BookStore.Logic.Queries.Implement
                  .ToListAsync());
         }
 
-        public UserDetailModel GetDetail(string UserId)
+        public UserDetailModel? GetDetail(string UserId)
         {
             return userManager.Users
                 .Where(u => u.Id == UserId)
                 .Select(u => mapper.Map<UserDetailModel>(u))
-                .First();
+                .FirstOrDefault();
         }
 
-        public Task<UserDetailModel> GetDetailAsync(string UserId)
+        public Task<UserDetailModel?> GetDetailAsync(string UserId)
         {
             return userManager.Users
                 .Where(u => u.Id == UserId)
                 .Select(u => mapper.Map<UserDetailModel>(u))
-                .FirstAsync();
+                .FirstOrDefaultAsync();
         }
     }
 }

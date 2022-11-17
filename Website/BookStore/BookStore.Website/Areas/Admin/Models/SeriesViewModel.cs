@@ -10,11 +10,9 @@ namespace BookStore.Website.Areas.Admin.Models
         public int SeriesId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên của bộ")]
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Tên series")]
         public string SeriesName { get; set; }
 
-        [RegularExpression(@"/^[0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [0-9]")]
         [Display(Name = "Đầu sách sắp ra")]
         public int? PlannedVolume { get; set; }
 
@@ -23,16 +21,23 @@ namespace BookStore.Website.Areas.Admin.Models
             return new CreateSeriesRequest()
             {
                 SeriesName = SeriesName,
-                PlannedVolume = PlannedVolume
+                PlannedVolume = PlannedVolume,
+                Status = Common.Shared.Model.Status.Active,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
         public UpdateSeriesRequest ToUpdateCommand()
         {
             return new UpdateSeriesRequest()
             {
+                SeriesId = SeriesId,
                 SeriesName = SeriesName,
                 PlannedVolume = PlannedVolume,
-                Status = Common.Shared.Model.Status.Active
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
     }

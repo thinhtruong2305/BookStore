@@ -14,7 +14,7 @@ namespace BookStore.Logic.Shared.Model
         public Status Status { get; set; }
         public string Title { get; set; }
         public int VolumeNumber { get; set; }
-        public string ISBN { get; set; } = String.Empty;
+        public string ISBN { get; set; }
         public List<AuthorBook> AuthorBooks { get; set; }
         public List<EditionPublisher> Pulisher { get; set; }
     }

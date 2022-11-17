@@ -8,6 +8,6 @@ namespace BookStore.Common.Shared.Model
 {
     public enum Status
     {
-        Active, InActive, Delete
+        Active, InActive, Delete, Unpaid, Paid
     }
 }

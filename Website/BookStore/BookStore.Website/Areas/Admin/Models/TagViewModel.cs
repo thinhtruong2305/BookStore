@@ -10,22 +10,22 @@ namespace BookStore.Website.Areas.Admin.Models
     public class TagViewModel : BaseViewModel
     {
         public int TagId { get; set; }
+        public int? ParentId { get; set; }
+        public int? InfoId { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên tag")]
-        [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z]")]
         [Display(Name = "Tên tag")]
         public string TagName { get; set; }
-
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
+        
         [Display(Name = "Từ khóa")]
         public string? Keyword { get; set; }
 
-        [RegularExpression(@"/^[a-zA-Z0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z0-9]")]
         [Display(Name = "Mô tả")]
         public string? Decription { get; set; }
 
         [Display(Name = "Liên kết")]
-        public string Slug { get; set; }
+        public string? Slug { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public CreateTagRequest ToCreateCommand()
         {
@@ -35,7 +35,11 @@ namespace BookStore.Website.Areas.Admin.Models
                 Keyword = Keyword,
                 Decription = Decription,
                 Slug = AppGlobal.GenerateSlug(TagName),
-                Status = Common.Shared.Model.Status.Active
+                Status = Common.Shared.Model.Status.Active,
+                ParentId = null,
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
 
@@ -46,7 +50,10 @@ namespace BookStore.Website.Areas.Admin.Models
                 TagName = TagName,
                 Keyword = Keyword,
                 Decription = Decription,
-                Slug = AppGlobal.GenerateSlug(TagName)
+                Slug = AppGlobal.GenerateSlug(TagName),
+                UserName = UserName,
+                IpAddress = IpAddress,
+                RequestId = RequestId
             };
         }
     }

@@ -33,9 +33,8 @@ namespace BookStore.Logic.Command.Handler
             {
                 var author = mapper.Map<Author>(request);
                 author.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                database.Authors.Add(author);
 
-                result.Data = author;
+                result.Data = database.Authors.Add(author);
                 result.Success = true;
             }
             catch (Exception e)

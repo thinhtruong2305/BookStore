@@ -20,7 +20,7 @@ namespace BookStore.Logic.Command.Handler
         private readonly IMapper mapper;
         private readonly AppDatabase database;
 
-        public CreateUserHandler(UserManager<User> userManager, 
+        public CreateUserHandler(UserManager<User> userManager,
             IMapper mapper, 
             AppDatabase database)
         {
@@ -28,30 +28,36 @@ namespace BookStore.Logic.Command.Handler
             this.mapper = mapper;
             this.database = database;
         }
-        public Task<BaseCommandResultWithData<User>> Handle(CreateUserRequest request, CancellationToken cancellationToken)
+        public async Task<BaseCommandResultWithData<User>> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             var result = new BaseCommandResultWithData<User>();
 
             try
             {
                 var user = mapper.Map<User>(request);
-                var createResult = userManager.CreateAsync(user, request.Password);
+                var createResult = await userManager.CreateAsync(user, request.Password);
 
-                if (createResult.Result.Succeeded)
+                if (createResult.Succeeded)
+                {
+                    var userResult = await userManager.FindByNameAsync(user.UserName);
+                    await userManager.AddToRoleAsync(userResult, "User");
+                }
+
+                if (createResult.Succeeded)
                 {
                     result.Data = user;
                     result.Success = true;
                 }
                 else
                 {
-                    result.Message = string.Join("-", createResult.Result.Errors.Select(x => x.Description));
+                    result.Message = string.Join("-", createResult.Errors.Select(x => x.Description));
                 }
             }
             catch (Exception e)
             {
                 result.Message = e.Message;
             }
-            return Task.FromResult(result);
+            return result;
         }
     }
 }

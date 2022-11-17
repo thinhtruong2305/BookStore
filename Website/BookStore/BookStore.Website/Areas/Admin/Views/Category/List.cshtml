@@ -1,0 +1,38 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@using BookStore.Common.Shared.Model
+@model IEnumerable<CategorySummaryModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@if (Model != null)
+{
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Name</td>
+            <td>@category.Keyword</td>
+            <td>
+                @if (@category.Status == Status.Active)
+                {
+                    <button class="btn btn-success" onclick="ChangeStatus('@Url.Action("Status", "Category", new {@id = category.CategoryId})', '@Url.Action("List", "Category")')">
+                        <i class="fa-solid fa-toggle-on"></i>
+                    </button>
+                }
+                else
+                {
+                    <button class="btn btn-danger" onclick="ChangeStatus('@Url.Action("Status", "Category", new {@id = category.CategoryId})', '@Url.Action("List", "Category")')">
+                        <i class="fa-solid fa-toggle-off"></i>
+                    </button>
+                }
+            </td>
+            <td>
+                <a class="btn btn-success" asp-action="Update" asp-controller="Category" asp-route-Id="@category.CategoryId">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <button class="btn btn-danger" onclick="OnDelete('@Url.Action("Delete", "Category", new{@id = category.CategoryId})', '@Url.Action("List", "Category")')">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
+        </tr>
+    }
+}

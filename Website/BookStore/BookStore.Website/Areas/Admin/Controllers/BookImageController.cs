@@ -1,11 +1,21 @@
 ﻿using BookStore.DAL.Entities;
 using BookStore.Logic.Shared.Catalog.Interface;
 using BookStore.Utils.Extension;
+using BookStore.Logic.Queries.Interface;
+using BookStore.Utils.Global;
 using BookStore.Website.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Data;
+using System.Text;
+using BookStore.Logic.Queries.Implement;
+using BookStore.Logic.Command.Request;
+using MediatR;
+using System.Security.Claims;
+using AutoMapper;
+using BookStore.Common.Shared.Model;
+using BookStore.DAL;
 
 namespace BookStore.Website.Areas.Admin.Controllers
 {
@@ -14,67 +24,143 @@ namespace BookStore.Website.Areas.Admin.Controllers
     public class BookImageController : Controller
     {
         private readonly IFileStorageService storageService;
+        private readonly IBookImageQueries bookImageQueries;
+        private readonly IMediator mediator;
+        private readonly IMapper mapper;
+        private readonly AppDatabase database;
         public const string BOOKIMAGES = "bookimages";
 
-        public BookImageController(IFileStorageService storageService)
+        public BookImageController(IFileStorageService storageService,
+            IBookImageQueries bookImageQueries,
+            IMediator mediator,
+            IMapper mapper,
+            AppDatabase database)
         {
             this.storageService = storageService;
+            this.bookImageQueries = bookImageQueries;
+            this.mediator = mediator;
+            this.mapper = mapper;
+            this.database = database;
         }
 
         [HttpGet]
-        public IActionResult AddBookImageToSession()
+        public IActionResult CreateBookImageToBook(string returnUrl, int BookId)
         {
             BookImageViewModel model = new BookImageViewModel();
+            model.BookId = BookId;
+            model.ReturnUrl = returnUrl;
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBookImageToSessionAsync([FromForm] BookImageViewModel model, IFormFile FileUpLoad)
+        public async Task<IActionResult> CreateAsync(BookImageViewModel model, string ReturnUrl, int BookId, IFormFile FileUpLoad)
         {
-            var session = HttpContext.Session;
-            List<BookImageViewModel> list = new List<BookImageViewModel>();
-
-            string? bookImagesGet = session.GetString(BOOKIMAGES);
-            if (bookImagesGet != null)
+            if (ModelState.IsValid)
             {
-                List<BookImageViewModel>? listGet = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImagesGet);
-                if (listGet != null)
+                var bookImageSave = new BookImage();
+                var bookImage = bookImageQueries.GetBookImageById(model.BookImageId);
+                if (bookImage == null)
                 {
-                    if (FileUpLoad != null)
+                    var bookImageResult = new BaseCommandResultWithData<BookImage>();
+                    string path = await storageService.SaveFile(FileUpLoad);
+                    model.FilePath = path;
+                    string decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                    model.Decription = decodedHtml;
+                    bookImageResult = await mediator.Send(model.ToCreateCommand());
+                    bookImageSave = bookImageResult.Data;
+                }
+                bookImageSave = bookImage;
+                if (BookId != 0)
+                {
+                    var book = database.Books
+                         .Where(i => i.Status != Status.Delete)
+                         .FirstOrDefault(i => i.BookId == model.BookId);
+                    if (book != null)
                     {
-                        list = listGet;
+                        var bookImageResult = new BaseCommandResultWithData<BookImage>();
+                        bookImageResult = await mediator.Send(model.ToCreateCommand(book));
                     }
                 }
             }
-            if (FileUpLoad != null)
-            {
-                string path = await storageService.SaveFile(FileUpLoad);
-                model.FilePath = path;
-                list.Add(model);
-                string bookImages = JsonConvert.SerializeObject(list);
-                session.SetString(BOOKIMAGES, bookImages);
-                return View("~/Areas/Admin/Views/Book/Create.cshtml");
-            }
-            ModelState.GetError();
-            return View("~/Areas/Admin/Views/Book/Create.cshtml");
+            database.SaveChanges();
+            return LocalRedirect(ReturnUrl);
         }
 
-        public IActionResult ClearAllBookImagesSession()
+        [HttpGet]
+        public IActionResult AddBookImageToSession(string returnUrl)
+        {
+            BookImageViewModel model = new BookImageViewModel();
+            model.ReturnUrl = returnUrl;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddBookImageToSession(BookImageViewModel model, string ReturnUrl, IFormFile FileUpLoad)
+        {
+            if (FileUpLoad != null)
+            {
+                var session = HttpContext.Session;
+                List<BookImageViewModel> list = new List<BookImageViewModel>();
+
+                string? bookImagesGet = session.GetString(BOOKIMAGES);
+                if (bookImagesGet != null)
+                {
+                    List<BookImageViewModel>? listGet = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImagesGet);
+                    if (listGet != null)
+                    {
+                        if (FileUpLoad != null)
+                        {
+                            list = listGet;
+                        }
+                    }
+                }
+
+                string path = await storageService.SaveFile(FileUpLoad);
+                model.FilePath = path;
+                string decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
+                model.Decription = decodedHtml;
+                list.Add(model);
+                string bookImages = JsonConvert.SerializeObject(list);
+                session.SetString(BOOKIMAGES, bookImages);  
+            }
+            return LocalRedirect(ReturnUrl ?? "/Admin");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteBookImageFromBookAsync(string returnUrl, int id, int BookImageId)
         {
             var session = HttpContext.Session;
-            string? bookImages = session.GetString(BOOKIMAGES);
-            if (bookImages != null)
+            string? bookImagesGet = session.GetString(BOOKIMAGES);
+            if (bookImagesGet != null)
             {
-                List<BookImageViewModel>? list = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImages);
+                List<BookImageViewModel>? list = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImagesGet);
                 if (list != null)
                 {
-                    list.ForEach(async item =>
+                    var bookImage =bookImageQueries.GetBookImageById(BookImageId);
+
+                    if (bookImage == null)
                     {
-                        await storageService.DeleteFileAsync(item.FilePath);
-                    });
+                        await storageService.DeleteFileAsync(list[id].FilePath);
+                        list.RemoveAt(id);
+                        string bookImages = JsonConvert.SerializeObject(list);
+                        session.SetString(BOOKIMAGES, bookImages);
+                    }
+                    else
+                    {
+                        var command = new DeleteBookImageRequest()
+                        {
+                            Id = id,
+                            RequestId = HttpContext.Connection?.Id,
+                            IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                            UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+                        };
+                        var result = await mediator.Send(command);
+                        var book = mapper.Map<BookViewModel>(bookImage.Book);
+                    }
                 }
             }
-            return RedirectToAction("Create", "Book");
+            return LocalRedirect(returnUrl);
         }
     }
 }

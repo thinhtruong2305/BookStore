@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.DAL;
+using BookStore.DAL.Entities;
 using BookStore.Logic.Queries.Interface;
 using BookStore.Logic.Shared.Model;
 using Microsoft.EntityFrameworkCore;
@@ -68,23 +69,43 @@ namespace BookStore.Logic.Queries.Implement
         public SeriesDetailModel? GetDetail(int SeriesId)
         {
             return database.Series
-                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Where(s => (s.Status != Common.Shared.Model.Status.Delete) && (s.SeriesId == SeriesId))
                 .Include(s => s.info)
                     .ThenInclude(info => info.Book)
                         .ThenInclude(b => b.AuthorBooks)
                 .Select(s => mapper.Map<SeriesDetailModel>(s))
-                .FirstOrDefault(s => s.SeriesId == SeriesId);
+                .FirstOrDefault();
         }
 
         public Task<SeriesDetailModel?> GetDetailAsync(int SeriesId)
+        {
+            return database.Series
+                .Where(s => (s.Status != Common.Shared.Model.Status.Delete) && (s.SeriesId == SeriesId))
+                .Include(s => s.info)
+                    .ThenInclude(info => info.Book)
+                        .ThenInclude(b => b.AuthorBooks)
+                .Select(s => mapper.Map<SeriesDetailModel>(s))
+                .FirstOrDefaultAsync();
+        }
+
+        public Series? GetSeriesByName(string SeriesName)
         {
             return database.Series
                 .Where(s => s.Status != Common.Shared.Model.Status.Delete)
                 .Include(s => s.info)
                     .ThenInclude(info => info.Book)
                         .ThenInclude(b => b.AuthorBooks)
-                .Select(s => mapper.Map<SeriesDetailModel>(s))
-                .FirstOrDefaultAsync(s => s.SeriesId == SeriesId);
+                .FirstOrDefault(s => s.SeriesName == SeriesName);
+        }
+
+        public Task<Series?> GetSeriesByNameAsync(string SeriesName)
+        {
+            return database.Series
+                .Where(s => s.Status != Common.Shared.Model.Status.Delete)
+                .Include(s => s.info)
+                    .ThenInclude(info => info.Book)
+                        .ThenInclude(b => b.AuthorBooks)
+                .FirstOrDefaultAsync(s => s.SeriesName == SeriesName);
         }
     }
 }

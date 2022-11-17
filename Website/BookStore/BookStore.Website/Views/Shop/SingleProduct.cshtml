@@ -1,0 +1,258 @@
+﻿@using BookStore.Logic.Shared.Model
+@model BookDetailClientModel
+@{
+    ViewData["Title"] = "SingleProduct";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+}
+
+<!-- Single -->
+	<div class="innerf-pages section">
+		<div class="container">
+			<div class="col-md-4 single-right-left ">
+				<div class="grid images_3_of_2">
+					<div class="flexslider1">
+						<ul class="slides">
+							@foreach(var item in Model.BookImages)
+							{
+								<li data-thumb="@item.FilePath">
+									<div class="thumb-image">
+										<img src="@item.FilePath" data-imagezoom="true" alt="@item.Decription" class="img-responsive">
+									</div>
+								</li>
+							}
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-md-8 single-right-left simpleCart_shelfItem">
+				<h3>@Model.Title
+				<span>@Model.Format – @Model.PublicationDate.ToString("MMM yyyy")</span>
+				</h3>
+				<p>by
+				@{
+					var authorResult = "";
+				}
+				@foreach ( var item in Model.AuthorBooks){
+					authorResult = item.Author.FirstName + " " + item.Author.LastName;
+					<a href="#">@authorResult</a>
+				}
+				</p>
+				<div class="caption">
+
+					<ul class="rating-single">
+						@if(Model.Ratings != null){
+							<li>
+								<a href="#">
+									<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+								</a>
+							</li>
+						}
+					</ul>
+					<div class="clearfix"> </div>
+					<h6>
+						$@Model.DiscountPrice</h6>
+				</div>
+				<div class="occasional">
+					<h5>Specifications</h5>
+					<ul class="single_specific">
+						<li>
+							<span>language :</span> @Model.Language</li>
+						<li>
+							<span>format :</span> @Model.Format</li>
+						<li>
+							@{
+								var publisherResult = "";
+							}
+							@for(int i = 0; i < Model.EditionPublisher.Count; i++){
+							if (i == 0)
+								publisherResult += Model.EditionPublisher[i].Publisher.PulishingHouse;
+							else
+								publisherResult += " - " + Model.EditionPublisher[i].Publisher.PulishingHouse;
+						}
+							<span>publisher :</span> @publisherResult</li>
+						<li>
+							<span>edition :</span> @Model.PublicationDate.ToString("MMM yyyy")
+						</li>
+						<li>
+							<span>pages :</span> @Model.Pages</li>
+					</ul>
+
+				</div>
+				<div class="color-quality">
+					<div class="color-quality-right">
+						<h5>Also Formats avaiable in:</h5>
+						<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+							<option value="null">paper back &nbsp;$90.00</option>
+							<option value="null">Audio Book &nbsp;$200.00</option>
+						</select>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="description">
+					<h5>Check delivery, payment options and charges at your location</h5>
+					<form action="#" method="post">
+						<input type="text" value="Enter pincode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter pincode';}">
+						<input type="submit" value="Check">
+					</form>
+				</div>
+				<div class="occasion-cart">
+					<div class="chr single-item single_page_b">
+					<form asp-controller="Shop" asp-action="Checkout" method="post">
+						<input type="hidden" name="cmd" value="_cart">
+						<input type="hidden" name="add" value="1">
+						<input type="hidden" name="quantity">
+						<input type="hidden" name="chr_item" value="@Model.Title @Model.VolumeNumber">
+						<input type="hidden" name="amount" value="@Model.Price">
+						<input type="hidden" name="discount_amount" value="@Model.DiscountPrice">
+						<input type="hidden" name="currency_code" value="VND">
+						<button type="submit" class="chr-cart pchr-cart">
+							Add to cart
+							<i class="fa fa-cart-plus" aria-hidden="true"></i>
+						</button>
+						<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+					</form>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--/tabs-->
+        <div class="responsive_tabs innfpage-tabs">
+            <div id="horizontalTab">
+                <ul class="resp-tabs-list">
+                    <li>Mô tả</li>
+                    <li>Đánh giá</li>
+                    <li>Hướng dẫn</li>
+                </ul>
+                <div class="resp-tabs-container">
+                    <!--/tab_one-->
+                    <div class="tab1">
+                        <div class="desc_single">
+                            <h5>Description</h5>
+							@Html.Raw(Model.Decription);
+                        </div>
+                    </div>
+                    <!--//tab_one-->
+                    <div class="tab2">
+                        <div class="content">
+                            <p>Hiện tại sản phẩm chưa có đánh giá nào, bạn hãy trở thành người đầu tiên đánh giá cho sản phẩm này</p>
+                            <div class="product-reviews-summary-actions">
+                                <button type="button" class="btn-new-review" onclick="">Gửi đánh giá của bạn</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab3">
+                        <p style="text-align: justify;"><strong>Bước 1:</strong> Truy cập website và lựa chọn sản phẩm cần mua để mua hàng</p>
+                        <p style="text-align: justify;"><strong>Bước 2:</strong> Click vào giỏ hàng, màn hình hiển thị ra pop up với các lựa chọn sau</p>
+                        <p style="text-align: justify;">Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào xem giỏ hàng</p>
+                        <p style="text-align: justify;">Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Checkout ở giỏ hàng sau mỗi lần thay đổi</p>
+                        <p style="text-align: justify;"><strong>Bước 3:</strong> Lựa chọn thông tin tài khoản thanh toán</p>
+                        <p style="text-align: justify;"><strong>Bước 4:</strong> Điền các thông tin của bạn để nhận đơn hàng, lựa chọn hình thức thanh toán và vận chuyển cho đơn hàng của mình</p>
+                        <p style="text-align: justify;"><strong>Bước 5:</strong> Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng về email cho bạn</p>
+                        <p style="text-align: justify;">Sau khi nhận được đơn hàng bạn gửi chúng tôi sẽ liên hệ bằng cách gọi điện lại để xác nhận lại đơn hàng và địa chỉ của bạn.</p>
+                        <p style="text-align: justify;">Trân trọng cảm ơn.</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!--//tabs-->
+	<!-- /new_arrivals -->
+	<div class="section singlep_btm">
+		<div class="container">
+			<div class="new_arrivals">
+				<h4 class="rad-txt">
+					<span class="abtxt1">featured</span>
+					<span class="abtext"> products</span>
+				</h4>
+				<div class="col-md-3 product-men">
+					<div class="product-chr-info chr">
+						<div class="thumbnail">
+							<a href="single_product.html">
+								<img src="images/lib7.jpg" alt="">
+							</a>
+						</div>
+						<div class="caption">
+							<h4>Marketing</h4>
+							<p>Scott Harris</p>
+							<div class="matrlf-mid">
+								<ul class="rating">
+									<li>
+										<a href="#">
+											<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="fa fa-star gray-star" aria-hidden="true"></span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span class="fa fa-star gray-star" aria-hidden="true"></span>
+										</a>
+									</li>
+								</ul>
+								<ul class="price-list">
+									<li>$ 180.00</li>
+									<li>
+										$220.00
+									</li>
+								</ul>
+
+								<div class="clearfix"> </div>
+							</div>
+							<form action="#" method="post">
+								<input type="hidden" name="cmd" value="_cart">
+								<input type="hidden" name="add" value="1">
+								<input type="hidden" name="chr_item" value="Book1">
+								<input type="hidden" name="amount" value="180.00">
+								<button type="submit" class="chr-cart pchr-cart">
+									Add to cart
+									<i class="fa fa-cart-plus" aria-hidden="true"></i>
+								</button>
+								<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!--//new_arrivals-->
+			<div class="clearfix"></div>
+		</div>
+	</div>
+<!--// Single -->

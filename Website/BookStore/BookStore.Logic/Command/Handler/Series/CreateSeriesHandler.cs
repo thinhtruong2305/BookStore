@@ -30,10 +30,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var series = mapper.Map<Series>(request);
                 series.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
-                database.Series.Add(series);
 
                 result.Success = true;
-                result.Data = series;
+                result.Data = database.Series.Add(series);
             }
             catch (Exception e)
             {

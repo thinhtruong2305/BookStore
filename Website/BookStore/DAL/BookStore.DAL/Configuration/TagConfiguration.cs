@@ -16,32 +16,26 @@ namespace BookStore.DAL.Configuration
             builder.HasKey(t => t.TagId);
             builder.Property(t => t.TagId).UseIdentityColumn();
 
-            builder.HasOne(t => t.Menu)
-                .WithMany(m => m.Tags)
-                .HasForeignKey(t => t.MenuId)
-                .IsRequired(false);
-
-            builder.HasOne(t => t.Info)
-                .WithMany(info => info.Tags)
-                .HasForeignKey(t => t.InfoId)
-                .IsRequired(false);
-
-            builder.Property<string>(t => t.TagName)
+            builder.Property(t => t.TagName)
                 .HasColumnType("nvarchar(30)")
                 .IsRequired(true);
 
-            builder.Property<string>(t => t.Keyword)
+            builder.Property(t => t.Keyword)
                 .HasColumnType("nvarchar(60)")
                 .IsRequired(false)
                 .HasDefaultValue("Unknow");
 
-            builder.Property<string>(t => t.Decription)
+            builder.Property(t => t.Decription)
                 .HasColumnType("ntext")
                 .IsRequired(false)
                 .HasDefaultValue("Unknow");
 
-            builder.Property<string>(t => t.Slug)
+            builder.Property(t => t.Slug)
                 .HasColumnType("varchar(MAX)");
+
+            builder.Property(t => t.ParentId)
+                .HasColumnType("int")
+                .IsRequired(false);
         }
     }
 }

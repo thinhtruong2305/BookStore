@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,7 @@ namespace BookStore.DAL.Entities
     public class Info : BaseEntity
     {
         public int InfoId { get; set; }
-        public int? SeriesId { get; set; }
+        public int SeriesId { get; set; }
 
         /*[RegularExpression(@"/^[0-9]+$/", ErrorMessage = "Bạn phải nhập các ký tự [0-9]")]
         [Display(Name = "Phần trăm giảm giá")]*/
@@ -29,6 +30,11 @@ namespace BookStore.DAL.Entities
         public int VolumeNumber { get; set; }
         public Book Book { get; set; }
         public Series Series { get; set; }
-        public List<Tag> Tags { get; set; }
+        public List<TagInfo> TagInfos { get; set; }
+
+        public static implicit operator Info(EntityEntry<Info> v)
+        {
+            return v.Entity;
+        }
     }
 }

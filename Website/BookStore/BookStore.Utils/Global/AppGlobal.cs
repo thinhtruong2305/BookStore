@@ -26,21 +26,22 @@ namespace BookStore.Utils.Global
             controller.ViewData.Model = model;
             using (var sw = new StringWriter())
             {
-                IViewEngine? viewEngine = controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
-                ViewEngineResult viewEngineResult = viewEngine.FindView(controller.ControllerContext, viewName, false);
+                IViewEngine viewEngine = controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                ViewEngineResult viewResult = viewEngine.FindView(controller.ControllerContext, viewName, false);
 
                 ViewContext viewContext = new ViewContext(
                     controller.ControllerContext,
-                    viewEngineResult.View,
+                    viewResult.View,
                     controller.ViewData,
                     controller.TempData,
                     sw,
                     new HtmlHelperOptions()
                 );
-                viewEngineResult.View.RenderAsync(viewContext);
+                viewResult.View.RenderAsync(viewContext);
                 return sw.GetStringBuilder().ToString();
             }
         }
+
         public static string GenerateSlug(string str, bool hierarchical = true)
         {
             var slug = str.Trim().ToLower();

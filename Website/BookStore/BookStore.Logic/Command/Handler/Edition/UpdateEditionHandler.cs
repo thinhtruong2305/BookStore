@@ -5,6 +5,7 @@ using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
 using BookStore.Utils.Global;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
@@ -32,16 +33,16 @@ namespace BookStore.Logic.Command.Handler
             {
                 var edition = database.Editions
                     .Where(e => e.Status != Status.Delete)
+                    .AsNoTracking()
                     .FirstOrDefault(e => e.EditionId == request.EditionId);
 
                 if(edition != null)
                 {
-                    mapper.Map(request, edition);
-                    edition.SetUpdateInfo(request.UserName ?? string.Empty, AppGlobal.SysDateTime);
-                    database.Editions.Update(edition);
-
+                    var editionSave = mapper.Map(request, edition);
+                    editionSave.SetUpdateInfo(request.UserName ?? string.Empty, AppGlobal.SysDateTime);
+                    
                     result.Success = true;
-                    result.Data = edition;
+                    result.Data = database.Editions.Update(editionSave);
                 }
                 else
                 {

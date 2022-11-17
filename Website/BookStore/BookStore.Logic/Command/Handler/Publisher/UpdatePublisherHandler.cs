@@ -34,12 +34,11 @@ namespace BookStore.Logic.Command.Handler
 
                 if (publisher != null)
                 {
-                    mapper.Map(request, publisher);
-                    publisher.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.Publishers.Update(publisher);
-
+                    var publisherSave = mapper.Map<Publisher>(request);
+                    publisherSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
+                    
                     result.Success = true;
-                    result.Data = publisher;
+                    result.Data = database.Publishers.Update(publisherSave);
                 }
                 else
                 {

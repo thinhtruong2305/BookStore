@@ -35,10 +35,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var bookImage = mapper.Map<BookImage>(request);
                 bookImage.SetCreateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                database.BookImages.Add(bookImage);
 
                 result.Success = true;
-                result.Data = bookImage;
+                result.Data = database.BookImages.Add(bookImage); ;
             }
             catch (Exception e)
             {

@@ -12,7 +12,7 @@ namespace BookStore.Logic.Queries.Interface
     {
         public List<UserSummaryModel> GetAll();
         public Task<List<UserSummaryModel>> GetAllAsync();
-        public UserDetailModel GetDetail(string Userid);
-        public Task<UserDetailModel> GetDetailAsync(string Userid);
+        public UserDetailModel? GetDetail(string Userid);
+        public Task<UserDetailModel?> GetDetailAsync(string Userid);
     }
 }

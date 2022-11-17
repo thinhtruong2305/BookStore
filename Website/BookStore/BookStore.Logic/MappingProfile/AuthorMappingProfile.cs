@@ -14,8 +14,6 @@ namespace BookStore.Logic.MappingProfile
     {
         public AuthorMappingProfile()
         {
-            new BookMappingProfile();
-
             //Map cho phần hiển thị
             CreateMap<Author, AuthorSummaryModel>()
                 .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.FirstName + " " + src.LastName))

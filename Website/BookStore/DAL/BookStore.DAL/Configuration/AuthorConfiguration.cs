@@ -33,6 +33,7 @@ namespace BookStore.DAL.Configuration
                 .HasDefaultValue("Unknow")
                 .IsRequired(false);
 
+
             builder.Property<string>(a => a.Keyword)
                 .HasColumnType("nvarchar(60)")
                 .HasDefaultValue("Unknow")

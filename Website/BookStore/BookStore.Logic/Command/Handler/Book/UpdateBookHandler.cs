@@ -3,12 +3,15 @@ using BookStore.Common.Shared.Model;
 using BookStore.DAL;
 using BookStore.DAL.Entities;
 using BookStore.Logic.Command.Request;
+using BookStore.Logic.Shared.Model;
 using BookStore.Utils.Global;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,17 +34,17 @@ namespace BookStore.Logic.Command.Handler
             try
             {
                 var book = database.Books
-                    .Where(b => b.Status != Status.Delete)
-                    .FirstOrDefault(b => b.BookId == request.BookId);
+                .Where(b => b.Status != Common.Shared.Model.Status.Delete)
+                .AsNoTracking()
+                .FirstOrDefault(b => b.BookId == request.BookId);
 
                 if (book != null)
                 {
-                    mapper.Map(request, book);
-                    book.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
-                    database.Update(book);
+                    var bookSave = mapper.Map(request, book);
+                    bookSave.SetUpdateInfo(request.UserName ?? string.Empty, DateTime.Now);
 
                     result.Success = true;
-                    result.Data = book;
+                    result.Data = database.Books.Update(bookSave);
                 }
                 else
                 {

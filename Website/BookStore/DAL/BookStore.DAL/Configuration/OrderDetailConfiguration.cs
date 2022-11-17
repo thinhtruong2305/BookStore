@@ -17,8 +17,8 @@ namespace BookStore.DAL.Configuration
             builder.Property(od => od.OrderDetailId).UseIdentityColumn();
 
             builder.HasOne(od => od.Book)
-                .WithOne(b => b.OrderDetail)
-                .HasForeignKey<OrderDetail>(b => b.BookId);
+                .WithMany(b => b.OrderDetails)
+                .HasForeignKey(od => od.BookId);
 
             builder.HasOne(o => o.Order)
                 .WithMany(od => od.OrderDetails)
@@ -27,10 +27,9 @@ namespace BookStore.DAL.Configuration
             builder.Property<int>(od => od.Quantity)
                 .IsRequired(true);
 
-            builder.Property<decimal?>(od => od.DiscountPrice)
-                .HasColumnType("decimal(18,2)")
-                .HasDefaultValue(Convert.ToDecimal(0))
-                .IsRequired(false);
+            builder.Property(od => od.DiscountPrice)
+                .IsRequired(false)
+                .HasDefaultValue(Convert.ToDecimal(0));
 
             builder.Property<decimal>(od => od.Payment)
                 .HasColumnType("decimal(18,2)")

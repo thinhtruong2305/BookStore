@@ -1,4 +1,5 @@
 ﻿ using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,7 @@ namespace BookStore.DAL.Entities
     public class Book : BaseEntity
     {
         public int BookId { get; set; }
+        public int CategoryId { get; set; }
         public int InfoId { get; set; }
 
         /*[Required(ErrorMessage = "Bạn phải nhập tiêu đề của sách")]
@@ -33,8 +35,14 @@ namespace BookStore.DAL.Entities
         public List<AuthorBook> AuthorBooks { get; set; }
         public Info Info { get; set; }
         public Edition Edition { get; set; }
-        public OrderDetail OrderDetail { get; set; }
+        public Category Category { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
         public List<BookImage> BookImages { get; set; }
         public List<Rating> Ratings { get; set; }
+
+        public static implicit operator Book(EntityEntry<Book> v)
+        {
+            return v.Entity;
+        }
     }
 }

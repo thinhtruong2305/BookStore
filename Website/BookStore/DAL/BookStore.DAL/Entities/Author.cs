@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace BookStore.DAL.Entities
 
         public static implicit operator Author(EntityEntry<Author> v)
         {
-            throw new NotImplementedException();
+            return v.Entity;
         }
     }
 }

@@ -30,10 +30,9 @@ namespace BookStore.Logic.Command.Handler
             {
                 var publisher = mapper.Map<Publisher>(request);
                 publisher.SetCreateInfo(request.UserName ?? String.Empty, DateTime.Now);
-                database.Publishers.Add(publisher);
 
                 result.Success = true;
-                result.Data = publisher;
+                result.Data = database.Publishers.Add(publisher); ;
             }
             catch (Exception e)
             {

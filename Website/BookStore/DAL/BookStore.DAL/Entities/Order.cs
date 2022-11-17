@@ -1,4 +1,5 @@
 ﻿using BookStore.Common.Shared.Model;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,5 +30,10 @@ namespace BookStore.DAL.Entities
         public string ShipPhone { get; set; }
         public decimal TotalPrice { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
+
+        public static implicit operator Order(EntityEntry<Order> v)
+        {
+            return v.Entity;
+        }
     }
 }
