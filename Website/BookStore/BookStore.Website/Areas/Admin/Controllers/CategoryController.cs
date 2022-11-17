@@ -57,16 +57,32 @@ namespace BookStore.Website.Areas.Admin.Controllers
             model = categoryQueries.GetAllDelete();
             return View(model);
         }
+
         public IActionResult ListTrash()
         {
             var model = new List<CategorySummaryModel>();
             model = categoryQueries.GetAllDelete();
             return PartialView(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> StatusAsync(int id)
         {
             var command = new ChangeCategoryStatusRequest()
+            {
+                Id = id,
+                RequestId = HttpContext.Connection?.Id,
+                IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+            };
+            var result = await mediator.Send(command);
+            return Json(new { success = result.Success, message = result.Message });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ReTrash(int id)
+        {
+            var command = new RecoveryCategoryRequest()
             {
                 Id = id,
                 RequestId = HttpContext.Connection?.Id,
@@ -155,6 +171,19 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var command = new DeleteCategoryRequest()
+            {
+                Id = id,
+                RequestId = HttpContext.Connection?.Id,
+                IpAddress = HttpContext.Connection?.RemoteIpAddress?.ToString(),
+                UserName = HttpContext.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Name)?.Value
+            };
+            var result = await mediator.Send(command);
+            return Json(new { success = result.Success, message = result.Message });
         }
     }
 }

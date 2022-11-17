@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Logic.Command.Handler
 {
-    public class RecoveryBookHandler : IRequestHandler<ChangeBookStatusRequest, BaseCommandResult>
+    public class RecoveryBookHandler : IRequestHandler<RecoveryBookRequest, BaseCommandResult>
     {
         private readonly AppDatabase database;
         private readonly IMapper mapper;
@@ -22,29 +22,29 @@ namespace BookStore.Logic.Command.Handler
             this.mapper = mapper;
         }
 
-        public Task<BaseCommandResult> Handle(ChangeBookStatusRequest request, CancellationToken cancellationToken)
+        public Task<BaseCommandResult> Handle(RecoveryBookRequest request, CancellationToken cancellationToken)
         {
             var result = new BaseCommandResult();
 
             try
             {
                 var book = database.Books
-                    .Where(b => b.Status != Status.Delete)
+                    .Where(b => b.Status == Status.Delete)
                     .FirstOrDefault(b => b.BookId == request.Id);
 
                 var edition = database.Books
-                    .Where(b => b.Status != Status.Delete)
+                    .Where(b => b.Status == Status.Delete)
                     .Select(b => b.Edition)
                     .FirstOrDefault(e => e.BookId == request.Id);
 
                 var bookImages = database.BookImages
-                    .Where(bi => (bi.Status != Status.Delete) && (bi.BookId == request.Id))
+                    .Where(bi => (bi.Status == Status.Delete) && (bi.BookId == request.Id))
                     .ToList();
 
                 if (book != null && edition != null && bookImages != null)
                 {
                     var info = database.Infos
-                        .Where(info => info.Status != Status.Delete)
+                        .Where(info => info.Status == Status.Delete)
                         .FirstOrDefault(info => info.InfoId == book.InfoId);
 
                     if (info != null)

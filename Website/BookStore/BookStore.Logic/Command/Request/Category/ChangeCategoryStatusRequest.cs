@@ -13,9 +13,9 @@ namespace BookStore.Logic.Command.Request
         IRequest<BaseCommandResult>
     {
         public int Id { get; set; }
-        public string? RequestId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? IpAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string? UserName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string? RequestId { get; set; }
+        public string? IpAddress { get; set; }
+        public string? UserName { get; set; }
     }
 }
 

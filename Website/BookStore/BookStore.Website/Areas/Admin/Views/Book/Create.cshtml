@@ -51,10 +51,10 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <button type="submit" class="btn btn-sm btn-success">
-                        <span class="">Save</span> <i class="fa-solid fa-floppy-disk"></i>
+                        <i class="fa-solid fa-floppy-disk"></i> <span class="">Lưu</span>
                     </button>
                     <a asp-action="Index" asp-controller="Book" asp-area="Admin" class="btn btn-sm btn-primary">
-                        <span>Back</span>  <i class="fa-solid fa-caret-left"></i>
+                        <i class="fa-solid fa-caret-left"></i> <span>Quay lại</span>
                     </a>
                 </div>
             </div>
@@ -430,13 +430,13 @@
             <div class="row mt-2">
                 <div class="col-6 text-end">
                     <a asp-action="Index" asp-controller="Book" asp-area="Admin" class="btn btn-primary">
-                        <span class="fs-4">Back</span>  <i class="fa-solid fa-caret-left fs-4"></i>
+                        <i class="fa-solid fa-caret-left fs-4"></i> <span class="fs-4">Back</span>
                     </a>
                 </div>
                 <div class="col-6">
                     @*onclick="CreateBookImage('@Url.Action("Create", "BookImage")')"*@
                     <button id="save" class="btn btn-success" type="submit">
-                        <span class="fs-4">Save</span> <i class="fa-solid fa-floppy-disk fs-4"></i>
+                        <i class="fa-solid fa-floppy-disk fs-4"></i> <span class="fs-4">Save</span>
                     </button>
                 </div>
             </div>

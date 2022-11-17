@@ -30,24 +30,49 @@ namespace BookStore.Logic.Command.Handler
             try
             {
                 var book = database.Books
+                    .Where(b => b.Status != Status.Delete)
                     .FirstOrDefault(b => b.BookId == request.Id);
 
-                if (book != null)
-                {
-                    book.MarkAsDelete(request.UserName ?? string.Empty, AppGlobal.SysDateTime);
-                    database.Update(book);
-                    database.SaveChanges();
+                var edition = database.Books
+                    .Where(b => b.Status != Status.Delete)
+                    .Select(b => b.Edition)
+                    .FirstOrDefault(e => e.BookId == request.Id);
 
-                    result.Success = true;
+                var bookImages = database.BookImages
+                    .Where(bi => (bi.Status != Status.Delete) && (bi.BookId == request.Id))
+                    .ToList();
+
+                if (book != null && edition != null && bookImages != null)
+                {
+                    var info = database.Infos
+                        .Where(info => info.Status != Status.Delete)
+                        .FirstOrDefault(info => info.InfoId == book.InfoId);
+
+                    if (info != null)
+                    {
+                        bookImages.ForEach(bi =>
+                        {
+                            bi.MarkAsDelete(request.UserName ?? string.Empty, DateTime.Now);
+                        });
+
+                        book.MarkAsDelete(request.UserName ?? string.Empty, DateTime.Now);
+                        edition.MarkAsDelete(request.UserName ?? string.Empty, DateTime.Now);
+                        info.MarkAsDelete(request.UserName ?? string.Empty, DateTime.Now);
+
+                        database.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                        database.SaveChanges();
+
+                        result.Success = true;
+                    }
                 }
                 else
                 {
                     result.Message = "Không thể thực hiện. Vui lòng kiểm tra lại id!";
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                result.Message = ex.Message;
+                result.Message = e.Message;
             }
             return Task.FromResult(result);
         }
