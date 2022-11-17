@@ -1,0 +1,57 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@using BookStore.Common.Shared.Model
+@model IEnumerable<BookSummaryModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Trash";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Trash</h1>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-uppercase text-danger">Thùng rác của sách</strong>
+            </div>
+            <div class="col-md-6 text-end">
+                <a asp-action="Index" asp-controller="Book" asp-area="Admin" class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-caret-left"></i> Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th class="text-center">Tựa sách</th>
+                    <th class="text-center">Tên tác giả</th>
+                    <th class="text-center">Tập</th>
+                    <th class="text-center">Mã sách</th>
+                    <th class="text-center">Nhà xuất bản</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="body-list-trash">
+                @Html.Partial("~/Areas/Admin/Views/Book/ListTrash.cshtml", Model)
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Tựa sách</th>
+                    <th>Tên tác giả</th>
+                    <th>Đầu sách(tập)</th>
+                    <th>Mã sách</th>
+                    <th>Nhà xuất bản</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+

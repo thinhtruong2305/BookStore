@@ -1,0 +1,84 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@using BookStore.Common.Shared.Model
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Newtonsoft.Json;
+@model IEnumerable<BookSummaryClientModel>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@foreach (var book in Model)
+{
+	<div class="col-md-3 product-men">
+		<div class="product-chr-info chr">
+			<div class="thumbnail">
+				<a asp-controller="Shop" asp-action="SingleProduct" asp-route-Slug="@book.Slug" asp-route-id="@book.BookId">
+					@{
+						var image = @book.BookImages.FirstOrDefault();
+						if (image != null)
+						{
+							<img src="@image.FilePath" alt="@image.Decription">
+						}
+						else
+						{
+							<img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="unknow">
+						}
+					}
+				</a>
+			</div>
+			<div class="caption">
+				<h4>@book.Category</h4>
+				<p>@book.Title</p>
+				<div class="matrlf-mid">
+					<ul class="rating">
+						<li>
+							<a href="#">
+								<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="fa fa-star yellow-star" aria-hidden="true"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="fa fa-star gray-star" aria-hidden="true"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="fa fa-star gray-star" aria-hidden="true"></span>
+							</a>
+						</li>
+					</ul>
+					<ul class="price-list">
+						<li>$ @book.DiscountPrice</li>
+						<li>
+							$ @book.Price
+						</li>
+					</ul>
+
+					<div class="clearfix"> </div>
+				</div>
+				<form asp-controller="Shop" asp-action="Checkout" method="post">
+					<input type="hidden" name="cmd" value="_cart">
+					<input type="hidden" name="add" value="1">
+					<input type="hidden" name="quantity">
+					<input type="hidden" name="chr_item" value="@book.Title @book.Info.VolumeNumber">
+					<input type="hidden" name="amount" value="@book.Price">
+					<input type="hidden" name="discount_amount" value="@book.DiscountPrice">
+					<input type="hidden" name="currency_code" value="VND">
+					<button type="submit" class="chr-cart pchr-cart">
+						Add to cart
+						<i class="fa fa-cart-plus" aria-hidden="true"></i>
+					</button>
+					<a href="#" data-toggle="modal" data-target="#myModal1"></a>
+				</form>
+			</div>
+		</div>
+	</div>
+}

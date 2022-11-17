@@ -1,0 +1,67 @@
+﻿@using BookStore.DAL.Entities
+@using BookStore.Logic.Shared.Model
+@model IEnumerable<AuthorSummaryModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-uppercase text-danger">Danh sách loại sản phẩm</strong>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="@Url.Action("Create", "Author")" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i> Thêm
+                </a>
+                <a href="@Url.Action("Trash", "Author")" class="btn btn-sm btn-danger">
+                    <i class="fa-solid fa-trash-alt"></i> Thùng rác
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Tên tác giả</th>
+                    <th>Ngày sinh</th>
+                    <th>Quốc tịch</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var author in Model)
+                    {
+                        <tr>
+                            <td>@author.AuthorName</td>
+                            <td>@author.DateOfBirth</td>
+                            <td>@author.CountryOfResidence</td>
+                            <td>
+                                <a class="btn btn-success d-inline" asp-action="Detail" asp-controller="Author" asp-route-id="@author.AuthorId">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                                <a class="btn btn-success d-inline" asp-action="Delete" asp-controller="Author" asp-route-id="@author.AuthorId">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Tên tác giả</th>
+                    <th>Ngày sinh</th>
+                    <th>Quốc tịch</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

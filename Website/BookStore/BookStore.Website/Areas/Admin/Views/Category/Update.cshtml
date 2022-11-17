@@ -1,0 +1,103 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using BookStore.Website.Areas.Admin.Models
+@using BookStore.DAL.Entities
+@model CategoryViewModel
+
+@{
+    ViewData["Title"] = "Cập nhật";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/ckeditor/ckeditor.js"></script>
+<form id="form-update-category" autocomplete="off" asp-action="Create" asp-controller="Category" asp-area="Admin" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="CategoryId" />
+    <input type="hidden" asp-for="Orders" />
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="text-uppercase text-danger">Cập nhật danh mục sách</strong>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i> <span class="">Lưu</span>
+                    </button>
+                    <a asp-action="Index" asp-controller="Category" asp-area="Admin" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-caret-left"></i> <span>Quay lại</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div id="book" class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title mb-5">Danh mục</h2>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        <input maxlength="70" required type="text" asp-for="Name" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" asp-for="Name"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        <input maxlength="60" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" for="Keyword" asp-for="Keyword"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="Keyword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        @if(Model.Categories != null){
+                                            <select class="form-control form-input" asp-items="@(new SelectList(Model.Categories, "CategoryId", "Name"))" asp-for="ParentId">
+                                                <option value="0">Chọn danh mục cha</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="ParentId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <select class="form-control form-input" asp-for="ParentId">
+                                                <option value="0">Chọn danh mục cha</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="ParentId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 form-field mt-3">
+                                        <label for="Decription">Mô tả</label>
+                                        <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="@Model.Decription" class="form-control form-input" placeholder=" "></textarea>
+                                        <script>
+                                            CKEDITOR.replace("Decription");
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row mt-2">
+                <div class="col-6 text-end">
+                    <a asp-action="Index" asp-controller="Category" asp-area="Admin" class="btn btn-primary">
+                        <i class="fa-solid fa-caret-left fs-4"></i> <span class="fs-4">Quay lại</span>
+                    </a>
+                </div>
+                <div class="col-6">
+                    @*onclick="CreateBookImage('@Url.Action("Create", "BookImage")')"*@
+                    <button id="save" class="btn btn-success" type="submit">
+                        <i class="fa-solid fa-floppy-disk fs-4"></i> <span class="fs-4">Lưu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

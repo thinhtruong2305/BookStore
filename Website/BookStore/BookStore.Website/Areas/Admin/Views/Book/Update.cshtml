@@ -1,0 +1,471 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using BookStore.Website.Areas.Admin.Models
+@using BookStore.DAL.Entities
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Newtonsoft.Json;
+@model BookViewModel
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<BookImageViewModel>? listBookImage = new List<BookImageViewModel>();
+    List<PublisherViewModel>? listPublisher = new List<PublisherViewModel>();
+    List<AuthorViewModel>? listAuthor = new List<AuthorViewModel>();
+    List<TagViewModel>? listTag = new List<TagViewModel>();
+}
+
+@{
+    string? bookImages = HttpContextAccessor.HttpContext?.Session.GetString("bookimages");
+    if(bookImages != null)
+        listBookImage = JsonConvert.DeserializeObject<List<BookImageViewModel>>(bookImages);
+
+    string? publishers = HttpContextAccessor.HttpContext?.Session.GetString("publishers");
+    if(publishers != null)
+        listPublisher = JsonConvert.DeserializeObject<List<PublisherViewModel>>(publishers);
+
+    string? authors = HttpContextAccessor.HttpContext?.Session.GetString("authors");
+    if(authors != null)
+        listAuthor = JsonConvert.DeserializeObject<List<AuthorViewModel>>(authors);
+
+    string? tags = HttpContextAccessor.HttpContext?.Session.GetString("tags");
+    if(tags != null)
+        listTag = JsonConvert.DeserializeObject<List<TagViewModel>>(tags);
+}
+
+<div class="container-fluid px-4"></div>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item">Book</li>
+    <li class="breadcrumb-item active">Update</li>
+</ol>
+<form id="form-create-book" asp-action="Update" asp-controller="Book" asp-area="Admin" enctype="multipart/form-data" method="post">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong class="text-uppercase text-danger">Cập nhật sách</strong>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i> <span class="">Lưu</span>
+                    </button>
+                    <a asp-action="Index" asp-controller="Book" asp-area="Admin" class="btn btn-sm btn-primary">
+                        <i class="fa-solid fa-caret-left"></i> <span>Quay lại</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div id="book-image" class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title mb-5">Hình ảnh</h2>
+                            </div>
+                            <div class="container bg-default">
+                                <div id="body-list-book-image" class="col-12">
+                                    <div class="row">
+                                        @if (listBookImage != null)
+                                        {
+                                            @if (listBookImage.Count > 0)
+                                            {
+                                                for (int i = 0; i < listBookImage.Count; i++)
+                                                {
+                                                    <div class="text-center float-start col-lg-4 col-md-12">
+                                                        <div class="card h-100">
+                                                            <!-- Product image-->
+                                                            <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
+                                                            <!-- Product details-->
+                                                            <div class="card-body p-4">
+                                                                <div class="text-center">
+                                                                    <label>@listBookImage[i].Decription</label>
+                                                                </div>
+                                                            </div>
+                                                            @if(listBookImage[i].BookImageId == 0)
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <!-- Product actions-->
+                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                    <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
+                                                                        <i class="fa-solid fa-circle-xmark"></i>
+                                                                    </a>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="text-center m-2 float-start">
+                                            </div>
+                                        }
+                                        <div class="m-2 float-start">
+                                            <button type="button" onclick="AddCreateThingToBook('@Url.Action("CreateBookImageToBook", "BookImage", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="card mb-4">
+                <div class="card-body text-center align-middle">
+                    <div class="container" id="author-body">
+                        <h5 class="title mb-2">Tác giả</h5>
+                        <div class="row">
+                            @if (listAuthor != null)
+                            {
+                                @if (listAuthor.Count > 0)
+                                {
+                                    @for (int i = 0; i < listAuthor.Count; i++)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input readonly type="text" asp-for="@listAuthor[i].FirstName" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listAuthor[i].FirstName"></label>
+                                                </div>
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input readonly type="text" asp-for="@listAuthor[i].LastName" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listAuthor[i].LastName"></label>
+                                                </div>
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input type="text" asp-for="@listAuthor[i].CountryOfResidence" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listAuthor[i].CountryOfResidence"></label>
+                                                </div>
+                                                <div class="col-md-12 col-lg-5 form-field p-2">
+                                                    <input type="date" asp-for="@listAuthor[i].DateOfBirth" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listAuthor[i].DateOfBirth"></label>
+                                                </div>
+                                            </div>
+                                            @if(listAuthor[i].AuthorId == 0)
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromBook" asp-controller="Author" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeleteAuthorFromBook" asp-controller="Author" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-AuthorId="@listAuthor[i].AuthorId" asp-route-BookId="@Model.BookId">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreateAuthorToBook", "Author", new{returnUrl = @Url.Action("Update", "Book"), BookId = Model.BookId})', 'Thêm tác giả')">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body text-center align-middle">
+                    <div class="container" id="publisher-body">
+                        <h5 class="title">Nhà xuất bản</h5>
+                        <div class="row">
+                            @if (listPublisher != null)
+                            {
+                                @if (listPublisher.Count > 0)
+                                {
+                                    @for (int i = 0; i < listPublisher.Count; i++)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-12 col-lg-6 form-field">
+                                                    <input type="text" asp-for="@listPublisher[i].PulishingHouse" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listPublisher[i].PulishingHouse"></label>
+                                                </div>
+                                                <div class="col-md-12 col-lg-6 form-field">
+                                                    <input type="text" asp-for="@listPublisher[i].Country" class="form-control form-input" placeholder=" ">
+                                                    <label class="form-label" asp-for="@listPublisher[i].Country"></label>
+                                                </div>
+                                            </div>
+                                            @if(listPublisher[i].EditionId == 0)
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" type="button" asp-action="DeletePublisherFromBook" asp-controller="Publisher" asp-route-id="@i">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="container">
+                                                        <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeletePublisherFromBook" asp-controller="Publisher" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-PublisherId="@listPublisher[i].PublisherId" asp-route-EditionId="@Model.EditionViewModel.EditionId">
+                                                            <i class="fa-solid fa-x"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreatePublisherToBook", "Publisher", new{returnUrl = @Url.Action("Update", "Book"), EditionId = Model.EditionViewModel.EditionId})', 'Thêm nhà xuất bản')">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body text-center align-middle">
+                    <div class="container" id="tag-body">
+                        <div class="container">
+                            <h5 class="title">Thể loại</h5>
+                            <div class="row">
+                                @if (listTag != null)
+                                {
+                                    @if (listTag.Count > 0)
+                                    {
+                                        @for (int i = 0; i < listTag.Count; i++)
+                                        {
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-lg-6 form-field">
+                                                        <input type="text" asp-for="@listTag[i].TagName" class="form-control form-input" placeholder=" ">
+                                                        <label class="form-label" asp-for="@listTag[i].TagName"></label>
+                                                    </div>
+                                                </div>
+                                                @if(listTag[i].TagId == 0)
+                                                {
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromSession" asp-controller="Tag" asp-route-id="@i">
+                                                                <i class="fa-solid fa-x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="row">
+                                                        <div class="container">
+                                                            <a id="remove" class="btn btn-danger float-start m-2" asp-action="DeleteTagFromBook" asp-controller="Tag" asp-route-returnUrl="@Url.Action("Update", "Book")" asp-route-id="@i" asp-route-TagId="@listTag[i].TagId" asp-route-InfoId="@Model.InfoId">
+                                                                <i class="fa-solid fa-x"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary float-start" onclick="AddCreateThingToBook('@Url.Action("CreateTagToBook", "Tag", new{returnUrl = @Url.Action("Update", "Book"), InfoId = Model.InfoId})', 'Thêm thể loại')">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div id="book" class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="title mb-5">Sách</h2>
+                            </div>
+                            <input type="hidden" asp-for="Slug"/>
+                            <input type="hidden" asp-for="BookId"/>
+                            <input type="hidden" asp-for="InfoId"/>
+                            <div class="col-md-12 mt-2">
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        <input maxlength="70" required type="text" asp-for="Title" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" asp-for="Title"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        <input maxlength="60" type="text" asp-for="Keyword" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" for="Keyword" asp-for="Keyword"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="Keyword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" asp-for="Categories"/>
+                                    <div class="col-md-12 col-lg-4 form-field p-2">
+                                        @if (Model.Categories != null)
+                                        {
+                                            <select class="form-control form-input" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories, "CategoryId", "Name"))">
+                                                <option>Chọn danh mục</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <select class="form-control form-input" asp-for="CategoryId">
+                                                <option value="0">Chọn danh mục cha</option>
+                                            </select>
+                                            <div class="row">
+                                                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <input type="hidden" asp-for="SeriesViewModel.SeriesId"/>
+                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                        <input required type="text" asp-for="SeriesViewModel.SeriesName" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" asp-for="SeriesViewModel.SeriesName"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="SeriesViewModel.SeriesName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6 form-field p-2">
+                                        <input type="text" asp-for="SeriesViewModel.PlannedVolume" class="form-control form-input" placeholder=" ">
+                                        <label class="form-label" asp-for="SeriesViewModel.PlannedVolume"></label>
+                                        <div class="row">
+                                            <span asp-validation-for="SeriesViewModel.PlannedVolume" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-12 form-field mt-3">
+                                        <label for="Decription">Mô tả</label>
+                                        <textarea autocomplete="off" type="text" id="Decription" name="Decription" asp-for="Decription" class="form-control form-input" placeholder=" "></textarea>
+                                        <script>
+                                            // Replace all three <textarea> elements above with CKEditor instances.
+                                            CKEDITOR.replaceAll();
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div id="info" class="container">
+                        <h5 class="title">Chi tiết</h5>
+                        <div class="row">
+                            <input type="hidden" asp-for="InfoViewModel.InfoId"/>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input type="text" asp-for="InfoViewModel.DiscountPercent" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="InfoViewModel.DiscountPercent"></label>
+                                <div class="row">
+                                    <span asp-validation-for="InfoViewModel.DiscountPercent" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input maxlength="20" type="text" asp-for="InfoViewModel.Language" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="InfoViewModel.Language"></label>
+                                <div class="row">
+                                    <span asp-validation-for="InfoViewModel.Language" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input required type="text" asp-for="InfoViewModel.VolumeNumber" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="InfoViewModel.VolumeNumber"></label>
+                                <div class="row">
+                                    <span asp-validation-for="InfoViewModel.VolumeNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div id="edition" class="container">
+                        <h5 class="title">Bản quyền</h5>
+                        <div class="row">
+                        <input type="hidden" asp-for="EditionViewModel.EditionId"/>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input required maxlength="14" type="text" asp-for="EditionViewModel.ISBN" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.ISBN"></label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.ISBN" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input type="date" data-date-format="dd/MM/yyyy" asp-for="EditionViewModel.PublicationDate" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.PublicationDate">Publishing Date</label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.PublicationDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input maxlength="20" type="text" asp-for="EditionViewModel.Format" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.Format"></label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.Format" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input maxlength="30" type="text" asp-for="EditionViewModel.PrintRunSize" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.PrintRunSize"></label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.PrintRunSize" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input type="text" asp-for="EditionViewModel.Price" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.Price"></label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.Price" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-4 form-field p-2">
+                                <input type="text" asp-for="EditionViewModel.Pages" class="form-control form-input" placeholder=" ">
+                                <label class="form-label" asp-for="EditionViewModel.Pages"></label>
+                                <div class="row">
+                                    <span asp-validation-for="EditionViewModel.Pages" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6 text-end">
+                    <a asp-action="Index" asp-controller="Book" asp-area="Admin" class="btn btn-primary">
+                        <i class="fa-solid fa-caret-left fs-4"></i> <span class="fs-4">Quay lại</span>
+                    </a>
+                </div>
+                <div class="col-6">
+                    @*onclick="CreateBookImage('@Url.Action("Create", "BookImage")')"*@
+                    <button id="save" class="btn btn-success" type="submit">
+                        <i class="fa-solid fa-floppy-disk fs-4"></i> <span class="fs-4">Save</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

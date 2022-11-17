@@ -1,0 +1,34 @@
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.deps.json
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.runtimeconfig.json
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.Common.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.Common.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\refint\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.genruntimeconfig.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\ref\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.deps.json
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.runtimeconfig.json
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.Common.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\bin\Debug\net6.0\BookStore.Common.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\refint\BookStore.DAL.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\BookStore.DAL.genruntimeconfig.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\DAL\BookStore.DAL\obj\Debug\net6.0\ref\BookStore.DAL.dll

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "ConfirmEmail";
+    Layout = null;
+}
+
+<h1>@ViewData["Title"].</h1>
+<div>
+    <p>
+        Bạn đã hoàn thành xác thực email.
+        Hãy <a asp-controller="Account" asp-action="Login" class="btn btn-primary">bấm vào đây để đăng nhập</a>.
+    </p>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-primary">
+        <span>Trang chính</span>
+    </a>
+</div>

@@ -1,0 +1,27 @@
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.deps.json
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\refint\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\Graduation Project\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\ref\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.deps.json
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Utils.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.AssemblyReference.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.AssemblyInfoInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.AssemblyInfo.cs
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\refint\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\ref\BookStore.Utils.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Common.Shared.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\bin\Debug\net6.0\BookStore.Common.Shared.pdb
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Utils\obj\Debug\net6.0\BookStore.Utils.csproj.CopyComplete
