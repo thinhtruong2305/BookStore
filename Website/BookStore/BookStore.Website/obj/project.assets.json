@@ -3195,6 +3195,29 @@
           }
         }
       },
+      "ReportViewerCore.NETCore/15.1.17": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.VisualBasic": "4.0.0",
+          "System.CodeDom": "4.7.0",
+          "System.Drawing.Common": "4.7.0",
+          "System.IO.Packaging": "4.7.0",
+          "System.Resources.Extensions": "4.7.1",
+          "System.Windows.Extensions": "4.7.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.ReportViewer.Common.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.DataVisualization.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.NETCore.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.ProcessingObjectModel.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.ReportViewer.Common.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.DataVisualization.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.NETCore.dll": {},
+          "lib/net6.0/Microsoft.ReportViewer.ProcessingObjectModel.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -3366,6 +3389,46 @@
           }
         }
       },
+      "Syncfusion.Compression.Net.Core/20.3.0.57": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Syncfusion.Compression.Portable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Syncfusion.Compression.Portable.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Licensing/20.3.0.57": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.Pdf.Net.Core/20.3.0.57": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Compression.Net.Core": "20.3.0.57",
+          "Syncfusion.Licensing": "20.3.0.57",
+          "System.Text.Encoding.CodePages": "4.4.0"
+        },
+        "compile": {
+          "lib/net6.0/Syncfusion.Pdf.Portable.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Syncfusion.Pdf.Portable.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3387,6 +3450,19 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "System.CodeDom/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Collections/4.3.0": {
@@ -3907,6 +3983,19 @@
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
         }
       },
+      "System.IO.Packaging/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.IO.Packaging.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.IO.Packaging.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.IO.Pipelines/5.0.1": {
         "type": "package",
         "compile": {
@@ -4183,6 +4272,19 @@
         },
         "runtime": {
           "lib/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
+        }
+      },
+      "System.Resources.Extensions/4.7.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Resources.Extensions.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Resources.Extensions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -8722,6 +8824,30 @@
         "portable.bouncycastle.nuspec"
       ]
     },
+    "ReportViewerCore.NETCore/15.1.17": {
+      "sha512": "+aJSex/eI7aRVwpSogOTkQCb6TBBnQFHs0RPlSiHU4+Chwq6DAsU5DI8KaOja90V/XKYHJtlos90xFHGQst9Ug==",
+      "type": "package",
+      "path": "reportviewercore.netcore/15.1.17",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/icon.png",
+        "lib/net5.0/Microsoft.ReportViewer.Common.dll",
+        "lib/net5.0/Microsoft.ReportViewer.DataVisualization.dll",
+        "lib/net5.0/Microsoft.ReportViewer.NETCore.dll",
+        "lib/net5.0/Microsoft.ReportViewer.ProcessingObjectModel.dll",
+        "lib/net6.0/Microsoft.ReportViewer.Common.dll",
+        "lib/net6.0/Microsoft.ReportViewer.DataVisualization.dll",
+        "lib/net6.0/Microsoft.ReportViewer.NETCore.dll",
+        "lib/net6.0/Microsoft.ReportViewer.ProcessingObjectModel.dll",
+        "lib/netcoreapp3.1/Microsoft.ReportViewer.Common.dll",
+        "lib/netcoreapp3.1/Microsoft.ReportViewer.DataVisualization.dll",
+        "lib/netcoreapp3.1/Microsoft.ReportViewer.NETCore.dll",
+        "lib/netcoreapp3.1/Microsoft.ReportViewer.ProcessingObjectModel.dll",
+        "reportviewercore.netcore.15.1.17.nupkg.sha512",
+        "reportviewercore.netcore.nuspec"
+      ]
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "sha512": "HdSSp5MnJSsg08KMfZThpuLPJpPwE5hBXvHwoKWosyHHfe8Mh5WKT0ylEOf6yNzX6Ngjxe4Whkafh5q7Ymac4Q==",
       "type": "package",
@@ -8946,6 +9072,81 @@
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
       ]
     },
+    "Syncfusion.Compression.Net.Core/20.3.0.57": {
+      "sha512": "CBRYDwR38HVWGT19Jtw1yzoiS9XzcKF0bMcnudTZkXfyLJtBc9dBJcY/CV8VeDIORr/XE9JUjPb5YnRYfCw7Rg==",
+      "type": "package",
+      "path": "syncfusion.compression.net.core/20.3.0.57",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/net6.0/Syncfusion.Compression.Portable.dll",
+        "lib/net6.0/Syncfusion.Compression.Portable.xml",
+        "lib/netstandard1.2/Syncfusion.Compression.Portable.dll",
+        "lib/netstandard1.2/Syncfusion.Compression.Portable.xml",
+        "lib/netstandard1.4/Syncfusion.Compression.Portable.dll",
+        "lib/netstandard1.4/Syncfusion.Compression.Portable.xml",
+        "lib/netstandard2.0/Syncfusion.Compression.Portable.dll",
+        "lib/netstandard2.0/Syncfusion.Compression.Portable.xml",
+        "syncfusion.compression.net.core.20.3.0.57.nupkg.sha512",
+        "syncfusion.compression.net.core.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Licensing/20.3.0.57": {
+      "sha512": "l/V7HuB/ZgYaSP0+hfvULMKfn5tJxITv6qCj1bwhAcIjKpHcf2wzQ3FHb/IdD5iCnzvAFdubRddJyHbzG+6ieA==",
+      "type": "package",
+      "path": "syncfusion.licensing/20.3.0.57",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/MonoAndroid10.0/Syncfusion.Licensing.dll",
+        "lib/MonoAndroid90/Syncfusion.Licensing.dll",
+        "lib/Xamarin.Mac/Syncfusion.Licensing.dll",
+        "lib/Xamarin.iOS10/Syncfusion.Licensing.dll",
+        "lib/net20/Syncfusion.Licensing.dll",
+        "lib/net35/Syncfusion.Licensing.dll",
+        "lib/net40/Syncfusion.Licensing.dll",
+        "lib/net45/Syncfusion.Licensing.dll",
+        "lib/net451/Syncfusion.Licensing.dll",
+        "lib/net46/Syncfusion.Licensing.dll",
+        "lib/net5.0/Syncfusion.Licensing.dll",
+        "lib/net6.0/Syncfusion.Licensing.dll",
+        "lib/netcoreapp3.1/Syncfusion.Licensing.dll",
+        "lib/netstandard1.0/Syncfusion.Licensing.dll",
+        "lib/netstandard1.2/Syncfusion.Licensing.dll",
+        "lib/netstandard1.4/Syncfusion.Licensing.dll",
+        "lib/netstandard2.0/Syncfusion.Licensing.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81/Syncfusion.Licensing.dll",
+        "lib/uap10.0/Syncfusion.Licensing.dll",
+        "syncfusion.licensing.20.3.0.57.nupkg.sha512",
+        "syncfusion.licensing.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Pdf.Net.Core/20.3.0.57": {
+      "sha512": "QsZV62BanLvHbU9L+7YWmG9QNR+oboy3kv/KLKOeQvNTMsveuXSIkY7nEI36gp3DbHLvXBTKpmvTrg1GZ5O9WA==",
+      "type": "package",
+      "path": "syncfusion.pdf.net.core/20.3.0.57",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net6.0/Syncfusion.Pdf.Portable.dll",
+        "lib/net6.0/Syncfusion.Pdf.Portable.xml",
+        "lib/netstandard1.2/Syncfusion.Pdf.Portable.dll",
+        "lib/netstandard1.2/Syncfusion.Pdf.Portable.xml",
+        "lib/netstandard1.4/Syncfusion.Pdf.Portable.dll",
+        "lib/netstandard1.4/Syncfusion.Pdf.Portable.xml",
+        "lib/netstandard2.0/Syncfusion.Pdf.Portable.dll",
+        "lib/netstandard2.0/Syncfusion.Pdf.Portable.xml",
+        "syncfusion.pdf.net.core.20.3.0.57.nupkg.sha512",
+        "syncfusion.pdf.net.core.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
     "System.AppContext/4.3.0": {
       "sha512": "fKC+rmaLfeIzUhagxY17Q9siv/sPrjjKcfNg1Ic8IlQkZLipo8ljcaZQu4VtI4Jqbzjc2VTjzGLF6WmsRXAEgA==",
       "type": "package",
@@ -9026,6 +9227,29 @@
         "ref/uap10.0.16299/_._",
         "system.buffers.4.5.0.nupkg.sha512",
         "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.CodeDom/4.7.0": {
+      "sha512": "Hs9pw/kmvH3lXaZ1LFKj3pLQsiGfj2xo3sxSzwiLlRL6UcMZUTeCfoJ9Udalvn3yq5dLlPEZzYegrTQ1/LhPOQ==",
+      "type": "package",
+      "path": "system.codedom/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.CodeDom.dll",
+        "lib/net461/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "ref/net461/System.CodeDom.dll",
+        "ref/net461/System.CodeDom.xml",
+        "ref/netstandard2.0/System.CodeDom.dll",
+        "ref/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.4.7.0.nupkg.sha512",
+        "system.codedom.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -10234,6 +10458,33 @@
         "system.io.filesystem.primitives.nuspec"
       ]
     },
+    "System.IO.Packaging/4.7.0": {
+      "sha512": "9VV4KAbgRQZ79iEoG40KIeZy38O30oWwewScAST879+oki8g/Wa2HXZQgrhDDxQM4GkP1PnRJll05NMiVPbYAw==",
+      "type": "package",
+      "path": "system.io.packaging/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.IO.Packaging.dll",
+        "lib/net46/System.IO.Packaging.xml",
+        "lib/netstandard1.3/System.IO.Packaging.dll",
+        "lib/netstandard1.3/System.IO.Packaging.xml",
+        "lib/netstandard2.0/System.IO.Packaging.dll",
+        "lib/netstandard2.0/System.IO.Packaging.xml",
+        "ref/net46/System.IO.Packaging.dll",
+        "ref/net46/System.IO.Packaging.xml",
+        "ref/netstandard1.3/System.IO.Packaging.dll",
+        "ref/netstandard1.3/System.IO.Packaging.xml",
+        "ref/netstandard2.0/System.IO.Packaging.dll",
+        "ref/netstandard2.0/System.IO.Packaging.xml",
+        "system.io.packaging.4.7.0.nupkg.sha512",
+        "system.io.packaging.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.IO.Pipelines/5.0.1": {
       "sha512": "qEePWsaq9LoEEIqhbGe6D5J8c9IqQOUuTzzV6wn1POlfdLkJliZY3OlB0j0f17uMWlqZYjH7txj+2YbyrIA8Yg==",
       "type": "package",
@@ -11142,6 +11393,26 @@
         "runtimes/aot/lib/netcore50/System.Reflection.TypeExtensions.dll",
         "system.reflection.typeextensions.4.3.0.nupkg.sha512",
         "system.reflection.typeextensions.nuspec"
+      ]
+    },
+    "System.Resources.Extensions/4.7.1": {
+      "sha512": "cuRdQps4IdpvMzgRrtKpXLckKXvc6XzgmTNQ75wf9snAITrfDK759ucS+US0gt1vmspTjCHKSCXgvp0ysfrjkA==",
+      "type": "package",
+      "path": "system.resources.extensions/4.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Resources.Extensions.dll",
+        "lib/net461/System.Resources.Extensions.xml",
+        "lib/netstandard2.0/System.Resources.Extensions.dll",
+        "lib/netstandard2.0/System.Resources.Extensions.xml",
+        "system.resources.extensions.4.7.1.nupkg.sha512",
+        "system.resources.extensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Resources.ResourceManager/4.3.0": {
@@ -12969,7 +13240,9 @@
       "Microsoft.Extensions.Configuration >= 6.0.1",
       "Microsoft.Extensions.DependencyInjection >= 6.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.10",
-      "Newtonsoft.Json >= 13.0.1"
+      "Newtonsoft.Json >= 13.0.1",
+      "ReportViewerCore.NETCore >= 15.1.17",
+      "Syncfusion.Pdf.Net.Core >= 20.3.0.57"
     ]
   },
   "packageFolders": {
@@ -13102,6 +13375,14 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "ReportViewerCore.NETCore": {
+            "target": "Package",
+            "version": "[15.1.17, )"
+          },
+          "Syncfusion.Pdf.Net.Core": {
+            "target": "Package",
+            "version": "[20.3.0.57, )"
           }
         },
         "imports": [

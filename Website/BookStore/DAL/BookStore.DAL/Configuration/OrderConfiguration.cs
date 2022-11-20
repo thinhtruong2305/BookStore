@@ -14,7 +14,9 @@ namespace BookStore.DAL.Configuration
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(o => o.OrderId);
-            builder.Property(o => o.OrderId).UseIdentityColumn();
+
+            builder.Property(o => o.OrderId)
+                .HasDefaultValueSql("NEWID()");
 
             builder.Property<string>(o => o.ShipName)
                 .HasColumnType("nvarchar(60)")

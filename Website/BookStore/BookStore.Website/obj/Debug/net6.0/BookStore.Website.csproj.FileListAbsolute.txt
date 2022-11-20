@@ -574,3 +574,13 @@ C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.Properties.Resources.resources
 C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\obj\Debug\net6.0\BookStore.Website.csproj.GenerateResource.cache
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.ReportViewer.Common.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.ReportViewer.NETCore.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Syncfusion.Compression.Portable.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Syncfusion.Licensing.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\Syncfusion.Pdf.Portable.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\System.IO.Packaging.dll
+C:\Users\ADMIN\Desktop\Code\CSharp\GraduationProject\Website\BookStore\BookStore.Website\bin\Debug\net6.0\System.Resources.Extensions.dll

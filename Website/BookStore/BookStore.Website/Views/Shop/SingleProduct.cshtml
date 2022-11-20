@@ -71,16 +71,24 @@
 						}
 					</ul>
 					<div class="clearfix"> </div>
-					<h6>
-						$@Model.DiscountPrice</h6>
+				@if (Model.DiscountPrice != Model.Price)
+				{
+					<ul class="price-list-single">
+						<li><h6>$@Model.DiscountPrice</h6></li>
+						<li><h6>$@Model.Price</h6></li>
+					</ul>
+				}
+				else{
+					<h6>$@Model.Price</h6>
+				}
 				</div>
 				<div class="occasional">
-					<h5>Specifications</h5>
+					<h5>Đặc điểm</h5>
 					<ul class="single_specific">
 						<li>
-							<span>language :</span> @Model.Language</li>
+							<span>Ngôn ngữ :</span> @Model.Language</li>
 						<li>
-							<span>format :</span> @Model.Format</li>
+							<span>Định dạng :</span> @Model.Format</li>
 						<li>
 							@{
 								var publisherResult = "";
@@ -91,12 +99,12 @@
 							else
 								publisherResult += " - " + Model.EditionPublisher[i].Publisher.PulishingHouse;
 						}
-							<span>publisher :</span> @publisherResult</li>
+							<span>Nhà xuất bản :</span> @publisherResult</li>
 						<li>
-							<span>edition :</span> @Model.PublicationDate.ToString("MMM yyyy")
+							<span>Ngày xuất bản :</span> @Model.PublicationDate.ToString("MMM yyyy")
 						</li>
 						<li>
-							<span>pages :</span> @Model.Pages</li>
+							<span>Trang :</span> @Model.Pages</li>
 					</ul>
 
 				</div>
@@ -119,13 +127,19 @@
 				</div>
 				<div class="occasion-cart">
 					<div class="chr single-item single_page_b">
+					@{
+						decimal? Discount;
+					}
+					@{
+						Discount = @Model.Price - @Model.DiscountPrice;
+					}
 					<form asp-controller="Shop" asp-action="Checkout" method="post">
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="add" value="1">
-						<input type="hidden" name="quantity">
+						<input type="hidden" name="quantity" value="1">
 						<input type="hidden" name="chr_item" value="@Model.Title @Model.VolumeNumber">
 						<input type="hidden" name="amount" value="@Model.Price">
-						<input type="hidden" name="discount_amount" value="@Model.DiscountPrice">
+						<input type="hidden" name="discount_amount" value="@Discount">
 						<input type="hidden" name="currency_code" value="VND">
 						<button type="submit" class="chr-cart pchr-cart">
 							Add to cart

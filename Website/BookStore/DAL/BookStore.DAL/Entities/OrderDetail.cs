@@ -13,7 +13,7 @@ namespace BookStore.DAL.Entities
     public class OrderDetail : BaseEntity
     {
         public int OrderDetailId { get; set; }
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public int BookId { get; set; }
         public int Quantity { get; set; }
         public decimal? DiscountPrice { get; set; }

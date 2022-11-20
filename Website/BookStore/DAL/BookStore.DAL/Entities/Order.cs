@@ -13,7 +13,7 @@ namespace BookStore.DAL.Entities
     [Table("Order")]
     public class Order : BaseEntity
     {
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
         /*[Required(ErrorMessage = "Bạn phải nhập tên")]
         [RegularExpression(@"/^[a-zA-Z]+$/", ErrorMessage = "Bạn phải nhập các ký tự [a-zA-Z]")]
