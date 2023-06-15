@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\BookStore.DAL.Shared.csproj",
+      "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\BookStore.DAL.Shared.csproj",
       "projectName": "BookStore.DAL.Shared",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\BookStore.DAL.Shared.csproj",
+      "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\BookStore.DAL.Shared.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\obj\\",
+      "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",

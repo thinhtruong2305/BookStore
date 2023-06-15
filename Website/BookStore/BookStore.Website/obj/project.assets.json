@@ -44,10 +44,10 @@
           }
         }
       },
-      "MailKit/3.4.2": {
+      "MailKit/3.6.0": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "3.4.2"
+          "MimeKit": "3.6.0"
         },
         "compile": {
           "lib/net6.0/MailKit.dll": {
@@ -2690,7 +2690,7 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/3.1.0": {
+      "Microsoft.NETCore.Platforms/1.1.1": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -2942,11 +2942,13 @@
           }
         }
       },
-      "MimeKit/3.4.2": {
+      "MimeKit/3.6.0": {
         "type": "package",
         "dependencies": {
           "Portable.BouncyCastle": "1.9.0",
-          "System.Security.Cryptography.Pkcs": "6.0.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0",
+          "System.Security.Cryptography.Pkcs": "6.0.0",
+          "System.Text.Encoding.CodePages": "6.0.0"
         },
         "compile": {
           "lib/net6.0/MimeKit.dll": {
@@ -4791,23 +4793,26 @@
           }
         }
       },
-      "System.Text.Encoding.CodePages/4.7.0": {
+      "System.Text.Encoding.CodePages/6.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "3.1.0"
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/System.Text.Encoding.CodePages.dll": {
+          "lib/net6.0/System.Text.Encoding.CodePages.dll": {
             "related": ".xml"
           }
         },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
         "runtimeTargets": {
-          "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll": {
+          "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll": {
             "assetType": "runtime",
             "rid": "win"
           }
@@ -5030,7 +5035,10 @@
         },
         "runtime": {
           "bin/placeholder/BookStore.Common.Shared.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "BookStore.DAL/1.0.0": {
         "type": "project",
@@ -5078,19 +5086,16 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "BookStore.DAL": "1.0.0",
-          "MailKit": "3.4.2",
-          "Microsoft.AspNetCore.Identity.UI": "6.0.9",
-          "MimeKit": "3.4.2"
+          "MailKit": "3.6.0",
+          "Microsoft.AspNetCore.Identity.UI": "6.0.10",
+          "MimeKit": "3.6.0"
         },
         "compile": {
           "bin/placeholder/BookStore.Logic.Shared.dll": {}
         },
         "runtime": {
           "bin/placeholder/BookStore.Logic.Shared.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        }
       },
       "BookStore.Utils/1.0.0": {
         "type": "project",
@@ -5163,10 +5168,10 @@
         "logo.png"
       ]
     },
-    "MailKit/3.4.2": {
-      "sha512": "BRt9YHSr5LtxUeKrsJfxuJ5t5jb+6a2dRWWZvxt/5Tm3Z+nKJ3HBvw7SaMq2ze9e2x0Izw0SS8Q7H31PxBaXSg==",
+    "MailKit/3.6.0": {
+      "sha512": "P7sL/bWj6girXBYlmZmCQnS6Y0DHMe947iiH+Dzl3vlJJiFUcnhxJei/gnrIARuaFUpPoYoFjVqguHwOT4Myzg==",
       "type": "package",
-      "path": "mailkit/3.4.2",
+      "path": "mailkit/3.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -5189,7 +5194,7 @@
         "lib/netstandard2.1/MailKit.dll",
         "lib/netstandard2.1/MailKit.pdb",
         "lib/netstandard2.1/MailKit.xml",
-        "mailkit.3.4.2.nupkg.sha512",
+        "mailkit.3.6.0.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -7832,21 +7837,19 @@
         "notices/THIRDPARTYNOTICES.txt"
       ]
     },
-    "Microsoft.NETCore.Platforms/3.1.0": {
-      "sha512": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
+    "Microsoft.NETCore.Platforms/1.1.1": {
+      "sha512": "TMBuzAHpTenGbGgk0SMTwyEkyijY/Eae4ZGsFNYJvAr/LDn1ku3Etp3FPxChmDp5HHF3kzJuoaa08N0xjqAJfQ==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/3.1.0",
+      "path": "microsoft.netcore.platforms/1.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+        "microsoft.netcore.platforms.1.1.1.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
     "Microsoft.NETCore.Targets/1.1.3": {
@@ -8553,10 +8556,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "MimeKit/3.4.2": {
-      "sha512": "8bshZj8peXR9OaGb1fJJto6YWGG9zGGbDwY5Uylkz08mFU2tHKdkGtwMyFdtO6ZVq1aW41QYj+cN+4vRlE0O5Q==",
+    "MimeKit/3.6.0": {
+      "sha512": "R7WNYvUA+qn4PHt1rMaIUJ3nyloZ2SlWyLjnLfGm90kbMcU/4sYS2QSQMs1dWbtcts5B0CSfB5a2jB9fWX9DAQ==",
       "type": "package",
-      "path": "mimekit/3.4.2",
+      "path": "mimekit/3.6.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8579,7 +8582,7 @@
         "lib/netstandard2.1/MimeKit.dll",
         "lib/netstandard2.1/MimeKit.pdb",
         "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.3.4.2.nupkg.sha512",
+        "mimekit.3.6.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -12498,44 +12501,43 @@
         "system.text.encoding.nuspec"
       ]
     },
-    "System.Text.Encoding.CodePages/4.7.0": {
-      "sha512": "aeu4FlaUTemuT1qOd1MyU4T516QR4Fy+9yDbwWMPHOHy7U8FD6SgTzdZFO7gHcfAPHtECqInbwklVvUK4RHcNg==",
+    "System.Text.Encoding.CodePages/6.0.0": {
+      "sha512": "ZFCILZuOvtKPauZ/j/swhvw68ZRi9ATCfvGbk1QfydmcXBkIWecWKn/250UH7rahZ5OoDBaiAudJtPvLwzw85A==",
       "type": "package",
-      "path": "system.text.encoding.codepages/4.7.0",
+      "path": "system.text.encoding.codepages/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Text.Encoding.CodePages.targets",
+        "buildTransitive/netcoreapp3.1/_._",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
-        "lib/net46/System.Text.Encoding.CodePages.dll",
         "lib/net461/System.Text.Encoding.CodePages.dll",
         "lib/net461/System.Text.Encoding.CodePages.xml",
-        "lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
+        "lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "lib/netcoreapp3.1/System.Text.Encoding.CodePages.dll",
+        "lib/netcoreapp3.1/System.Text.Encoding.CodePages.xml",
         "lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
         "lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
         "runtimes/win/lib/net461/System.Text.Encoding.CodePages.dll",
         "runtimes/win/lib/net461/System.Text.Encoding.CodePages.xml",
-        "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.dll",
-        "runtimes/win/lib/netcoreapp2.0/System.Text.Encoding.CodePages.xml",
-        "runtimes/win/lib/netstandard1.3/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Text.Encoding.CodePages.xml",
         "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
         "runtimes/win/lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
-        "system.text.encoding.codepages.4.7.0.nupkg.sha512",
+        "system.text.encoding.codepages.6.0.0.nupkg.sha512",
         "system.text.encoding.codepages.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "useSharedDesignerContext.txt"
       ]
     },
     "System.Text.Encoding.Extensions/4.3.0": {
@@ -13251,11 +13253,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
+      "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
       "projectName": "BookStore.Website",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
+      "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\",
+      "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -13272,20 +13274,20 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+            "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+              "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
             },
-            "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
+            "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
+              "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
             },
-            "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj"
+            "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
+              "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj"
             },
-            "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
+            "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
+              "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
             },
-            "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
-              "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
+            "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
+              "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
             }
           }
         }

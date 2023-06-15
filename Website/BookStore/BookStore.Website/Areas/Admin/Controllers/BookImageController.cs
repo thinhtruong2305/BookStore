@@ -16,6 +16,9 @@ using System.Security.Claims;
 using AutoMapper;
 using BookStore.Common.Shared.Model;
 using BookStore.DAL;
+using Microsoft.AspNetCore.Html;
+using System.Text.RegularExpressions;
+using System;
 
 namespace BookStore.Website.Areas.Admin.Controllers
 {
@@ -65,7 +68,8 @@ namespace BookStore.Website.Areas.Admin.Controllers
                     string path = await storageService.SaveFile(FileUpLoad);
                     model.FilePath = path;
                     string decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
-                    model.Decription = decodedHtml;
+                    var result = Regex.Replace(decodedHtml, "<.*?>", string.Empty);
+                    model.Decription = result;
                     bookImageResult = await mediator.Send(model.ToCreateCommand());
                     bookImageSave = bookImageResult.Data;
                 }
@@ -119,7 +123,8 @@ namespace BookStore.Website.Areas.Admin.Controllers
                 string path = await storageService.SaveFile(FileUpLoad);
                 model.FilePath = path;
                 string decodedHtml = System.Net.WebUtility.HtmlDecode(model.Decription);
-                model.Decription = decodedHtml;
+                var result = Regex.Replace(decodedHtml, "<.*?>|\n|\r", string.Empty);
+                model.Decription = result;
                 list.Add(model);
                 string bookImages = JsonConvert.SerializeObject(list);
                 session.SetString(BOOKIMAGES, bookImages);  

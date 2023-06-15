@@ -1,0 +1,312 @@
+﻿@using BookStore.Website.Areas.Identity.Models.Manage
+@model IndexViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Hồ sơ cá nhân";
+        Layout = "~/Areas/Identity/Views/Shared/_LoginLayout.cshtml";
+    
+}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 rounded-lg my-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Hồ sơ cá nhân</h3></div>
+                <div class="card-body">
+                    <div class="d-flex align-items-start my-5">
+                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <button class="nav-link active" id="v-pills-infomation-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-infomation"
+                                    type="button" role="tab" aria-controls="v-pills-infomation" aria-selected="true">
+                                Thông tin cơ bản
+                            </button>
+                            <button class="nav-link" id="v-pills-password-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-password"
+                                    type="button" role="tab" aria-controls="v-pills-password" aria-selected="false">
+                                Mật khẩu
+                            </button>
+                            <button class="nav-link" id="v-pills-accounts-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-accounts"
+                                    type="button" role="tab" aria-controls="v-pills-accounts" aria-selected="false">
+                                Liên kết tài khoản ngoài
+                            </button>
+                            <button class="nav-link" id="v-pills-phone-number-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-phone-number"
+                                    type="button" role="tab" aria-controls="v-pills-phone-number" aria-selected="false">
+                                Số điện thoại
+                            </button>
+                            <button class="nav-link" id="v-pills-authortication-2-actor-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-authortication-2-actor"
+                                    type="button" role="tab" aria-controls="v-pills-authortication-2-actor" aria-selected="false">
+                                Xác thực hai yếu tố
+                            </button>
+                            <button class="nav-link" id="v-pills-app-authentication-tab"
+                                    data-bs-toggle="pill" data-bs-target="#v-pills-app-authentication"
+                                    type="button" role="tab" aria-controls="v-pills-app-authentication" aria-selected="false">
+                                Xác thực ứng dụng
+                            </button>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-infomation" role="tabpanel" aria-labelledby="v-pills-infomation-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                @Html.DisplayNameFor(m => Model.profile.UserName)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(m => Model.profile.UserName)
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                @Html.DisplayNameFor(m => Model.profile.UserEmail)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(m => Model.profile.UserEmail)
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                @Html.DisplayNameFor(m => Model.profile.PhoneNumber)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(m => Model.profile.PhoneNumber)
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                @Html.DisplayNameFor(m => Model.profile.HomeAdress)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(m => Model.profile.HomeAdress)
+                                            </dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-sm-6">
+                                                @Html.DisplayNameFor(m => Model.profile.BirthDate)
+                                            </dt>
+                                            <dd class="col-sm-6">
+                                                @Html.DisplayFor(m => Model.profile.BirthDate)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-5">
+                                            <div class="row">
+                                                <a asp-action="EditProfile" class="btn btn-primary btn-sm">Cập nhật</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                                @if (Model.HasPassword)
+                                {
+                                    <a asp-controller="Manage" asp-action="ChangePassword">Đổi mật khẩu</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Manage" asp-action="SetPassword">Tạo mật khẩu</a>
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-accounts" role="tabpanel" aria-labelledby="v-pills-accounts-tab">
+                                <div class="col-md-12">
+                                    Có @Model.Logins.Count liên kết. <a asp-controller="Manage" asp-action="ManageLogins">Quản lý liên kết ngoài</a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-phone-number" role="tabpanel" aria-labelledby="v-pills-phone-number-tab">
+                                @(Model.PhoneNumber ?? "không có")
+                                @if (Model.PhoneNumber != null)
+                                {
+                                    <text>:</text>
+                                    <text>&nbsp;&nbsp;<a asp-controller="Manage" asp-action="AddPhoneNumber">Thay đổi</a>&nbsp;&nbsp;</text>
+                                    <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post" role="form">
+                                        <button type="submit" class="btn btn-danger btn-sm">Loại bỏ số điện thoại</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <text>&nbsp;&nbsp;<a asp-controller="Manage" asp-action="AddPhoneNumber">Thêm số điện thoại</a></text>
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-authortication-2-actor" role="tabpanel" aria-labelledby="v-pills-authortication-2-actor-tab">
+                                <div class="col-md-12">
+                                    @if (Model.TwoFactor)
+                                    {
+                                        <form asp-controller="Manage" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                                            (Đang kích hoạt) <button type="submit" class="btn btn-danger btn-sm">Hủy</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-controller="Manage" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-primary btn-sm">Kích hoạt</button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-app-authentication" role="tabpanel" aria-labelledby="v-pills-app-authentication-tab">
+                                <div class="col-md-12">
+                                    @if (Model.AuthenticatorKey == null)
+                                    {
+                                        <form asp-controller="Manage" asp-action="ResetAuthenticatorKey" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-sm btn-primary">Phát sinh mã</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <p>Mã xác thực là: @Model.AuthenticatorKey</p>
+                                        <p>Nhập mã này khi yêu cầu xác thực 2 yếu tố</p>
+                                        <form asp-controller="Manage" asp-action="GenerateRecoveryCode" method="post" class="form-horizontal" role="form">
+                                            <button type="submit" class="btn btn-sm btn-primary">Phát sinh mã phục hồi</button>
+                                            <p>Mã phục hồi sử dụng để xác thực hai yếu tố</p>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center py-3">
+                   
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+@*<div id="VerticalTab">
+    <ul class="resp-tabs-list ver_1">
+        <li>Thông tin cơ bản</li>
+        <li>Mật khẩu</li>
+        <li>Liên kết tài khoản ngoài</li>
+        <li>Số điện thoại</li>
+        <li>Xác thực hai yếu tố</li>
+        <li>Xác thực ứng dụng</li>
+    </ul>
+    <div class="resp-tabs-container ver_1">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(m => Model.profile.UserName)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(m => Model.profile.UserName)
+                        </dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(m => Model.profile.UserEmail)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(m => Model.profile.UserEmail)
+                        </dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(m => Model.profile.PhoneNumber)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(m => Model.profile.PhoneNumber)
+                        </dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(m => Model.profile.HomeAdress)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(m => Model.profile.HomeAdress)
+                        </dd>
+                    </dl>
+                    <dl class="row">
+                        <dt class="col-sm-6">
+                            @Html.DisplayNameFor(m => Model.profile.BirthDate)
+                        </dt>
+                        <dd class="col-sm-6">
+                            @Html.DisplayFor(m => Model.profile.BirthDate)
+                        </dd>
+                    </dl>
+                    <a asp-action="EditProfile" class="btn btn-primary btn-sm">Cập nhật</a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                @if (Model.HasPassword)
+                {
+                    <a asp-controller="Manage" asp-action="ChangePassword">Đổi mật khẩu</a>
+                }
+                else
+                {
+                    <a asp-controller="Manage" asp-action="SetPassword">Tạo mật khẩu</a>
+                }
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                Có @Model.Logins.Count liên kết. <a asp-controller="Manage" asp-action="ManageLogins">Quản lý liên kết ngoài</a>
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                <p>
+                    Số điện thoại dùng để xác thực hai yêu tố
+                </p>
+                @(Model.PhoneNumber ?? "không có")
+                @if (Model.PhoneNumber != null)
+                {
+                    <text>:</text>
+                    <text>&nbsp;&nbsp;<a asp-controller="Manage" asp-action="AddPhoneNumber">Thay đổi</a>&nbsp;&nbsp;</text>
+                    <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post" role="form">
+                        <button type="submit" class="btn btn-danger btn-sm">Loại bỏ số điện thoại</button>
+                    </form>
+                }
+                else
+                {
+                    <text>&nbsp;&nbsp;<a asp-controller="Manage" asp-action="AddPhoneNumber">Thêm số điện thoại</a></text>
+                }
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                @if (Model.TwoFactor)
+                {
+                    <form asp-controller="Manage" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                        (Đang kích hoạt) <button type="submit" class="btn btn-danger btn-sm">Hủy</button>
+                    </form>
+                }
+                else
+                {
+                    <form asp-controller="Manage" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal" role="form">
+                        <button type="submit" class="btn btn-primary btn-sm">Kích hoạt</button>
+                    </form>
+                }
+            </div>
+        </div>
+        <div>
+            <div class="col-md-12">
+                @if (Model.AuthenticatorKey == null)
+                {
+                    <form asp-controller="Manage" asp-action="ResetAuthenticatorKey" method="post" class="form-horizontal" role="form">
+                        <button type="submit" class="btn btn-sm btn-primary">Phát sinh mã</button>
+                    </form>
+                }
+                else
+                {
+                    <p>Mã xác thực là: @Model.AuthenticatorKey</p>
+                    <p>Nhập mã này khi yêu cầu xác thực 2 yếu tố</p>
+                    <form asp-controller="Manage" asp-action="GenerateRecoveryCode" method="post" class="form-horizontal" role="form">
+                        <button type="submit" class="btn btn-sm btn-primary">Phát sinh mã phục hồi</button>
+                        <p>Mã phục hồi sử dụng để xác thực hai yếu tố</p>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="clearfix"></div>

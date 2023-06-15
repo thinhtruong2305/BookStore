@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj": {}
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
         "projectName": "BookStore.Common.Shared",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -59,14 +62,14 @@
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
         "projectName": "BookStore.Logic.Shared",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +86,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
               }
             }
           }
@@ -101,15 +104,15 @@
           "dependencies": {
             "MailKit": {
               "target": "Package",
-              "version": "[3.4.2, )"
+              "version": "[3.6.0, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.9, )"
+              "version": "[6.0.10, )"
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[3.4.2, )"
+              "version": "[3.6.0, )"
             }
           },
           "imports": [
@@ -124,9 +127,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -135,14 +135,14 @@
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj",
         "projectName": "BookStore.Logic",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -159,17 +159,17 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
               }
             }
           }
@@ -221,14 +221,14 @@
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
         "projectName": "BookStore.Utils",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -245,8 +245,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
               }
             }
           }
@@ -322,14 +322,14 @@
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
         "projectName": "BookStore.Website",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\BookStore.Website.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Website\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -346,20 +346,20 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic.Shared\\BookStore.Logic.Shared.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Logic\\BookStore.Logic.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj"
               },
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj"
               }
             }
           }
@@ -482,14 +482,14 @@
         }
       }
     },
-    "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
+    "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
+        "projectUniqueName": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
         "projectName": "BookStore.DAL",
-        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
+        "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\BookStore.DAL.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\obj\\",
+        "outputPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\DAL\\BookStore.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -506,8 +506,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
-                "projectPath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
+              "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj": {
+                "projectPath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Common.Shared\\BookStore.Common.Shared.csproj"
               }
             }
           }

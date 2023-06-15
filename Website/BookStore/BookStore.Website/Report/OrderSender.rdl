@@ -282,7 +282,7 @@
                         <Style />
                       </TextRun>
                       <TextRun>
-                        <Value>=First(Fields!ShipName.Value, "Order")</Value>
+                        <Value>=Fields!ShipName.Value</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -295,7 +295,7 @@
                         <Style />
                       </TextRun>
                       <TextRun>
-                        <Value>=First(Fields!ShipAdress.Value, "Order")</Value>
+                        <Value>=Fields!ShipAdress.Value</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -308,7 +308,7 @@
                         <Style />
                       </TextRun>
                       <TextRun>
-                        <Value>=First(Fields!ShipPhone.Value, "Order")</Value>
+                        <Value>=Fields!ShipPhone.Value</Value>
                         <Style />
                       </TextRun>
                     </TextRuns>
@@ -661,7 +661,7 @@
                         </Style>
                       </TextRun>
                       <TextRun>
-                        <Value>=First(Fields!TotalPrice.Value, "Order")</Value>
+                        <Value>=Fields!TotalPrice.Value</Value>
                         <Style>
                           <FontFamily />
                         </Style>
@@ -786,7 +786,6 @@
                 </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
-              <Top>0in</Top>
               <Left>0.01958in</Left>
               <Height>0.85139in</Height>
               <Width>2.55816in</Width>
@@ -869,7 +868,6 @@
                 </Textbox>
               </ReportItems>
               <KeepTogether>true</KeepTogether>
-              <Top>0in</Top>
               <Left>3.35382in</Left>
               <Height>0.85139in</Height>
               <Width>2.14466in</Width>

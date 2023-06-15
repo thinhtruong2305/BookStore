@@ -1,17 +1,11 @@
 ﻿using BookStore.Common.Shared.Config;
 using BookStore.Logic.Shared.Catalog.Interface;
 using MailKit.Security;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Utils.Extension
 {

@@ -37,6 +37,9 @@
                 <li>
                     <a asp-area="Admin" asp-controller="Home" asp-action="Index" title="@UserManager.GetUserName(User)!">Quản lý</a>
                 </li>
+                <li>
+                    <a asp-area="Identity" asp-controller="Manage" asp-action="Index" title="@UserManager.GetUserName(User)!">Hồ sơ cá nhân</a>
+                </li>
             </ul>
         </li>
         <li>
@@ -55,8 +58,7 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <!--asp-area="Admin" asp-controller="Home" asp-action="Index"-->
-                    <a action="#" title="@UserManager.GetUserName(User)!">Hồ sơ cá nhân</a>
+                    <a asp-area="Identity" asp-controller="Manage" asp-action="Index" title="@UserManager.GetUserName(User)!">Hồ sơ cá nhân</a>
                 </li>
             </ul>
         </li>

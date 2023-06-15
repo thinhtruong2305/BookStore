@@ -61,7 +61,7 @@
         </div>
         <div class="card-body">
             <div class="card mb-4">
-                <div class="card-body">
+                <div class="card-body m-2">
                     <div id="book-image" class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -76,12 +76,12 @@
                                             {
                                                 for (int i = 0; i < listBookImage.Count; i++)
                                                 {
-                                                    <div class="text-center float-start col-lg-4 col-md-12">
-                                                        <div class="card h-100">
+                                                    <div class="text-center float-start col-lg-3 col-sm-12">
+                                                        <div class="card">
                                                             <!-- Product image-->
-                                                            <img class="img-thumbnail mx-auto d-block" width="200" height="350" src="@listBookImage[i].FilePath" />
+                                                            <img class="img-thumbnail mx-auto" width="150px" src="@listBookImage[i].FilePath" />
                                                             <!-- Product details-->
-                                                            <div class="card-body p-4">
+                                                            <div class="card-body p-2">
                                                                 <div class="text-center">
                                                                     <label>@listBookImage[i].Decription</label>
                                                                 </div>
@@ -89,7 +89,7 @@
                                                             @if(listBookImage[i].BookImageId == 0)
                                                             {
                                                                 <!-- Product actions-->
-                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
                                                                     <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-id="@i" class="btn btn-outline-danger" title="remove">
                                                                         <i class="fa-solid fa-circle-xmark"></i>
                                                                     </a>
@@ -98,7 +98,7 @@
                                                             else
                                                             {
                                                                 <!-- Product actions-->
-                                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                                <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
                                                                     <a asp-action="DeleteBookImageFromBook" asp-controller="BookImage" asp-area="Admin" asp-route-returnUrl="@Url.Action("Create", "Book")" asp-route-BookImageId="@listBookImage[i].BookImageId" class="btn btn-outline-danger" title="remove">
                                                                         <i class="fa-solid fa-circle-xmark"></i>
                                                                     </a>
@@ -111,11 +111,11 @@
                                         }
                                         else
                                         {
-                                            <div class="text-center m-2 float-start">
+                                            <div class="text-center float-start">
                                             </div>
                                         }
-                                        <div class="m-2 float-start">
-                                            <a onclick="AddCreateThingToBook('@Url.Action("AddBookImageToSession", "BookImage", new{returnUrl = Url.Action("Create", "Book")})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success">
+                                        <div class="float-start col-3 col-sm-12">
+                                            <a onclick="AddCreateThingToBook('@Url.Action("AddBookImageToSession", "BookImage", new{returnUrl = Url.Action("Create", "Book")})', 'Thêm hình ảnh')" for="file" class="btn btn-outline-success btn-add-img">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </a>
                                         </div>

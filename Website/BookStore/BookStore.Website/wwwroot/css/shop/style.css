@@ -2323,6 +2323,7 @@ button#btn-signup {
     margin: 0 auto;
 }
 .tab1 p {
+    color: black;
     margin-top: 10px;
     word-spacing: 2px;
 }

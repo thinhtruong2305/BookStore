@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "r0A4RNqyZEKfuU3osA9dwwnQmKkkFsw6TE/A1IRVrO5rtFMka+M0qSY9hRDgswR1+TCdAO1wsynwQ8VIsgrkEQ==",
+  "dgSpecHash": "FM9y58TvdX9jeDjn6icruHPxmggRp17IxfM2+RKbj1B5uAeHrtVvOXnbcn0uddRNX0CSGOuk998HdZFmXeFrIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
+  "projectFilePath": "D:\\Users\\admin\\Documents\\DocumentStudy\\DaiHoc\\BaiThucHanh\\Code\\CSharp\\GraduationProject\\Website\\BookStore\\BookStore.Utils\\BookStore.Utils.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\mailkit\\3.4.2\\mailkit.3.4.2.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.2.0\\microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
