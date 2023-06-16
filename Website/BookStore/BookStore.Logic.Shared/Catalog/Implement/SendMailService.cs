@@ -1,16 +1,11 @@
 ﻿using BookStore.Common.Shared.Config;
 using BookStore.Logic.Shared.Catalog.Interface;
 using MailKit.Security;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mime;
 
 namespace BookStore.Utils.Extension
 {
@@ -75,6 +70,48 @@ namespace BookStore.Utils.Extension
             var emailsavefile = string.Format(@"smssave/{0}-{1}.txt", number, Guid.NewGuid());
             System.IO.File.WriteAllTextAsync(emailsavefile, message);
             return Task.FromResult(0);
+        }
+
+        public async Task SendEmailWithFileAsync(string email, string subject, string htmlMessage, Attachment attachment, byte[] data)
+        {
+            var message = new MimeMessage();
+            message.Sender = new MailboxAddress(mailSettings.Value.DisplayName, mailSettings.Value.Mail);
+            message.From.Add(new MailboxAddress(mailSettings.Value.DisplayName, mailSettings.Value.Mail));
+            message.To.Add(MailboxAddress.Parse(email));
+            message.Subject = subject;
+
+
+            var builder = new BodyBuilder();
+            builder.Attachments.Add(attachment.Name, data, MimeKit.ContentType.Parse(MediaTypeNames.Application.Pdf));
+            builder.HtmlBody = htmlMessage;
+            message.Body = builder.ToMessageBody();
+
+            // dùng SmtpClient của MailKit
+            using var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+            try
+            {
+                smtp.Connect(mailSettings.Value.Host, mailSettings.Value.Port, SecureSocketOptions.StartTls);
+                smtp.Authenticate(mailSettings.Value.Mail, mailSettings.Value.Password);
+                await smtp.SendAsync(message);
+            }
+
+            catch (Exception ex)
+            {
+                // Gửi mail thất bại, nội dung email sẽ lưu vào thư mục mailssave
+                System.IO.Directory.CreateDirectory("mailssave");
+                var emailsavefile = string.Format(@"mailssave/{0}.eml", Guid.NewGuid());
+                await message.WriteToAsync(emailsavefile);
+
+                logger.LogInformation("Lỗi gửi mail, lưu tại - " + emailsavefile);
+                logger.LogError(ex.Message);
+            }
+
+            smtp.Disconnect(true);
+
+            logger.LogInformation("send mail to " + email);
+
+
         }
     }
 }

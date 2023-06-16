@@ -18,15 +18,13 @@ namespace BookStore.Website.Controllers
         public const string CARTS = "carts";
         private readonly IBookQueries bookQueries;
         private readonly IOrderQueries orderQueries;
-        private readonly ISendMailService emailSender;
 
         public ShopController(IBookQueries bookQueries,
-            IOrderQueries orderQueries,
-            ISendMailService emailSender)
+            IOrderQueries orderQueries
+            )
         {
             this.bookQueries = bookQueries;
             this.orderQueries = orderQueries;
-            this.emailSender = emailSender;
         }
         public IActionResult Index()
         {
@@ -47,7 +45,6 @@ namespace BookStore.Website.Controllers
             OrderViewModel order = new OrderViewModel();
             List<OrderDetailViewModel> orderDetails = new List<OrderDetailViewModel>();
             var session = HttpContext.Session;
-            string? cartGet = session.GetString(CARTS);
             int items = (form.Count - 4) / 5;
             for (int i = 1; i < items + 1; i++)
             {
@@ -92,9 +89,9 @@ namespace BookStore.Website.Controllers
                     {
                         orderDetail.DiscountPrice = Convert.ToDecimal(item.Value);
                     }
-                    if (orderDetail.Book != null && orderDetail.Quantity != 0 && orderDetail.Payment != 0 && orderDetail.DiscountPrice != 0)
+                    if (orderDetail.Book != null && orderDetail.Quantity != 0 && orderDetail.Payment != 0)
                     {
-                        orderDetail.Payment = orderDetail.Payment * orderDetail.Quantity;
+                        orderDetail.Payment = (orderDetail.Payment * orderDetail.Quantity)  - orderDetail.DiscountPrice;
                         break;
                     }
                 }
@@ -109,38 +106,14 @@ namespace BookStore.Website.Controllers
             session.SetString(CARTS, carts);
             return View(order);
         }
-        public IActionResult Payment(int id)
+        public IActionResult Payment(Guid id)
         {
-            if (id != 0)
+            if (id != Guid.Empty)
             {
                 var model = orderQueries.GetDetail(id);
                 return View(model);
             }
             return RedirectToAction("Index", "Shop");
-        }
-        [HttpPost]
-        public async Task<IActionResult> SendMailAsync(IFormCollection form)
-        {
-            int OrderId = 0;
-            string email = "";
-            foreach (var item in form)
-            {
-                if (item.Key == "OrderId")
-                {
-                    OrderId = Convert.ToInt32(item.Value);
-                }
-                if (item.Key == "Email")
-                {
-                    email = item.Value.ToString();
-                }
-            }
-            var callbackUrl = Url.ActionLink("Payment", "Shop", new{ area = "", id = OrderId}, Request.Scheme);
-            await emailSender.SendEmailAsync(email,
-                        "Xác nhận địa chỉ email",
-                        @$"Cảm ơn bạn đã mua hàng trên BookStore, 
-                               đây là hóa đơn của bạn <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>bấm vào đây</a> 
-                               để xem hóa đơn.");
-            return RedirectToAction("Index", "Home");
         }
     }
 }

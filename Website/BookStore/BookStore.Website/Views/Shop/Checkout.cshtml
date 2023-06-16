@@ -61,17 +61,23 @@
                                                 var image = listOrderDetail[i].Book.BookImages.FirstOrDefault();
                                                 if (image != null)
                                                 {
-                                                            <img src="@image.FilePath" alt="@image.Decription">
+                                                                    <img src="@image.FilePath" alt="@image.Decription">
                                                 }
                                                 else
                                                 {
-                                                            <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="unknow">
+                                                                    <img src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="unknow">
                                                 }
                                             }
                                         </a>
                                     </td>
                                     <td class="invert">
                                         <div class="quantity">
+                                            @{
+                                                decimal? Discount;
+                                            }
+                                            @{
+                                                Discount = listOrderDetail[i].Book.Edition.Price - listOrderDetail[i].DiscountPrice;
+                                            }
                                             <div class="quantity-select">
                                                 <div class="entry value-minus">
                                                     <form action="#" method="post">
@@ -79,7 +85,8 @@
                                                         <input type="hidden" name="add" value="1">
                                                         <input type="hidden" name="quantity" value="-1">
                                                         <input type="hidden" name="chr_item" value="@listOrderDetail[i].Book.Title @listOrderDetail[i].Book.Info.VolumeNumber">
-                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Payment">
+                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Book.Edition.Price">
+                                                        <input type="hidden" name="discount_amount" value="@Discount">
                                                         <input type="hidden" name="currency_code" value="VND">
                                                         <button type="submit" class="entry value-minus">&nbsp;</button>
                                                         <a href="#" data-toggle="modal" data-target="#myModal1"></a>
@@ -88,13 +95,14 @@
                                                 <div class="entry value">
                                                     <span>@listOrderDetail[i].Quantity</span>
                                                 </div>
-                                                <div class="entry value-plus active">
+                                                <div class="entry value-plus">
                                                     <form action="#" method="post">
                                                         <input type="hidden" name="cmd" value="_cart">
                                                         <input type="hidden" name="add" value="1">
                                                         <input type="hidden" name="quantity" value="1">
                                                         <input type="hidden" name="chr_item" value="@listOrderDetail[i].Book.Title @listOrderDetail[i].Book.Info.VolumeNumber">
-                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Payment">
+                                                        <input type="hidden" name="amount" value="@listOrderDetail[i].Book.Edition.Price">
+                                                        <input type="hidden" name="discount_amount" value="@Discount">
                                                         <input type="hidden" name="currency_code" value="VND">
                                                         <button type="submit" class="entry value-plus">&nbsp;</button>
                                                         <a href="#" data-toggle="modal" data-target="#myModal1"></a>
@@ -105,13 +113,7 @@
                                     </td>
                                     <td class="invert">@listOrderDetail[i].Book.Title</td>
                                     <td class="invert">
-                                        @if (listOrderDetail[i].Payment == listOrderDetail[i].DiscountPrice)
-                                        {
-											@listOrderDetail[i].Payment;
-										}
-										else{
-											@listOrderDetail[i].DiscountPrice;
-										}
+                                        @listOrderDetail[i].Payment
                                     </td>
                                 </tr>
                             }
@@ -131,21 +133,14 @@
                                     @item.Book.Title
                                     <i>-</i>
                                     <span>$
-                                        @if (item.Payment == item.DiscountPrice)
-                                        {
-                                            @item.Payment;
-                                        }
-                                        else
-                                        {
-                                            @item.DiscountPrice;
-                                        }
+                                        @item.Payment
                                     </span>
                                 </li>
                             }
                             <li>
                                 Total
                                 <i>-</i>
-                                <span>$@listOrderDetail.Select(od => od.Payment == od.DiscountPrice ? od.Payment : od.DiscountPrice).Sum()</span>
+                                <span>$@listOrderDetail.Select(od => od.Payment).Sum()</span>
                             </li>
                         }
                     </ul>
@@ -160,6 +155,10 @@
                                     <div class="controls">
                                         <label class="control-label" asp-for="ShipName"></label>
                                         <input required class="billing-address-name form-control" type="text" asp-for="ShipName" placeholder="Họ và tên">
+                                    </div>
+                                    <div class="controls">
+                                        <label class="control-label" asp-for="Email"></label>
+                                        <input required class="billing-address-name form-control" type="email" asp-for="Email" placeholder="exmaple@gmail.com">
                                     </div>
                                     <div class="card_number_grids">
                                         <div class="card_number_grid_left">
@@ -177,7 +176,7 @@
                                         <div class="clear"> </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="submit check_out">place order</button>
+                                <button id="my-checkout" type="submit" class="submit check_out">place order</button>
                             </div>
                         </div>
                     </form>

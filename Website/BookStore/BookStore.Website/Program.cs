@@ -26,6 +26,7 @@ using BookStore.Website.Areas.Admin.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using BookStore.Website.Areas.Admin.Models.MappingProfile;
 using Microsoft.AspNetCore.Routing.Template;
+using BookStore.Website.Models.MappingProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -111,6 +112,7 @@ builder.Services.AddIdentityConfig<User, IdentityRole, AppDatabase>();
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(AuthorMappingProfile).Assembly);
 builder.Services.AddAutoMapper(typeof(BookViewMappingProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(OrderDetailSenderMappingProfile).Assembly);
 
 //MediatR
 builder.Services.AddMediatR(typeof(LoginRequest).Assembly);

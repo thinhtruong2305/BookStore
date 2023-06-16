@@ -8,7 +8,7 @@ namespace BookStore.Logic.Shared.Model
 {
     public class OrderSummaryModel
     {
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public string ShipName { get; set; }
         public string ShipAdress { get; set; }
         public string ShipPhone { get; set; }

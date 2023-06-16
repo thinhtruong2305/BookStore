@@ -27,6 +27,7 @@ namespace BookStore.Website.Areas.Admin.Models
         {
             return new CreateOrderRequest
             {
+                OrderId = new Guid(),
                 ShipName = ShipName,
                 ShipAdress = ShipAdress,
                 ShipPhone = ShipPhone,

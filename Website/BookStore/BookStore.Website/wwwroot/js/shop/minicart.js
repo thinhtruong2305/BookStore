@@ -1808,7 +1808,6 @@ Cart.prototype.subtotal = function subtotal(config) {
  */
 Cart.prototype.total = function total(config) {
     var result = 0;
-
     result += this.subtotal();
     result -= this.discount();
 
@@ -1868,7 +1867,7 @@ Cart.prototype.save = function save() {
  * @param {object} The initiating event
  */
     Cart.prototype.new_checkout = function new_checkout(evt) {
-    this.fire('new_checkout', evt);
+        this.fire('new_checkout', evt);
 };
 
 
@@ -2158,7 +2157,7 @@ Product.prototype.options = function options() {
  */
 Product.prototype.discount = function discount(config) {
     var flat, rate, num, limit, result, amount;
-
+    
     if (!this._discount) {
         result = 0;
         num = parseInt(this.get('discount_num'), 10) || 0;
@@ -2215,10 +2214,15 @@ Product.prototype.amount = function amount(config) {
  */
 Product.prototype.total = function total(config) {
     var result;
-
+    debugger;
     if (!this._total) {
-        result  = this.get('quantity') * this.amount();
-        result -= this.discount();
+        if (this.discount() !== this.amount()) {
+            result = this.get('quantity') * this.amount();
+            result -= this.discount();
+        }
+        else {
+            result = this.get('quantity') * this.amount();
+        }
 
         this._total = parser.amount(result);
     }
@@ -3015,4 +3019,4 @@ module.exports = viewevents = {
 };
 
 },{"./constants":11,"./util/events":16}]},{},[9,10,11,12,13,14,15,16,17,18,19,20,21,22,23])
-;
+    ;

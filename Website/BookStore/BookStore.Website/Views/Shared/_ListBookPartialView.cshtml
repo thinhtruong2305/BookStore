@@ -64,13 +64,19 @@
 
 					<div class="clearfix"> </div>
 				</div>
+				@{
+                    decimal? Discount;
+                }
+                @{
+					Discount = @book.Price - @book.DiscountPrice;
+                }
 				<form asp-controller="Shop" asp-action="Checkout" method="post">
 					<input type="hidden" name="cmd" value="_cart">
 					<input type="hidden" name="add" value="1">
-					<input type="hidden" name="quantity">
+					<input type="hidden" name="quantity" value="1">
 					<input type="hidden" name="chr_item" value="@book.Title @book.Info.VolumeNumber">
 					<input type="hidden" name="amount" value="@book.Price">
-					<input type="hidden" name="discount_amount" value="@book.DiscountPrice">
+					<input type="hidden" name="discount_amount" value="@Discount">
 					<input type="hidden" name="currency_code" value="VND">
 					<button type="submit" class="chr-cart pchr-cart">
 						Add to cart

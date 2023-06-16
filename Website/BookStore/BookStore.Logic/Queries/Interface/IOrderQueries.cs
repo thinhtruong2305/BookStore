@@ -13,7 +13,7 @@ namespace BookStore.Logic.Queries.Interface
         public Task<List<OrderSummaryModel>> GetAllAsync();
         public List<OrderSummaryModel> GetAllDelete();
         public Task<List<OrderSummaryModel>> GetAllDeleteAsync();
-        public OrderDetailModel? GetDetail(int OrderId);
-        public Task<OrderDetailModel?> GetDetailAsync(int OrderId);
+        public OrderDetailModel? GetDetail(Guid OrderId);
+        public Task<OrderDetailModel?> GetDetailAsync(Guid OrderId);
     }
 }

@@ -83,3 +83,8 @@ input[type="file"] {
     margin: 10px;
     display: none;
 }
+
+.btn-add-img{
+    font-size: 50px;
+    padding: 99px 60px;
+}
