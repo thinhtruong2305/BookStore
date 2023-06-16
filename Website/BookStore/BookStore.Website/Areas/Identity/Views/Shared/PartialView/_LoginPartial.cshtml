@@ -28,10 +28,19 @@
 @if (SignInManager.IsSignedIn(User))
 {
     @if(@Context.User?.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.Role)?.Value == "Admin"){
-        <li>
-            <a asp-area="Admin" asp-controller="Home" asp-action="Index" title="@UserManager.GetUserName(User)!">
+        <li class="dropdown">
+            <a class="dropdown-toggle effect-3" action="#">
                 <span class="fa fa-user nav-icon"></span>
+                <b class="caret"></b>
             </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index" title="@UserManager.GetUserName(User)!">Quản lý</a>
+                </li>
+                <li>
+                    <a asp-area="Identity" asp-controller="Manage" asp-action="Index" title="@UserManager.GetUserName(User)!">Hồ sơ cá nhân</a>
+                </li>
+            </ul>
         </li>
         <li>
             <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="button-transparent">
@@ -42,6 +51,17 @@
         </li>
     }
     else{
+        <li>
+            <a class="dropdown-toggle effect-3" action="#">
+                <span class="fa fa-user nav-icon"></span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a asp-area="Identity" asp-controller="Manage" asp-action="Index" title="@UserManager.GetUserName(User)!">Hồ sơ cá nhân</a>
+                </li>
+            </ul>
+        </li>
         <li>
             <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="button-transparent">
                 <button title="Đăng xuất" type="submit" class="button-transparent">

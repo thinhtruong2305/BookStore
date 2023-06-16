@@ -606,6 +606,23 @@ ul.price-list li:last-child {
 	text-decoration: line-through;
 }
 
+ul.price-list-single li {
+	display: inline-block;
+	color: #000;
+	font-size: 1em;
+}
+
+ul.price-list-single li:first-child {
+	font-weight: 600;
+	color: #34c663;
+}
+
+ul.price-list-single li:last-child {
+	color: #777;
+	float: right;
+	text-decoration: line-through;
+}
+
 .product-chr-info .caption h4 {
 	color: #000;
 	text-transform: capitalize;
@@ -624,6 +641,11 @@ ul.rating {
 }
 
 ul.price-list {
+	padding-top: 10px;
+}
+
+ul.price-list-single {
+	width: 325px;
 	padding-top: 10px;
 }
 
@@ -1427,7 +1449,7 @@ ul.single_specific li {
 	color: #000;
 	font-size: 1em;
 	text-transform: capitalize;
-	word-spacing: 9px;
+	word-spacing: 2px;
 	letter-spacing: 0.2px;
 	line-height: 1.8;
 }
@@ -1441,7 +1463,6 @@ ul.single_specific li {
 }
 
 /*-- /Responsive --*/
-
 @media screen and (max-width: 1440px) {
 	.container-cart {
 		width: 86%;

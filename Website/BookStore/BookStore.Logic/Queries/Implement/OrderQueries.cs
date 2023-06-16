@@ -55,10 +55,16 @@ namespace BookStore.Logic.Queries.Implement
                 .ToListAsync();
         }
 
-        public OrderDetailModel? GetDetail(int OrderId)
+        public OrderDetailModel? GetDetail(Guid OrderId)
         {
             return database.Orders
                 .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.Info)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.Edition)
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Book)
                         .ThenInclude(b => b.BookImages)
@@ -66,12 +72,19 @@ namespace BookStore.Logic.Queries.Implement
                 .FirstOrDefault();
         }
 
-        public Task<OrderDetailModel?> GetDetailAsync(int OrderId)
+        public Task<OrderDetailModel?> GetDetailAsync(Guid OrderId)
         {
             return database.Orders
                 .Where(o => (o.Status != Common.Shared.Model.Status.Delete) && (o.OrderId == OrderId))
                 .Include(o => o.OrderDetails)
                     .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.Info)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.Edition)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Book)
+                        .ThenInclude(b => b.BookImages)
                 .Select(o => mapper.Map<OrderDetailModel>(o))
                 .FirstOrDefaultAsync();
         }

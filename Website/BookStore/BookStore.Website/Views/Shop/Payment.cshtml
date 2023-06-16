@@ -57,12 +57,7 @@
 											</td>
 											<td class="invert">@item.Book.Title</td>
 											<td class="invert">
-												@if(item.Payment == item.DiscountPrice){
-													@item.Payment;
-												}
-												else{
-													@item.DiscountPrice;
-												}
+												@item.Payment
 											</td>
 										</tr>
 									}
@@ -74,18 +69,6 @@
 		</div>
 	</div>
 <!--End order-->
-<div class="description">
-	<div class="container">
-		<div class="form-email text-center">
-			<h5>Bạn có muốn gửi hóa đơn về mail?</h5>
-			<form asp-action="SendMail" asp-controller="Shop" method="post">
-				<input type="hidden" name="OrderId" value="@Model.OrderId" />
-				<input type="email" name="Email" class="input-email" value="" placeholder="example@gmail.com">
-				<button type="submit" class="button-email">Xác nhận</button>
-			</form>
-		</div>
-	</div>
-</div>
 <!--Payment-->
 	<div class="innerf-pages section">
 		<div class="container">

@@ -98,3 +98,6 @@ jQuery(document).ready(function($){
 		}
 	}
 });
+$('#my-checkout').click(function (e) {
+	window.localStorage.removeItem('staplesbmincart')
+});

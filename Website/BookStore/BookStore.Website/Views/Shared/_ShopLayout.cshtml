@@ -4,6 +4,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -34,12 +35,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="~/css/shop/flexslider.css" rel="stylesheet" />
 	<!--footer 1-->
     <link href="~/css/shop/footer1.css" rel="stylesheet" />
-	<!--footer 2-->
-    <link href="~/css/shop/footer2.css" rel="stylesheet" />
-	<!--footer 3-->
-	<link href="~/css/shop/footer3.css" rel="stylesheet" />
-	<!--footer 4-->
-    <link href="~/css/shop/footer4.css" rel="stylesheet" />
     <!-- checkout css -->
 	<link href="~/css/shop/checkout.css" type="text/css" rel="stylesheet" media="all">
 	<!-- Range-slider-css -->
@@ -52,6 +47,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<link href="~/css/shop/font-awesome.css" rel="stylesheet">
 	<!-- shop css -->
 	<link href="~/css/shop/shop.css" type="text/css" rel="stylesheet" media="all">
+	<!-- shop css -->
+	<link href="~/css/shop/shop-my-ctyle.css" type="text/css" rel="stylesheet" media="all">
 
 	<!-- //Custom Theme files -->
 	<!-- online-fonts -->
@@ -159,6 +156,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="~/js/shop/minicart.js"></script>
 	<script>
 		chr.render();
+
 		chr.cart.on('new_checkout', function (evt) {
 			var items, len, i;
 			
@@ -169,6 +167,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				{
 				}
 			}
+			
 		});
 	</script>
 	<!-- //cart-js -->
@@ -230,7 +229,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="~/js/shop/scrolling-nav.js"></script>
 	<!-- //fixed-scroll-nav-js -->
 	<!--//scripts-->
-
 	<script src="~/js/shop/bootstrap.js"></script>
 	<!-- start-smoth-scrolling -->
 	<script src="~/js/shop/move-top.js"></script>
@@ -277,9 +275,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				width: 'auto', //auto or any width like 600px
 				fit: true, // 100% fit in a container
 				closed: 'accordion', // Start closed if in accordion view
+				tabidentify: 'hor_1', // The tab groups identifier
 				activate: function (event) { // Callback function if tab is switched
 					var $tab = $(this);
-					var $info = $('#tabInfo');
+					var $info = $('#nested-tabInfo2');
+					var $name = $('span', $info);
+					$name.text($tab.text());
+					$info.show();
+				}
+			});
+			$('#VerticalTab').easyResponsiveTabs({
+				type: 'vertical', //Types: default, vertical, accordion
+				width: 'auto', //auto or any width like 600px
+				fit: true, // 100% fit in a container
+				closed: 'accordion', // Start closed if in accordion view
+				tabidentify: 'ver_1', // The tab groups identifier
+				activate: function (event) { // Callback function if tab is switched
+					var $tab = $(this);
+					var $info = $('#nested-tabInfo2');
 					var $name = $('span', $info);
 					$name.text($tab.text());
 					$info.show();
